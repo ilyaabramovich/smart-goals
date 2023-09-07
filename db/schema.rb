@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_06_104841) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_07_094603) do
   create_table "goals", force: :cascade do |t|
     t.datetime "target_date"
     t.float "target_value"
@@ -19,6 +19,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_104841) do
     t.float "current_value", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "stats", force: :cascade do |t|
@@ -30,5 +32,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_104841) do
     t.index ["goal_id"], name: "index_stats_on_goal_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
+  end
+
+  add_foreign_key "goals", "users"
   add_foreign_key "stats", "goals"
 end
