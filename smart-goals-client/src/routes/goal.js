@@ -4,12 +4,12 @@ import { getGoal } from '../goals'
 export async function loader({ params }) {
   const goal = await getGoal(params.goalId)
   if (!goal) {
-    throw new Response("", {
+    throw new Response('', {
       status: 404,
-      statusText: "Not Found",
-    });
+      statusText: 'Not Found',
+    })
   }
-  return { goal };
+  return { goal }
 }
 
 export default function Goal() {
@@ -26,7 +26,15 @@ export default function Goal() {
 
         {goal.targetDate && <p>{goal.targetDate}</p>}
 
-        {goal.stats && <p>{goal.stats}</p>}
+        {goal.stats && (
+          <ul>
+            {goal.stats.map((stat) => (
+              <li key={stat.id}>
+                {stat.measurementValue} {stat.measurementDate}
+              </li>
+            ))}
+          </ul>
+        )}
 
         <div>
           <Form action="edit">
