@@ -1,7 +1,7 @@
 import { Form, redirect, useActionData, useLocation, useNavigation } from 'react-router-dom'
 import { signIn } from '../auth'
 
-export async function loginAction({ request }: LoaderFunctionArgs) {
+export async function loginAction({ request }) {
   const formData = await request.formData()
   const username = formData.get('username')
   const password = formData.get('password')
