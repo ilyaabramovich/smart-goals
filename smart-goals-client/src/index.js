@@ -10,38 +10,21 @@ import ErrorPage from './error-page'
 import Goal, { loader as goalLoader } from './routes/goal'
 import EditGoal, { action as editAction } from './routes/edit'
 import Index from './routes'
+import Login, { loginAction } from './routes/login'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-      path="/"
-      element={<Root />}
-      loader={rootLoader}
-      action={rootAction}
-      errorElement={<ErrorPage />}
-    >
+    <Route path="/" element={<Root />} loader={rootLoader} action={rootAction} errorElement={<ErrorPage />}>
+      <Route path="login" element={<Login />} action={loginAction} />
       <Route errorElement={<ErrorPage />}>
         <Route index element={<Index />} />
-        <Route
-          path="goals/:goalId"
-          element={<Goal />}
-          loader={goalLoader}
-        />
-        <Route
-          path="goals/:goalId/edit"
-          element={<EditGoal />}
-          loader={goalLoader}
-          action={editAction}
-        />
-        <Route
-          path="goals/:goalId/destroy"
-          action={destroyAction}
-        />
+        <Route path="goals/:goalId" element={<Goal />} loader={goalLoader} />
+        <Route path="goals/:goalId/edit" element={<EditGoal />} loader={goalLoader} action={editAction} />
+        <Route path="goals/:goalId/destroy" action={destroyAction} />
       </Route>
-    </Route>
-  )
-);
-
+    </Route>,
+  ),
+)
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
