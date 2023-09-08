@@ -1,3 +1,5 @@
+import { camelToSnake } from './utils/camelToSnake'
+
 export async function getGoals(query) {
   const res = await fetch(`http://localhost:3000/api/v1/goals`)
   const goals = await res.json()
@@ -6,11 +8,14 @@ export async function getGoals(query) {
 }
 
 export async function createGoal() {
-  const goalData = { description: 'My new SMART goal', target_date: new Date().toISOString() }
+  const goalData = {
+    description: 'My new SMART goal',
+    targetDate: new Date(new Date().getFullYear() + 1, 0, 1).toISOString(),
+  }
   const res = await fetch(`http://localhost:3000/api/v1/goals`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ goal: goalData }),
+    body: JSON.stringify(camelToSnake({ goal: goalData })),
   })
   const goal = await res.json()
   return goal
