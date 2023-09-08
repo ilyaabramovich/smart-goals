@@ -1,5 +1,5 @@
 import { Form, redirect, useActionData, useNavigation } from 'react-router-dom'
-import { signIn } from '../auth'
+import { signIn, signUp } from '../auth'
 
 export async function signupAction({ request }) {
   const formData = await request.formData()
@@ -32,7 +32,7 @@ export async function signupAction({ request }) {
   }
 
   try {
-    await signIn(username, password, passwordConfirmation)
+    await signUp(username, password, passwordConfirmation)
     return redirect('/')
   } catch (error) {
     return {
