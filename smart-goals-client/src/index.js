@@ -24,8 +24,8 @@ const router = createBrowserRouter(
       <Route errorElement={<ErrorPage />}>
           <Route index element={<Index />} />
           <Route path="goals" element={<RequireAuth><Goals /></RequireAuth>} loader={goalsLoader} action={goalsAction} />
-          <Route path="goals/:goalId" element={<Goal />} loader={goalLoader} />
-          <Route path="goals/:goalId/edit" element={<EditGoal />} loader={goalLoader} action={editAction} />
+          <Route path="goals/:goalId" element={<RequireAuth><Goal /></RequireAuth>} loader={goalLoader} />
+          <Route path="goals/:goalId/edit" element={<RequireAuth><EditGoal /></RequireAuth>} loader={goalLoader} action={editAction} />
           <Route path="goals/:goalId/destroy" action={destroyAction} />
         </Route>
     </Route>,
