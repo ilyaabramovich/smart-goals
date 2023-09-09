@@ -30,7 +30,7 @@ export default function Goals() {
         </p>
       )}
       <Form method="post">
-        <button type="submit">New</button>
+        <button type="submit">New goal</button>
       </Form>
     </>
   )

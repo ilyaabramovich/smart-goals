@@ -10,12 +10,12 @@ export default function AuthStatus() {
   }
 
   if (!auth?.user) {
-    return <><p>You are not logged in.</p></>
+    return <span>You are not logged in.</span>
   }
 
   return (
-    <p>
+    <span>
       Welcome {auth.user.username}! <button onClick={handleSignOut}>Sign out</button>
-    </p>
+    </span>
   )
 }

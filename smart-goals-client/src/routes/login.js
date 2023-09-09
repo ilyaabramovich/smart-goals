@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useNavigation } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useNavigation } from 'react-router-dom'
 import { useAuth } from '../context/auth'
 import { useState } from 'react'
 
@@ -52,6 +52,7 @@ export default function Login() {
         </button>
         {error ? <p style={{ color: 'red' }}>{error}</p> : null}
       </form>
+      <Link to='/signup'>No account? Sign up</Link>
     </div>
   )
 }

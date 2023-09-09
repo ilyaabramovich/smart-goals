@@ -1,12 +1,10 @@
-import { Outlet } from 'react-router-dom'
-import AuthStatus from '../auth_status'
+import { NavLink, Outlet } from 'react-router-dom'
+import Header from '../header'
 
 export default function Root() {
   return (
     <>
-      <header>
-        <AuthStatus />
-      </header>
+      <Header/>
       <main>
         <Outlet />
       </main>
