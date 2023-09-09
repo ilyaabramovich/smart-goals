@@ -18,13 +18,6 @@ export default function Root() {
     <>
       <div id="sidebar">
         <h1>SMART Goals</h1>
-        <div>
-          <form id="search-form" role="search">
-            <input id="q" aria-label="Search goals" placeholder="Search" type="search" name="q" />
-            <div id="search-spinner" aria-hidden hidden={true} />
-            <div className="sr-only" aria-live="polite"></div>
-          </form>
-        </div>
         <nav>
           {goals.length ? (
             <ul>
