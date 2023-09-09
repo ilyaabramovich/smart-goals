@@ -18,7 +18,7 @@ export default function Root() {
 
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="sm" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="/">SMART goals</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import { useAuth } from '../context/auth'
 
 export default function Signup() {
@@ -43,16 +42,10 @@ export default function Signup() {
             <Form.Label>Confirm password</Form.Label>
             <Form.Control type="password" name="passwordConfirmation" />
           </Form.Group>
-          <Row className="align-items-center">
-            <Col>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" className='me-2'>
                 Signup
               </Button>
-            </Col>
-            <Col>
-              <Link to="/login">Login</Link>
-            </Col>
-          </Row>
+              <Link to="/login" className='align-middle link-underline link-underline-opacity-0'>Login</Link>
         </Form>
       </Row>
     </Container>

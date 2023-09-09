@@ -1,4 +1,4 @@
-import { Link, Form, useLoaderData, redirect } from 'react-router-dom'
+import { Link, useLoaderData, redirect } from 'react-router-dom'
 import { createGoal, getGoals } from '../goals'
 
 export async function loader() {
@@ -16,7 +16,7 @@ export default function Goals() {
 
   return (
     <>
-      {goals.length ? (
+      {goals.length > 0 ? (
         <ul>
           {goals.map((goal) => (
             <li key={goal.id}>
@@ -29,9 +29,7 @@ export default function Goals() {
           You have no goals yet. Go ahead and add one!
         </p>
       )}
-      <Form method="post">
-        <button type="submit">New goal</button>
-      </Form>
+      <Link to={`/goals/new`} variant="primary" type="submit">New goal</Link>
     </>
   )
 }

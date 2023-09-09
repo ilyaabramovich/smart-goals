@@ -7,18 +7,35 @@ export async function getGoals(query) {
   return goals
 }
 
-export async function createGoal() {
-  const goalData = {
-    description: 'My new SMART goal',
-    targetDate: new Date(new Date().getFullYear() + 1, 0, 1).toISOString(),
+export async function createGoal(goalData) {
+let response
+  try {
+    response = await fetch(`/api/v1/goals`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(camelToSnake({ goal: goalData })),
+    })
+  } catch (error) {
+    console.log('There was an error', error)
   }
-  const res = await fetch(`/api/v1/goals`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(camelToSnake({ goal: goalData })),
-  })
-  const goal = await res.json()
-  return goal
+  let json
+  try {
+    if (response) {
+      json = await response.json()
+      if (response?.ok) {
+        return json
+      } else {
+        throw new Error(json?.error || 'Unexpected error')
+      }
+    }
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      console.log('There was a SyntaxError', error)
+    } else {
+      console.log('There was an error', error)
+      throw error
+    }
+  }
 }
 
 export async function getGoal(id) {
