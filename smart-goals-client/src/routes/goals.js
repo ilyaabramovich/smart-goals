@@ -26,7 +26,7 @@ export default function Goals() {
         </ul>
       ) : (
         <p>
-          <i>No goals</i>
+          You have no goals yet. Go ahead and add one!
         </p>
       )}
       <Form method="post">
