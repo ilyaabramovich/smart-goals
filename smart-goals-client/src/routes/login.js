@@ -9,7 +9,7 @@ export default function Login() {
   const location = useLocation()
   const navigation = useNavigation()
   const params = new URLSearchParams(location.search)
-  const from = params.get('from') || '/'
+  const from = params.get('from') || '/goals'
 
   const isLoggingIn = navigation.formData?.get('username') != null
 

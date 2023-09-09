@@ -10,7 +10,7 @@ export default function AuthStatus() {
   }
 
   if (!auth?.user) {
-    return <p>You are not logged in.</p>
+    return <><p>You are not logged in.</p></>
   }
 
   return (

@@ -33,7 +33,7 @@ export async function signupAction({ request }) {
 
   try {
     await signUp(username, password, passwordConfirmation)
-    return redirect('/')
+    return redirect('/goals')
   } catch (error) {
     return {
       error: error.message,
