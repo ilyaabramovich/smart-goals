@@ -16,7 +16,7 @@ class Api::V1::GoalsController < ApplicationController
   # POST /goals
   def create
     @goal = Goal.new(goal_params)
-    @goal.user_id = current_user.id
+    # @goal.user_id = current_user.id
 
     if @goal.save
       render json: @goal, status: :created, location: @goal
@@ -41,7 +41,7 @@ class Api::V1::GoalsController < ApplicationController
 
   private
     def set_goal
-      @goal = current_user.goals.find(params[:id])
+      @goal = Goal.find(params[:id])
     end
 
     def goal_params
