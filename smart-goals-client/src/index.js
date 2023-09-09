@@ -12,12 +12,13 @@ import EditGoal, { action as editAction } from './routes/edit'
 import Index from './routes'
 import Login, { loginAction } from './routes/login'
 import Signup, { signupAction } from './routes/signup'
+import { AuthProvider } from './context/auth'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} loader={rootLoader} action={rootAction} errorElement={<ErrorPage />}>
       <Route path="signup" element={<Signup />} action={signupAction} />
-      <Route path="login" element={<Login />} action={loginAction} />
+      <Route path="login" element={<Login />} />
       <Route errorElement={<ErrorPage />}>
         <Route index element={<Index />} />
         <Route path="goals/:goalId" element={<Goal />} loader={goalLoader} />
@@ -31,7 +32,9 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
 

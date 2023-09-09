@@ -1,10 +1,10 @@
-export async function signIn(username, password) {
+export async function signIn(userData) {
   let response
   try {
-    response = await fetch(`http://localhost:3000/login`, {
+    response = await fetch(`/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify(userData),
     })
   } catch (error) {
     console.log('There was an error', error)
@@ -32,7 +32,7 @@ export async function signIn(username, password) {
 export async function signUp(username, password, passwordConfirmation) {
   let response
   try {
-    response = await fetch(`http://localhost:3000/signup`, {
+    response = await fetch(`/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password, passwordConfirmation }),
@@ -57,5 +57,13 @@ export async function signUp(username, password, passwordConfirmation) {
       console.log('There was an error', error)
       throw error
     }
+  }
+}
+
+export async function logOut() {
+  try {
+    await fetch(`/logout`, { method: 'DELETE' })
+  } catch (error) {
+    console.log('There was an error', error)
   }
 }

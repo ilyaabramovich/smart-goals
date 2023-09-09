@@ -1,5 +1,5 @@
 import { Form, redirect, useActionData, useNavigation } from 'react-router-dom'
-import { signIn, signUp } from '../auth'
+import { signUp } from '../auth'
 
 export async function signupAction({ request }) {
   const formData = await request.formData()

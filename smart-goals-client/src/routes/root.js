@@ -1,5 +1,6 @@
 import { Outlet, Link, Form, useLoaderData, redirect } from 'react-router-dom'
 import { createGoal, getGoals } from '../goals'
+import AuthStatus from '../auth_status'
 
 export async function loader() {
   const goals = await getGoals()
@@ -16,6 +17,9 @@ export default function Root() {
 
   return (
     <>
+      <header>
+        <AuthStatus />
+      </header>
       <div id="sidebar">
         <h1>SMART Goals</h1>
         <nav>
