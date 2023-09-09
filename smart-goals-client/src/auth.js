@@ -29,13 +29,13 @@ export async function signIn(userData) {
   }
 }
 
-export async function signUp(username, password, passwordConfirmation) {
+export async function signUp(userData) {
   let response
   try {
     response = await fetch(`/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password, passwordConfirmation }),
+      body: JSON.stringify(userData),
     })
   } catch (error) {
     console.log('There was an error', error)

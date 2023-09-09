@@ -12,7 +12,7 @@ import Goal, { loader as goalLoader } from './routes/goal'
 import EditGoal, { action as editAction } from './routes/edit'
 import Index from './routes'
 import Login from './routes/login'
-import Signup, { signupAction } from './routes/signup'
+import Signup from './routes/signup'
 import { AuthProvider } from './context/auth'
 import RequireAuth from './require-auth'
 import Goals, { loader as goalsLoader, action as goalsAction } from './routes/goals'
@@ -20,7 +20,7 @@ import Goals, { loader as goalsLoader, action as goalsAction } from './routes/go
 const router = createBrowserRouter(
   createRoutesFromElements(
       <Route path="/" element={<Root />}>
-      <Route path="signup" element={<Signup />} action={signupAction} />
+      <Route path="signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
       <Route errorElement={<ErrorPage />}>
           <Route index element={<Index />} />
