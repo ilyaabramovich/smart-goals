@@ -27,7 +27,7 @@ export default function Signup() {
 }
 
   return (
-      <Container>
+      <Container className='mt-2'>
       <Row lg={4}>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formSignupUsername">

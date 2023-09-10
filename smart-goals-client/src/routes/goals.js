@@ -1,35 +1,33 @@
-import { Link, useLoaderData, redirect } from 'react-router-dom'
-import { createGoal, getGoals } from '../goals'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Container from 'react-bootstrap/Container'
+import { Link, useLoaderData } from 'react-router-dom'
+import { getGoals } from '../goals'
 
 export async function loader() {
   const goals = await getGoals()
   return { goals }
 }
-
-export async function action() {
-  const goal = await createGoal()
-  return redirect(`/goals/${goal.id}/edit`)
-}
-
 export default function Goals() {
   const { goals } = useLoaderData()
 
   return (
-    <>
+<>
+    <Container className='mt-2 mb-4'>
       {goals.length > 0 ? (
-        <ul>
+        <ListGroup>
           {goals.map((goal) => (
-            <li key={goal.id}>
-              <Link to={`/goals/${goal.id}`}>{goal.id}</Link>
-            </li>
+            <ListGroup.Item key={goal.id}>
+              <Link to={`/goals/${goal.id}`}>{goal.description}</Link>
+            </ListGroup.Item>
           ))}
-        </ul>
+        </ListGroup>
       ) : (
-        <p>
-          You have no goals yet. Go ahead and add one!
-        </p>
+        <p>You have no goals yet. Go ahead and add one!</p>
       )}
-      <Link to={`/goals/new`} variant="primary" type="submit">New goal</Link>
-    </>
+    </Container>
+      <Link to={`/goals/new`} variant="primary" type="submit">
+        New goal
+      </Link>
+</>
   )
 }

@@ -15,7 +15,7 @@ import Login from './routes/login'
 import Signup from './routes/signup'
 import { AuthProvider } from './context/auth'
 import RequireAuth from './require-auth'
-import Goals, { loader as goalsLoader, action as goalsAction } from './routes/goals'
+import Goals, { loader as goalsLoader } from './routes/goals'
 import CreateGoal, { action as createAction } from './routes/create';
 
 const router = createBrowserRouter(
@@ -25,7 +25,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route errorElement={<ErrorPage />}>
           <Route index element={<Index />} />
-          <Route path="goals" element={<RequireAuth><Goals /></RequireAuth>} loader={goalsLoader} action={goalsAction} />
+          <Route path="goals" element={<RequireAuth><Goals /></RequireAuth>} loader={goalsLoader} />
           <Route path="goals/new" element={<RequireAuth><CreateGoal /></RequireAuth>} action={createAction} />
           <Route path="goals/:goalId" element={<RequireAuth><Goal /></RequireAuth>} loader={goalLoader} />
           <Route path="goals/:goalId/edit" element={<RequireAuth><EditGoal /></RequireAuth>} loader={goalLoader} action={editAction} />
