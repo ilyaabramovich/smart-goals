@@ -11,7 +11,15 @@ class Goal < ApplicationRecord
   validates :interval, inclusion: { in: VALID_INTERVALS }
   validate :target_date_must_be_in_future
 
+  after_create :create_time_frame_stats
+
   private
+
+  def create_time_frame_stats
+    time_frames = GoalTimeFrameCalculationService.new.call(self)
+    stats_data_to_insert = time_frames.map { |time_frame| { measurement_date: time_frame, measurement_value: 0 } }
+    stats.create!(stats_data_to_insert)
+  end
 
   def target_date_must_be_in_future
     if target_date.present? && target_date <= Date.today
