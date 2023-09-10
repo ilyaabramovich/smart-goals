@@ -4,6 +4,13 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
+  def require_user_logged_in!
+    if current_user.nil?
+      render json: { error: "You must be signed in to do that." }, status: :unauthorized
+      return
+    end
+  end
+
   private
 
   def current_user

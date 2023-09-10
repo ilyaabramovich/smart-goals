@@ -1,4 +1,5 @@
 class Api::V1::GoalsController < ApplicationController
+  before_action :require_user_logged_in!
   before_action :set_goal, only: %i[ show update destroy ]
 
   # GET /goals

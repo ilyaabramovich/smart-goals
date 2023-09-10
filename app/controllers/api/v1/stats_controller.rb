@@ -1,4 +1,5 @@
 class Api::V1::StatsController < ApplicationController
+  before_action :require_user_logged_in!
   before_action :set_stat, only: %i[ show update destroy ]
 
   # GET /stats
