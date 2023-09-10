@@ -16,7 +16,7 @@ export default function Goal() {
   const { goal } = useLoaderData()
 
   return (
-    <div id="goal">
+    <div>
       <div>
         {goal.description && <h1>{goal.description}</h1>}
 
