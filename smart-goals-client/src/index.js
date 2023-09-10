@@ -12,18 +12,18 @@ import EditGoal, { action as editAction } from './routes/edit'
 import Login from './routes/login'
 import Signup from './routes/signup'
 import { AuthProvider } from './context/auth'
-import RequireAuth from './require-auth'
 import Goals, { loader as goalsLoader } from './routes/goals'
 import CreateGoal, { action as createAction } from './routes/create'
 import Home from './routes/home'
 import Layout from './routes/layout'
+import ProtectedRoute from './routes/protected'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route path="signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
-      <Route errorElement={<ErrorPage />}>
+      <Route errorElement={<ErrorPage />} element={<ProtectedRoute/>}>
         <Route path="goals" element={<Goals />} loader={goalsLoader} />
         <Route path="goals/new" element={<CreateGoal />} action={createAction} />
         <Route path="goals/:goalId" element={<Goal />} loader={goalLoader} />
