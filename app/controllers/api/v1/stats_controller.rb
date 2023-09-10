@@ -4,7 +4,8 @@ class Api::V1::StatsController < ApplicationController
 
   # GET /stats
   def index
-    @stats = Stat.all
+    goal = current_user.goals.find(params[:goal_id])
+    @stats = goal.stats
 
     render json: @stats
   end

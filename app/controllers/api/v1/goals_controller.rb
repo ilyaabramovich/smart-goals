@@ -4,7 +4,7 @@ class Api::V1::GoalsController < ApplicationController
 
   # GET /goals
   def index
-    @goals = Goal.includes(:due_stats).all
+    @goals = current_user.goals.includes(:due_stats)
 
     render json: @goals
   end
@@ -16,8 +16,7 @@ class Api::V1::GoalsController < ApplicationController
 
   # POST /goals
   def create
-    @goal = Goal.new(goal_params)
-    @goal.user_id = current_user.id
+    @goal = current_user.goals.new(goal_params)
 
     if @goal.save
       render json: @goal, status: :created
