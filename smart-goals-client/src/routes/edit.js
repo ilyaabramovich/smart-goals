@@ -1,8 +1,8 @@
 import { Form as RouterForm, useLoaderData, redirect, useNavigate } from 'react-router-dom'
-import { format, parseISO } from 'date-fns'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { updateGoal } from '../goals'
+import { formatDateString } from '../utils/parseDate'
 
 export async function action({ request, params }) {
   const formData = await request.formData()
@@ -27,7 +27,7 @@ export default function EditGoal() {
       </Form.Group>
       <Form.Group className="mb-3" controlId="createGoalTargetDate">
         <Form.Label>Target date</Form.Label>
-        <Form.Control type="date" name="targetDate" defaultValue={format(parseISO(goal.targetDate), 'yyyy-MM-dd')} />
+        <Form.Control type="date" name="targetDate" defaultValue={formatDateString(goal.targetDate)} />
       </Form.Group>
       <Form.Group className="mb-3" controlId="createGoalInterval">
       <Form.Label>Interval</Form.Label>
