@@ -7,7 +7,7 @@ class Goal < ApplicationRecord
 
   validates :description, presence: true, length: { minimum: 15 }
   validates :target_date, presence: true
-  validates :target_value, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :target_value, numericality: { greater_than_or_equal_to: 0 }
   validates :current_value, numericality: { greater_than_or_equal_to: 0 }
   validates :interval, inclusion: { in: VALID_INTERVALS }
   validate :target_date_must_be_in_future
@@ -36,12 +36,12 @@ class Goal < ApplicationRecord
 
   def create_time_frame_stats
     time_frames = GoalTimeFrameCalculationService.new.call(self)
-    stats_data_to_insert = time_frames.map { |time_frame| { measurement_date: time_frame, measurement_value: 0 } }
-    stats.create!(stats_data_to_insert)
+    stats_data = time_frames.map { |time_frame| { measurement_date: time_frame } }
+    stats.create!(stats_data)
   end
 
   def target_date_must_be_in_future
-    if target_date.present? && target_date <= Date.today
+    if target_date.present? && target_date <= Time.zone.today
       errors.add(:target_date, "must be in the future")
     end
   end
