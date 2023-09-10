@@ -29,7 +29,7 @@ class Goal < ApplicationRecord
   def completion_percentage
     return 0 if target_value.zero?
 
-    (accumulated_value * 100) / target_value
+    ((accumulated_value * 100) / target_value).round
   end
 
   private
