@@ -48,7 +48,7 @@ export async function updateGoal(id, goalData) {
   const res = await fetch(`/api/v1/goals/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ goal: goalData }),
+    body: JSON.stringify(camelToSnake({ goal: goalData })),
   })
   const goal = await res.json()
   return goal
