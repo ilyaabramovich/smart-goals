@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GoalTimeFrameCalculationService < BaseService
   attr_reader :goal
 

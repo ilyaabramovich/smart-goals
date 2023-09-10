@@ -2,19 +2,16 @@ class Api::V1::GoalsController < ApplicationController
   before_action :require_user_logged_in!
   before_action :set_goal, only: %i[ show update destroy ]
 
-  # GET /goals
   def index
     @goals = current_user.goals.includes(:due_stats)
 
     render json: @goals
   end
 
-  # GET /goals/1
   def show
     render json: @goal
   end
 
-  # POST /goals
   def create
     @goal = current_user.goals.new(goal_params)
 
@@ -25,7 +22,6 @@ class Api::V1::GoalsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /goals/1
   def update
     if @goal.update(goal_params)
       render json: @goal
@@ -34,17 +30,17 @@ class Api::V1::GoalsController < ApplicationController
     end
   end
 
-  # DELETE /goals/1
   def destroy
     @goal.destroy
   end
 
   private
-    def set_goal
-      @goal = current_user.goals.find(params[:id])
-    end
 
-    def goal_params
-      params.require(:goal).permit(:target_date, :target_value, :description, :interval, :initial_value)
-    end
+  def set_goal
+    @goal = current_user.goals.find(params[:id])
+  end
+
+  def goal_params
+    params.require(:goal).permit(:target_date, :target_value, :description, :interval, :initial_value)
+  end
 end
