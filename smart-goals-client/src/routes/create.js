@@ -8,7 +8,7 @@ export async function action({ request }) {
   const goalData = Object.fromEntries(formData)
   try {
     const goal = await createGoal(goalData)
-    return redirect(`/goals/${goal.id}/edit`)
+    return redirect(`/goals/${goal.id}`)
   } catch (error) {
     console.error(error)
     return null
@@ -36,9 +36,9 @@ export default function CreateGoal() {
         <Form.Label>Interval</Form.Label>
         <Form.Select aria-label="Goal time frame interval" name="interval">
           <option>Select interval</option>
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
+          <option value="daily">daily</option>
+          <option value="weekly">weekly</option>
+          <option value="monthly">monthly</option>
         </Form.Select>
       </Form.Group>
       <Button variant="primary" type="submit" min={0} className="me-2">
