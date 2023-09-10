@@ -15,7 +15,8 @@ class Api::V1::StatsController < ApplicationController
 
   # POST /stats
   def create
-    @stat = Stat.new(stat_params)
+    goal = current_user.goals.find(params[:goal_id])
+    @stat = goal.stats.new(stat_params)
 
     if @stat.save
       render json: @stat, status: :created, location: @stat
@@ -41,11 +42,12 @@ class Api::V1::StatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stat
-      @stat = Stat.find(params[:id])
+      goal = current_user.goals.find(params[:goal_id])
+      @stat = goal.stats.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def stat_params
-      params.require(:stat).permit(:goal_id, :measurement_value, :measurement_date)
+      params.require(:stat).permit(:goal_id, :measurement_value)
     end
 end
