@@ -13,6 +13,16 @@ class Goal < ApplicationRecord
 
   after_create :create_time_frame_stats
 
+  def accumulated_value
+    current_value + stats.sum(&:measurement_value)
+  end
+
+  def completion_percentage
+    return 0 if target_value.zero?
+
+    (accumulated_value * 100) / target_value
+  end
+
   private
 
   def create_time_frame_stats

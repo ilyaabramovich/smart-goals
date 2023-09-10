@@ -4,7 +4,7 @@ class Api::V1::GoalsController < ApplicationController
 
   # GET /goals
   def index
-    @goals = Goal.all
+    @goals = Goal.includes(:stats).all
 
     render json: @goals
   end

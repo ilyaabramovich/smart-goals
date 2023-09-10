@@ -2,6 +2,7 @@ import { Form, Link, useLoaderData } from 'react-router-dom'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import ProgressBar from 'react-bootstrap/ProgressBar'
 import { getGoal } from '../goals'
 import { formatDateString } from '../utils/parseDate'
 import GoalStatsChart from '../goal-stats-chart'
@@ -41,6 +42,10 @@ export default function Goal() {
         <tr>
           <th>Target date</th>
           <td>{formatDateString(goal.targetDate)}</td>
+        </tr>
+        <tr>
+          <th>Goal progress</th>
+          <td><ProgressBar now={goal.completionPercentage} label={`${goal.completionPercentage}%`} /></td>
         </tr>
         </tbody>
       </Table>

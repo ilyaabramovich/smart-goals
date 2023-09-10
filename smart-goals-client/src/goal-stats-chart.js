@@ -21,14 +21,6 @@ export default function GoalStatsChart({ goal }) {
     labels: goal.stats.map((stat) => formatDateString(stat.measurementDate)),
     datasets: [
       {
-        type: 'line',
-        label: goal.description,
-        borderColor: 'rgb(255, 99, 132)',
-        borderWidth: 2,
-        fill: false,
-        data: goal.stats.map((stat) => stat.measurementValue),
-      },
-      {
         type: 'bar',
         label: goal.description,
         backgroundColor: 'rgb(75, 192, 192)',
