@@ -1,7 +1,8 @@
 class GoalSerializer < ActiveModel::Serializer
   attributes :id, :description, :target_date, :target_value, :current_value, :interval
 
-  has_many :stats
+  has_many :measured_stats
+  has_many :pending_stats
 
   attribute :completion_percentage
   attribute :accumulated_value

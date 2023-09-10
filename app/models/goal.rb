@@ -1,6 +1,7 @@
 class Goal < ApplicationRecord
   belongs_to :user
   has_many :stats, dependent: :destroy
+  has_many :due_stats, -> {  prior_to_date(Time.current.beginning_of_day) }, class_name: 'Stat'
 
   VALID_INTERVALS = ['daily', 'weekly', 'monthly']
 
@@ -13,8 +14,16 @@ class Goal < ApplicationRecord
 
   after_create :create_time_frame_stats
 
+  def measured_stats
+    due_stats.select(&:measured?)
+  end
+  
+  def pending_stats
+    due_stats.select(&:pending?)
+  end
+
   def accumulated_value
-    current_value + stats.sum(&:measurement_value)
+    current_value + due_stats.map(&:measurement_value).compact.sum
   end
 
   def completion_percentage

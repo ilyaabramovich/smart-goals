@@ -1,14 +1,14 @@
-import React, { useRef } from 'react'
 import {
-  Chart as ChartJS,
-  LinearScale,
-  CategoryScale,
   BarElement,
-  PointElement,
-  LineElement,
+  CategoryScale,
+  Chart as ChartJS,
   Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
   Tooltip,
 } from 'chart.js'
+import React, { useRef } from 'react'
 import { Chart } from 'react-chartjs-2'
 import { formatDateString } from './utils/parseDate'
 
@@ -18,13 +18,13 @@ export default function GoalStatsChart({ goal }) {
   const chartRef = useRef(null)
 
   const data = {
-    labels: goal.stats.map((stat) => formatDateString(stat.measurementDate)),
+    labels: goal.measuredStats.map((stat) => formatDateString(stat.measurementDate)),
     datasets: [
       {
         type: 'bar',
         label: goal.description,
         backgroundColor: 'rgb(75, 192, 192)',
-        data: goal.stats.map((stat) => stat.measurementValue),
+        data: goal.measuredStats.map((stat) => stat.measurementValue),
         borderColor: 'white',
         borderWidth: 2,
       },
