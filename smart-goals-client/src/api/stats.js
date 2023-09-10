@@ -1,4 +1,4 @@
-import { camelToSnake } from './utils/camelToSnake'
+import { camelToSnake } from '../utils/camelToSnake'
 
 export async function updateStat(goalId, statId, statData) {
   let response

@@ -1,7 +1,7 @@
-import { Form as RouterForm, useLoaderData, redirect, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { updateGoal } from '../goals'
+import { Form as RouterForm, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import { updateGoal } from '../api/goals'
 import { formatDateString } from '../utils/parseDate'
 
 export async function action({ request, params }) {
@@ -30,15 +30,15 @@ export default function EditGoal() {
         <Form.Control type="date" name="targetDate" defaultValue={formatDateString(goal.targetDate)} />
       </Form.Group>
       <Form.Group className="mb-3" controlId="createGoalInterval">
-      <Form.Label>Interval</Form.Label>
-      <Form.Select aria-label="Goal time frame interval" name="interval" defaultValue={goal.interval}>
-        <option>Select interval</option>
-        <option value="daily">Daily</option>
-        <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
-      </Form.Select>
+        <Form.Label>Interval</Form.Label>
+        <Form.Select aria-label="Goal time frame interval" name="interval" defaultValue={goal.interval}>
+          <option>Select interval</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </Form.Select>
       </Form.Group>
-      <Button variant="primary" type="submit" min={0} className='me-2'>
+      <Button variant="primary" type="submit" min={0} className="me-2">
         Save
       </Button>
       <Button

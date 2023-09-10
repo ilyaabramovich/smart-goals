@@ -1,7 +1,7 @@
-import ListGroup from 'react-bootstrap/ListGroup'
 import Container from 'react-bootstrap/Container'
+import ListGroup from 'react-bootstrap/ListGroup'
 import { Link, useLoaderData } from 'react-router-dom'
-import { getGoals } from '../goals'
+import { getGoals } from '../api/goals'
 
 export async function loader() {
   const goals = await getGoals()
@@ -17,7 +17,9 @@ export default function Goals() {
           <ListGroup>
             {goals.map((goal) => (
               <ListGroup.Item key={goal.id}>
-                <Link to={`${goal.id}`} className="link-underline link-underline-opacity-0">{goal.description}</Link>
+                <Link to={`${goal.id}`} className="link-underline link-underline-opacity-0">
+                  {goal.description}
+                </Link>
               </ListGroup.Item>
             ))}
           </ListGroup>

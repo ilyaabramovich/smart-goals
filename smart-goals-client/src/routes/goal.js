@@ -1,16 +1,16 @@
-import { Form as RouterForm, Link, useLoaderData, useFetcher, useRevalidator } from 'react-router-dom'
-import Table from 'react-bootstrap/Table'
 import Accordion from 'react-bootstrap/Accordion'
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
+import ProgressBar from 'react-bootstrap/ProgressBar'
 import Row from 'react-bootstrap/Row'
-import { getGoal } from '../goals'
-import { formatDateString } from '../utils/parseDate'
+import Table from 'react-bootstrap/Table'
+import { Link, Form as RouterForm, useLoaderData, useRevalidator } from 'react-router-dom'
+import { getGoal } from '../api/goals'
+import { updateStat } from '../api/stats'
 import GoalStatsChart from '../goal-stats-chart'
-import { updateStat } from '../stats'
+import { formatDateString } from '../utils/parseDate'
 
 export async function loader({ params }) {
   const goal = await getGoal(params.goalId)

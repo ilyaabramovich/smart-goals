@@ -1,4 +1,4 @@
-import { camelToSnake } from './utils/camelToSnake'
+import { camelToSnake } from '../utils/camelToSnake'
 
 export async function getGoals(query) {
   const res = await fetch(`/api/v1/goals`)

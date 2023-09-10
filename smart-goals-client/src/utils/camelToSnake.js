@@ -1,20 +1,20 @@
-export function camelToSnake(obj) {
-  if (typeof obj !== 'object') {
-    return obj
+export function camelToSnake(object) {
+  if (typeof object !== 'object') {
+    return object
   }
 
-  if (Array.isArray(obj)) {
-    return obj.map(camelToSnake)
+  if (Array.isArray(object)) {
+    return object.map(camelToSnake)
   }
 
-  const snakeObj = {}
+  const result = {}
 
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+  for (const key in object) {
+    if (Object.prototype.hasOwnProperty.call(object, key)) {
       const snakeKey = key.replace(/([A-Z])/g, '_$1').toLowerCase()
-      snakeObj[snakeKey] = camelToSnake(obj[key])
+      result[snakeKey] = camelToSnake(object[key])
     }
   }
 
-  return snakeObj
+  return result
 }

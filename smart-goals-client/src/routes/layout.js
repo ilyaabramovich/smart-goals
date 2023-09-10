@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/auth'
 
 export default function Layout() {
