@@ -1,6 +1,6 @@
 class Goal < ApplicationRecord
   belongs_to :user
-  has_many :stats
+  has_many :stats, dependent: :destroy
 
   VALID_INTERVALS = ['daily', 'weekly', 'monthly']
 
