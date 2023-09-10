@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { useAuth } from '../context/auth'
 
-export default function Root() {
+export default function Layout() {
   const auth = useAuth()
   const navigate = useNavigate()
 
