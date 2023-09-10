@@ -52,12 +52,16 @@ export default function Goal() {
             <td>{goal.targetValue}</td>
           </tr>
           <tr>
-            <th>Current value</th>
-            <td>{goal.currentValue}</td>
+            <th>Accumulated value</th>
+            <td>{goal.accumulatedValue}</td>
           </tr>
           <tr>
             <th>Target date</th>
             <td>{formatDateString(goal.targetDate)}</td>
+          </tr>
+          <tr>
+            <th>Interval</th>
+            <td>{goal.interval}</td>
           </tr>
           <tr>
             <th>Goal progress</th>
