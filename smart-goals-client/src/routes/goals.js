@@ -20,7 +20,7 @@ export default function Goals() {
         <ul>
           {goals.map((goal) => (
             <li key={goal.id}>
-              <Link to={`goals/${goal.id}`}>{goal.id}</Link>
+              <Link to={`/goals/${goal.id}`}>{goal.id}</Link>
             </li>
           ))}
         </ul>
