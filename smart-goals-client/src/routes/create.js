@@ -30,7 +30,7 @@ export default function CreateGoal() {
       </Form.Group>
       <Form.Group className="mb-3" controlId="createGoalTargetDate">
         <Form.Label>Target date</Form.Label>
-        <Form.Control type="datetime-local" name="targetDate" />
+        <Form.Control type="date" name="targetDate" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="createGoalInterval">
       <Form.Label>Interval</Form.Label>
