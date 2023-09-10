@@ -9,8 +9,8 @@ import Table from 'react-bootstrap/Table'
 import { Link, Form as RouterForm, useLoaderData, useRevalidator } from 'react-router-dom'
 import { getGoal } from '../api/goals'
 import { updateStat } from '../api/stats'
-import GoalStatsChart from '../goal-stats-chart'
 import { formatDateString } from '../utils/parseDate'
+import GoalStatsChart from '../components/goal-stats-chart'
 
 export async function loader({ params }) {
   const goal = await getGoal(params.goalId)
@@ -79,7 +79,7 @@ export default function Goal() {
                       <Form.Control type="number" name="measurementValue" placeholder="0" />
                     </Col>
                     <Col>
-                      <Button variant="link" type="submit">
+                      <Button variant="secondary" type="submit">
                         Submit
                       </Button>
                     </Col>

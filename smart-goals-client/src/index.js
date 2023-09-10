@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import { action as destroyAction } from './routes/destroy'
 
-import ErrorPage from './error-page'
+import ErrorBoundary from './routes/error-boundary'
 import Goal, { loader as goalLoader } from './routes/goal'
 import EditGoal, { action as editAction } from './routes/edit'
 import Login from './routes/login'
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route path="signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
-      <Route errorElement={<ErrorPage />} element={<ProtectedRoute />}>
+      <Route errorElement={<ErrorBoundary />} element={<ProtectedRoute />}>
         <Route path="goals" element={<Goals />} loader={goalsLoader} />
         <Route path="goals/new" element={<CreateGoal />} action={createAction} />
         <Route path="goals/:goalId" element={<Goal />} loader={goalLoader} />
