@@ -1,7 +1,7 @@
 class Goal < ApplicationRecord
   belongs_to :user
   has_many :stats, dependent: :destroy
-  has_many :due_stats, -> {  prior_to_date(Time.current.beginning_of_day) }, class_name: 'Stat'
+  has_many :due_stats, -> { prior_to_date(Time.current.beginning_of_day) }, class_name: 'Stat'
 
   VALID_INTERVALS = ['daily', 'weekly', 'monthly']
 
