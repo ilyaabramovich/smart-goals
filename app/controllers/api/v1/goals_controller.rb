@@ -45,6 +45,6 @@ class Api::V1::GoalsController < ApplicationController
     end
 
     def goal_params
-      params.require(:goal).permit(:target_date, :target_value, :description, :interval, :current_value)
+      params.require(:goal).permit(:target_date, :target_value, :description, :interval, :initial_value)
     end
 end

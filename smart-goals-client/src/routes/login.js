@@ -1,5 +1,4 @@
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -26,7 +25,6 @@ export default function Login() {
   }
 
   return (
-    <Container className="mt-2">
       <Row lg={4}>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formLoginUsername">
@@ -45,6 +43,5 @@ export default function Login() {
           </Link>
         </Form>
       </Row>
-    </Container>
   )
 }

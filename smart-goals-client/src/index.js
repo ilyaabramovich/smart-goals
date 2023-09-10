@@ -21,13 +21,13 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route path="signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
+      <Route index element={<Home />} />
       <Route errorElement={<ErrorBoundary />} element={<ProtectedRoute />}>
         <Route path="goals" element={<Goals />} loader={goalsLoader} />
         <Route path="goals/new" element={<CreateGoal />} action={createAction} />
         <Route path="goals/:goalId" element={<Goal />} loader={goalLoader} />
         <Route path="goals/:goalId/edit" element={<EditGoal />} loader={goalLoader} action={editAction} />
         <Route path="goals/:goalId/destroy" action={destroyAction} />
-        <Route index element={<Home />} />
       </Route>
     </Route>,
   ),

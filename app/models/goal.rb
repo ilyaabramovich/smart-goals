@@ -8,7 +8,7 @@ class Goal < ApplicationRecord
   validates :description, presence: true, length: { minimum: 15 }
   validates :target_date, presence: true
   validates :target_value, numericality: { greater_than_or_equal_to: 0 }
-  validates :current_value, numericality: { greater_than_or_equal_to: 0 }
+  validates :initial_value, numericality: { greater_than_or_equal_to: 0 }
   validates :interval, inclusion: { in: VALID_INTERVALS }
   validate :target_date_must_be_in_future
 
@@ -23,7 +23,7 @@ class Goal < ApplicationRecord
   end
 
   def accumulated_value
-    current_value + due_stats.map(&:measurement_value).compact.sum
+    initial_value + due_stats.map(&:measurement_value).compact.sum
   end
 
   def completion_percentage

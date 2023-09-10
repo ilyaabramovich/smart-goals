@@ -25,6 +25,10 @@ export default function EditGoal() {
         <Form.Label>Target value</Form.Label>
         <Form.Control type="number" name="targetValue" placeholder="0" defaultValue={goal.targetValue} />
       </Form.Group>
+      <Form.Group className="mb-3" controlId="createGoalInitialValue">
+        <Form.Label>Initial value</Form.Label>
+        <Form.Control type="number" name="initialValue" placeholder="0" defaultValue={goal.initialValue} />
+      </Form.Group>
       <Form.Group className="mb-3" controlId="createGoalTargetDate">
         <Form.Label>Target date</Form.Label>
         <Form.Control type="date" name="targetDate" defaultValue={formatDateString(goal.targetDate)} />

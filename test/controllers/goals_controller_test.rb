@@ -12,7 +12,7 @@ class GoalsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create goal" do
     assert_difference("Goal.count") do
-      post goals_url, params: { goal: { current_value: @goal.current_value, description: @goal.description, interval: @goal.interval, target_date: @goal.target_date, target_value: @goal.target_value } }, as: :json
+      post goals_url, params: { goal: { initial_value: @goal.initial_value, description: @goal.description, interval: @goal.interval, target_date: @goal.target_date, target_value: @goal.target_value } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +24,7 @@ class GoalsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update goal" do
-    patch goal_url(@goal), params: { goal: { current_value: @goal.current_value, description: @goal.description, interval: @goal.interval, target_date: @goal.target_date, target_value: @goal.target_value } }, as: :json
+    patch goal_url(@goal), params: { goal: { initial_value: @goal.initial_value, description: @goal.description, interval: @goal.interval, target_date: @goal.target_date, target_value: @goal.target_value } }, as: :json
     assert_response :success
   end
 

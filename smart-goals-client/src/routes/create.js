@@ -26,7 +26,11 @@ export default function CreateGoal() {
       </Form.Group>
       <Form.Group className="mb-3" controlId="createGoalTargetValue">
         <Form.Label>Target value</Form.Label>
-        <Form.Control type="number" name="targetValue" placeholder="0" />
+        <Form.Control type="number" name="targetValue" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="createGoalInitialValue">
+        <Form.Label>Initial value</Form.Label>
+        <Form.Control type="number" name="initialValue" defaultValue={0} />
       </Form.Group>
       <Form.Group className="mb-3" controlId="createGoalTargetDate">
         <Form.Label>Target date</Form.Label>

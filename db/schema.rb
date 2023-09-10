@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_094603) do
     t.float "target_value"
     t.text "description"
     t.string "interval", default: "daily"
-    t.float "current_value", default: 0.0
+    t.float "initial_value", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false

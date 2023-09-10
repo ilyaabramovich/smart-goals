@@ -1,5 +1,4 @@
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -27,29 +26,27 @@ export default function Signup() {
   }
 
   return (
-    <Container className="mt-2">
-      <Row lg={4}>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formSignupUsername">
-            <Form.Label>Username</Form.Label>
-            <Form.Control name="username" autoComplete="username" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formSignupPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" name="password" autoComplete="current-password" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formSignupPasswordConfirmation">
-            <Form.Label>Confirm password</Form.Label>
-            <Form.Control type="password" name="passwordConfirmation" />
-          </Form.Group>
-          <Button variant="primary" type="submit" className="me-2">
-            Signup
-          </Button>
-          <Link to="/login" className="align-middle link-underline link-underline-opacity-0">
-            Login
-          </Link>
-        </Form>
-      </Row>
-    </Container>
+    <Row lg={4}>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formSignupUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control name="username" autoComplete="username" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formSignupPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" name="password" autoComplete="current-password" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formSignupPasswordConfirmation">
+          <Form.Label>Confirm password</Form.Label>
+          <Form.Control type="password" name="passwordConfirmation" />
+        </Form.Group>
+        <Button variant="primary" type="submit" className="me-2">
+          Signup
+        </Button>
+        <Link to="/login" className="align-middle link-underline link-underline-opacity-0">
+          Login
+        </Link>
+      </Form>
+    </Row>
   )
 }

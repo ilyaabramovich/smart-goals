@@ -1,7 +1,6 @@
 import Accordion from 'react-bootstrap/Accordion'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Row from 'react-bootstrap/Row'
@@ -40,8 +39,8 @@ export default function Goal() {
   }
 
   return (
-    <Container className="mt-2">
-      <Table borderless className="mb-4">
+    <>
+      <Table borderless className="mb-2">
         <tbody>
           <tr>
             <th>Description</th>
@@ -50,6 +49,10 @@ export default function Goal() {
           <tr>
             <th>Target value</th>
             <td>{goal.targetValue}</td>
+          </tr>
+          <tr>
+            <th>Initial value</th>
+            <td>{goal.initialValue}</td>
           </tr>
           <tr>
             <th>Accumulated value</th>
@@ -72,7 +75,7 @@ export default function Goal() {
         </tbody>
       </Table>
       {goal.pendingStats.length > 0 && (
-        <Accordion defaultActiveKey={goal.pendingStats[0].id}>
+        <Accordion defaultActiveKey={goal.pendingStats[0].id} className='mb-2'>
           {goal.pendingStats.map((stat) => (
             <Accordion.Item eventKey={stat.id} key={stat.id}>
               <Accordion.Header>Enter measurement for {formatDateString(stat.measurementDate)}</Accordion.Header>
@@ -95,9 +98,10 @@ export default function Goal() {
         </Accordion>
       )}
       {goal.measuredStats.length > 0 && <GoalStatsChart goal={goal} />}
-      <Container>
+        <div className="my-2">
         <Link to="edit">Edit</Link>
         <RouterForm
+          className="mt-2"
           method="post"
           action="destroy"
           onSubmit={(event) => {
@@ -113,7 +117,7 @@ export default function Goal() {
             Delete
           </Button>
         </RouterForm>
-      </Container>
-    </Container>
+      </div>
+    </>
   )
 }

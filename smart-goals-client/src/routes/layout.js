@@ -54,7 +54,7 @@ export default function Layout() {
         </Container>
       </Navbar>
       <main>
-        <Container>
+        <Container className='mt-2'>
           <Outlet />
         </Container>
       </main>
