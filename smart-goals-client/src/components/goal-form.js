@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import { Form as RouterForm } from 'react-router-dom'
 import { formatDate } from '../utils/formatDate'
 import CancelButton from './cancel-button'
+import { useEffect, useRef } from 'react'
 
 const goalNullObject = {
   description: '',
@@ -13,11 +14,18 @@ const goalNullObject = {
 }
 
 export default function GoalForm({ goal = goalNullObject }) {
+  const ref = useRef()
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.focus()
+    }
+  }, [])
+
   return (
     <Form as={RouterForm} method="post">
       <Form.Group className="mb-3" controlId="createGoalDescription">
         <Form.Label>Goal description</Form.Label>
-        <Form.Control required as="textarea" minLength={15} rows={3} name="description" defaultValue={goal.description} placeholder='minimum 15 letters' />
+        <Form.Control ref={ref} required as="textarea" minLength={15} rows={3} name="description" defaultValue={goal.description} placeholder='minimum 15 letters' />
       </Form.Group>
       <Form.Group className="mb-3" controlId="createGoalInitialValue">
         <Form.Label>Initial value</Form.Label>
