@@ -45,7 +45,7 @@ export default function CreateGoal() {
           <option value="monthly">monthly</option>
         </Form.Select>
       </Form.Group>
-      <Button variant="primary" type="submit" min={0} className="me-2">
+      <Button variant="primary" type="submit" className="me-2">
         Save
       </Button>
       <Button

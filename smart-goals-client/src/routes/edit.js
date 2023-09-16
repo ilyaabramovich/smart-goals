@@ -42,7 +42,7 @@ export default function EditGoal() {
           <option value="monthly">Monthly</option>
         </Form.Select>
       </Form.Group>
-      <Button variant="primary" type="submit" min={0} className="me-2">
+      <Button variant="primary" type="submit" className="me-2">
         Save
       </Button>
       <Button
