@@ -8,7 +8,7 @@ import Table from 'react-bootstrap/Table'
 import { Link, Form as RouterForm, useLoaderData, useRevalidator } from 'react-router-dom'
 import { getGoal } from '../api/goals'
 import { updateStat } from '../api/stats'
-import { formatDateString } from '../utils/parseDate'
+import { formatDateString } from '../utils/formatDateString'
 import GoalStatsChart from '../components/goal-stats-chart'
 
 export async function loader({ params }) {

@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Form as RouterForm, redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import { updateGoal } from '../api/goals'
-import { formatDateString } from '../utils/parseDate'
+import { formatDateString } from '../utils/formatDateString'
 
 export async function action({ request, params }) {
   const formData = await request.formData()

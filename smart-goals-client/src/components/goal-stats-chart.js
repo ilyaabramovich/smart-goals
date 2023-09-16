@@ -10,7 +10,7 @@ import {
 } from 'chart.js'
 import React, { useRef } from 'react'
 import { Chart } from 'react-chartjs-2'
-import { formatDateString } from '../utils/parseDate'
+import { formatDateString } from '../utils/formatDateString'
 
 ChartJS.register(LinearScale, CategoryScale, BarElement, PointElement, LineElement, Legend, Tooltip)
 
