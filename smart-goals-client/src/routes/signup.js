@@ -3,13 +3,21 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/auth'
+import { useEffect, useRef } from 'react'
 
 export default function Signup() {
+  const ref = useRef()
   const { signup } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
   const params = new URLSearchParams(location.search)
   const from = params.get('from') || '/goals'
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.focus()
+    }
+  }, [])
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -30,7 +38,7 @@ export default function Signup() {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formSignupUsername">
           <Form.Label>Username</Form.Label>
-          <Form.Control name="username" autoComplete="username" />
+          <Form.Control ref={ref} name="username" autoComplete="username" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formSignupPassword">
           <Form.Label>Password</Form.Label>
