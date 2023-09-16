@@ -83,7 +83,7 @@ export default function Goal() {
                 <Form onSubmit={(event) => handleSubmit(event, stat.id)}>
                   <Row>
                     <Col>
-                      <Form.Control type="number" name="measurementValue" placeholder="0" />
+                      <Form.Control min={0} required type="number" name="measurementValue" defaultValue={0} />
                     </Col>
                     <Col>
                       <Button variant="secondary" type="submit">
@@ -98,7 +98,7 @@ export default function Goal() {
         </Accordion>
       )}
       <GoalStatsChart goal={goal} />
-      <Row className="mt-2 align-items-center justify-content-end">
+      <Row className="mt-2 align-items-baseline justify-content-end">
         <Col sm='auto'>
         <Link to="edit">Edit</Link>
         </Col>
