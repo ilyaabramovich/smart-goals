@@ -10,7 +10,7 @@ import {
 } from 'chart.js'
 import React, { useRef } from 'react'
 import { Chart } from 'react-chartjs-2'
-import { formatDateString } from '../utils/formatDateString'
+import { formatDate } from '../utils/formatDate'
 
 ChartJS.register(LinearScale, CategoryScale, BarElement, PointElement, LineElement, Legend, Tooltip)
 
@@ -18,7 +18,7 @@ export default function GoalStatsChart({ goal }) {
   const chartRef = useRef(null)
 
   const data = {
-    labels: goal.measuredStats.map((stat) => formatDateString(stat.measurementDate)),
+    labels: goal.measuredStats.map((stat) => formatDate(stat.measurementDate)),
     datasets: [
       {
         type: 'bar',

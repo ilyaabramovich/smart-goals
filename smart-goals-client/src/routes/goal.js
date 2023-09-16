@@ -8,7 +8,7 @@ import Table from 'react-bootstrap/Table'
 import { Link, Form as RouterForm, useLoaderData, useRevalidator } from 'react-router-dom'
 import { getGoal } from '../api/goals'
 import { updateStat } from '../api/stats'
-import { formatDateString } from '../utils/formatDateString'
+import { formatDate } from '../utils/formatDate'
 import GoalStatsChart from '../components/goal-stats-chart'
 
 export async function loader({ params }) {
@@ -60,7 +60,7 @@ export default function Goal() {
           </tr>
           <tr>
             <th>Target date</th>
-            <td>{formatDateString(goal.targetDate)}</td>
+            <td>{formatDate(goal.targetDate)}</td>
           </tr>
           <tr>
             <th>Interval</th>
@@ -75,10 +75,10 @@ export default function Goal() {
         </tbody>
       </Table>
       {goal.pendingStats.length > 0 && (
-        <Accordion defaultActiveKey={goal.pendingStats[0].id} className='mb-2'>
+        <Accordion defaultActiveKey={goal.pendingStats[0].id} className="mb-2">
           {goal.pendingStats.map((stat) => (
             <Accordion.Item eventKey={stat.id} key={stat.id}>
-              <Accordion.Header>Enter measurement for {formatDateString(stat.measurementDate)}</Accordion.Header>
+              <Accordion.Header>Enter measurement for {formatDate(stat.measurementDate)}</Accordion.Header>
               <Accordion.Body>
                 <Form onSubmit={(event) => handleSubmit(event, stat.id)}>
                   <Row>
@@ -98,7 +98,7 @@ export default function Goal() {
         </Accordion>
       )}
       {goal.measuredStats.length > 0 && <GoalStatsChart goal={goal} />}
-        <div className="my-2">
+      <div className="my-2">
         <Link to="edit">Edit</Link>
         <RouterForm
           className="mt-2"
