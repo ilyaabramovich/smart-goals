@@ -1,7 +1,7 @@
 import { deepSnakeCase } from '../utils/deepSnakeCase'
 
 export async function getGoals(query) {
-  const res = await fetch(`/api/v1/goals`)
+  const res = await fetch('/api/v1/goals')
   const goals = await res.json()
   if (!goals) return []
   return goals
@@ -10,7 +10,7 @@ export async function getGoals(query) {
 export async function createGoal(goalData) {
 let response
   try {
-    response = await fetch(`/api/v1/goals`, {
+    response = await fetch('/api/v1/goals', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(deepSnakeCase({ goal: goalData })),
