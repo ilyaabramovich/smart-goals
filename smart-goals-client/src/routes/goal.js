@@ -40,19 +40,19 @@ export default function Goal() {
 
   return (
     <>
-      <Table borderless className="mb-2">
+      <Table borderless>
         <tbody>
           <tr>
             <th>Description</th>
             <td>{goal.description}</td>
           </tr>
           <tr>
-            <th>Target value</th>
-            <td>{goal.targetValue}</td>
-          </tr>
-          <tr>
             <th>Initial value</th>
             <td>{goal.initialValue}</td>
+          </tr>
+          <tr>
+            <th>Target value</th>
+            <td>{goal.targetValue}</td>
           </tr>
           <tr>
             <th>Accumulated value</th>
@@ -97,8 +97,12 @@ export default function Goal() {
           ))}
         </Accordion>
       )}
-      {goal.measuredStats.length > 0 && <div className="mb-2"><GoalStatsChart goal={goal} /></div>}
+      <GoalStatsChart goal={goal} />
+      <Row className="mt-2 align-items-center justify-content-end">
+        <Col sm='auto'>
         <Link to="edit">Edit</Link>
+        </Col>
+        <Col sm='auto'>
         <RouterForm
           className="mt-2"
           method="post"
@@ -116,6 +120,8 @@ export default function Goal() {
             Delete
           </Button>
         </RouterForm>
+      </Col>
+      </Row>
     </>
   )
 }
