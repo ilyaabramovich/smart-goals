@@ -6,6 +6,8 @@ const AuthContext = createContext(null)
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
 
+  const isLoggedIn = !!user
+
   const signin = (newUser) => {
     return signIn(newUser).then((user) => {
       setUser(user)
@@ -24,7 +26,7 @@ export function AuthProvider({ children }) {
     })
   }
 
-  const value = { user, signin, signup, signout }
+  const value = { user, signin, signup, signout, isLoggedIn }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
