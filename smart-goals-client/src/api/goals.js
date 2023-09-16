@@ -1,4 +1,4 @@
-import { camelToSnake } from '../utils/camelToSnake'
+import { deepSnakeCase } from '../utils/deepSnakeCase'
 
 export async function getGoals(query) {
   const res = await fetch(`/api/v1/goals`)
@@ -13,7 +13,7 @@ let response
     response = await fetch(`/api/v1/goals`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(camelToSnake({ goal: goalData })),
+      body: JSON.stringify(deepSnakeCase({ goal: goalData })),
     })
   } catch (error) {
     console.log('There was an error', error)
@@ -48,7 +48,7 @@ export async function updateGoal(id, goalData) {
   const res = await fetch(`/api/v1/goals/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(camelToSnake({ goal: goalData })),
+    body: JSON.stringify(deepSnakeCase({ goal: goalData })),
   })
   const goal = await res.json()
   return goal

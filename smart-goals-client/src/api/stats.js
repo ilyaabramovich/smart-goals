@@ -1,4 +1,4 @@
-import { camelToSnake } from '../utils/camelToSnake'
+import { deepSnakeCase } from '../utils/deepSnakeCase'
 
 export async function updateStat(goalId, statId, statData) {
   let response
@@ -6,7 +6,7 @@ export async function updateStat(goalId, statId, statData) {
     response = await fetch(`/api/v1/goals/${goalId}/stats/${statId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(camelToSnake({ stat: statData })),
+      body: JSON.stringify(deepSnakeCase({ stat: statData })),
     })
   } catch (error) {
     console.log('There was an error', error)
