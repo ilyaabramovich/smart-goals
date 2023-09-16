@@ -97,8 +97,7 @@ export default function Goal() {
           ))}
         </Accordion>
       )}
-      {goal.measuredStats.length > 0 && <GoalStatsChart goal={goal} />}
-      <div className="my-2">
+      {goal.measuredStats.length > 0 && <div className="mb-2"><GoalStatsChart goal={goal} /></div>}
         <Link to="edit">Edit</Link>
         <RouterForm
           className="mt-2"
@@ -117,7 +116,6 @@ export default function Goal() {
             Delete
           </Button>
         </RouterForm>
-      </div>
     </>
   )
 }

@@ -41,7 +41,7 @@ export default function Signup() {
           <Form.Control type="password" name="passwordConfirmation" />
         </Form.Group>
         <Button variant="primary" type="submit" className="me-2">
-          Signup
+          Sign up
         </Button>
         <Link to="/login" className="align-middle link-underline link-underline-opacity-0">
           Login

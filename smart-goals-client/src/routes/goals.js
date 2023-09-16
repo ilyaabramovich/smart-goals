@@ -11,8 +11,9 @@ export default function Goals() {
 
   return (
     <>
+      <div className='mb-2'>
         {goals.length > 0 ? (
-          <ListGroup className='mb-2'>
+          <ListGroup>
             {goals.map((goal) => (
               <ListGroup.Item key={goal.id}>
                 <Link to={`${goal.id}`} className="link-underline link-underline-opacity-0">
@@ -22,8 +23,9 @@ export default function Goals() {
             ))}
           </ListGroup>
         ) : (
-          <p>You have no goals yet. Go ahead and add one!</p>
+          <span>You have no goals yet. Go ahead and add one!</span>
         )}
+      </div>
       <Link to="new">New goal</Link>
     </>
   )

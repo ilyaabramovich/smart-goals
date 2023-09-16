@@ -16,11 +16,9 @@ export default function Layout() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <main>
-        <Container className="mt-2">
+        <Container as='main' className='my-4'>
           <Outlet />
         </Container>
-      </main>
     </>
   )
 }
