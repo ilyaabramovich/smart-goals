@@ -15,7 +15,6 @@ import { formatDate } from '../utils/formatDate'
 ChartJS.register(LinearScale, CategoryScale, BarElement, PointElement, LineElement, Legend, Tooltip)
 
 export default function GoalStatsChart({ goal }) {
-  const chartRef = useRef(null)
 
   const data = {
     labels: goal.measuredStats.map((stat) => formatDate(stat.measurementDate)),
@@ -31,5 +30,5 @@ export default function GoalStatsChart({ goal }) {
     ],
   }
 
-  return <Chart ref={chartRef} type="bar" data={data} />
+  return <Chart type="bar" data={data} />
 }
