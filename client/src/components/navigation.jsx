@@ -1,11 +1,12 @@
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useMatch, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 
 export default function Navigation() {
   const { isLoggedIn, signout, user } = useAuth()
   const navigate = useNavigate()
+  const match = useMatch('/')
 
   const handleSignOut = () => {
     signout()
@@ -14,6 +15,10 @@ export default function Navigation() {
   }
 
   if (!isLoggedIn) {
+    if (!match) {
+      return null
+    }
+
     return (
       <Nav>
         <Nav.Item>
