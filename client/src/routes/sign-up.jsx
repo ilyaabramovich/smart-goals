@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 import { useEffect, useRef } from 'react'
@@ -22,10 +23,9 @@ export default function SignUp() {
   async function handleSubmit(event) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const username = formData.get('username')
-    const password = formData.get('password')
+    const userData = Object.fromEntries(formData)
 
-    signup({ username, password })
+    signup(userData)
       .then(() => {
         navigate(from, { replace: true })
       })
@@ -33,23 +33,27 @@ export default function SignUp() {
   }
 
   return (
-    <Row lg={4}>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group as="section" className="mb-3" controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control required ref={ref} name="username" autoComplete="username" />
-        </Form.Group>
-        <Form.Group as="section" className="mb-3" controlId="new-password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control required type="password" name="password" autoComplete="new-password" />
-        </Form.Group>
-        <Button variant="primary" type="submit" className="me-2">
-          Sign up
-        </Button>
-        <Link to="/signin" className="align-middle link-underline link-underline-opacity-0">
-          Sign in
-        </Link>
-      </Form>
+    <Row className="justify-content-center">
+      <Col md={6}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group as="section" className="mb-3" controlId="username">
+            <Form.Label>Username</Form.Label>
+            <Form.Control required ref={ref} name="username" autoComplete="username" />
+          </Form.Group>
+          <Form.Group as="section" className="mb-3" controlId="new-password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control required type="password" name="password" autoComplete="new-password" />
+          </Form.Group>
+          <Button variant="primary" type="submit" className="me-2">
+            Sign up
+          </Button>
+        </Form>
+        <p className="text-center mt-4 text-secondary">
+          <span>
+            Already have an account? <Link to="/signin">Sign in</Link>
+          </span>
+        </p>
+      </Col>
     </Row>
   )
 }
