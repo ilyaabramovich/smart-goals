@@ -4,28 +4,28 @@ The purpose of this project is to create and achieve SMART goals
 This project features a backend written with Ruby on Rails and frontend written with React.js.
 
 ## Getting started
-- install backend dependencies
+Install backend dependencies:
 ```bash
 bundle install
 ```
-- install frontend dependencies
+Install frontend dependencies:
 ```bash
 cd client && npm install
 ```
-- seed database
+Seed database:
 ```bash
 rails db:seed
 ```
-- start up rails server (it is important to specify port as 3001 😉)
+Start up a rails server (NOTE: it is important to specify port as 3001 😉):
 ```bash
 rails s -p 3001
 ```
-- start up client
+Start up client:
 ```bash
 cd client && npm run dev
 ```
 ## Testing
-To run a test suite run following in a root folder
+To run a backend test suite run following in a root folder:
 ```bash
 rspec
 ```
