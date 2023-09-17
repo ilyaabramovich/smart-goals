@@ -36,11 +36,11 @@ export default function SignIn() {
   return (
     <Row lg={4}>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="username">
+        <Form.Group as="section" className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control ref={ref} name="username" autoComplete="username" />
         </Form.Group>
-        <Form.Group className="mb-3 position-relative" controlId="current-password">
+        <Form.Group as="section" className="mb-3 position-relative" controlId="current-password">
           <Form.Label>Password</Form.Label>
           <button
             className="position-absolute top-0 end-0 p-0 border-0 bg-transparent text-secondary"

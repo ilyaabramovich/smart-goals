@@ -12,7 +12,7 @@ function Goals() {
 
   return (
     <>
-      <div className='mb-2'>
+      <div className="mb-4">
         {goals.length > 0 ? (
           <ListGroup>
             {goals.map((goal) => (

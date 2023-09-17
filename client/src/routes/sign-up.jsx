@@ -35,11 +35,11 @@ export default function SignUp() {
   return (
     <Row lg={4}>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="username">
+        <Form.Group as="section" className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control required ref={ref} name="username" autoComplete="username" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="new-password">
+        <Form.Group as="section" className="mb-3" controlId="new-password">
           <Form.Label>Password</Form.Label>
           <Form.Control required type="password" name="password" autoComplete="new-password" />
         </Form.Group>

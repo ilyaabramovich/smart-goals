@@ -10,7 +10,7 @@ const goalNullObject = {
   targetDate: new Date().setDate(new Date().getDate() + 1),
   initialValue: 0,
   targetValue: 0,
-  interval: 'daily'
+  interval: 'daily',
 }
 
 export default function GoalForm({ goal = goalNullObject }) {
@@ -23,23 +23,38 @@ export default function GoalForm({ goal = goalNullObject }) {
 
   return (
     <Form as={RouterForm} method="post">
-      <Form.Group className="mb-3" controlId="goal-field-description">
+      <Form.Group as="section" className="mb-3" controlId="goal-field-description">
         <Form.Label>Goal description</Form.Label>
-        <Form.Control ref={ref} required as="textarea" minLength={15} rows={3} name="description" defaultValue={goal.description} placeholder='minimum 15 letters' />
+        <Form.Control
+          ref={ref}
+          required
+          as="textarea"
+          minLength={15}
+          rows={3}
+          name="description"
+          defaultValue={goal.description}
+          placeholder="minimum 15 letters"
+        />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="goal-field-initial-value">
+      <Form.Group as="section" className="mb-3" controlId="goal-field-initial-value">
         <Form.Label>Initial value</Form.Label>
         <Form.Control type="number" min={0} name="initialValue" defaultValue={goal.initialValue} />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="goal-field-target-value">
+      <Form.Group as="section" className="mb-3" controlId="goal-field-target-value">
         <Form.Label>Target value</Form.Label>
         <Form.Control required type="number" min={0} name="targetValue" defaultValue={goal.targetValue} />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="goal-field-target-date">
+      <Form.Group as="section" className="mb-3" controlId="goal-field-target-date">
         <Form.Label>Target date</Form.Label>
-        <Form.Control required type="date" min={formatDate(new Date())} name="targetDate" defaultValue={formatDate(goal.targetDate)} />
+        <Form.Control
+          required
+          type="date"
+          min={formatDate(new Date())}
+          name="targetDate"
+          defaultValue={formatDate(goal.targetDate)}
+        />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="goal-field-interval">
+      <Form.Group as="section" className="mb-3" controlId="goal-field-interval">
         <Form.Label>Interval</Form.Label>
         <Form.Select aria-label="Goal time frame interval" name="interval" defaultValue={goal.interval}>
           <option value="daily">daily</option>
