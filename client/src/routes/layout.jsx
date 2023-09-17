@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import Navigation from '../components/navigation'
 
 export default function Layout() {
@@ -8,7 +8,7 @@ export default function Layout() {
     <>
       <Navbar expand="sm" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/">SMART goals</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">SMART goals</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="justify-content-end">
             <Navigation />
