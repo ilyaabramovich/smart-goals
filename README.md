@@ -22,7 +22,7 @@ rails s -p 3001
 ```
 - start up client
 ```bash
-cd smart-goals-client && npm start
+cd client && npm run dev
 ```
 ## Testing
 To run a test suite run following in a root folder
