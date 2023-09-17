@@ -6,10 +6,10 @@ class Goal < ApplicationRecord
   VALID_INTERVALS = ['daily', 'weekly', 'monthly']
 
   validates :description, presence: true, length: { minimum: 15 }
-  validates :target_value, numericality: { greater_than_or_equal_to: 0 }
   validates :initial_value, numericality: { greater_than_or_equal_to: 0 }
-  validates :interval, inclusion: { in: VALID_INTERVALS }
+  validates :target_value, numericality: { greater_than_or_equal_to: 0 }
   validates :target_date, presence: true
+  validates :interval, inclusion: { in: VALID_INTERVALS }
   validate :target_date_must_be_in_future
 
   after_create :create_time_frame_stats
