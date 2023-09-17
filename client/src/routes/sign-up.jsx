@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 import { useEffect, useRef } from 'react'
 
-export default function Signup() {
+export default function SignUp() {
   const ref = useRef()
   const { signup } = useAuth()
   const location = useLocation()
@@ -46,8 +46,8 @@ export default function Signup() {
         <Button variant="primary" type="submit" className="me-2">
           Sign up
         </Button>
-        <Link to="/login" className="align-middle link-underline link-underline-opacity-0">
-          Login
+        <Link to="/signin" className="align-middle link-underline link-underline-opacity-0">
+          Sign in
         </Link>
       </Form>
     </Row>

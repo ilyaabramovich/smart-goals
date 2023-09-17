@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 import { useEffect, useRef, useState } from 'react'
 
-export default function Login() {
+export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false)
   const ref = useRef()
   const { signin } = useAuth()
@@ -58,7 +58,7 @@ export default function Login() {
           <Form.Control type={showPassword ? 'text' : 'password'} name="password" autoComplete="current-password" />
         </Form.Group>
         <Button variant="primary" type="submit" className="me-2">
-          Login
+          Sign in
         </Button>
         <Link to="/signup" className="align-middle link-underline link-underline-opacity-0">
           Sign up

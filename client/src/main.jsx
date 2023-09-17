@@ -7,8 +7,8 @@ import { action as destroyAction } from './routes/destroy'
 import ErrorBoundary from './routes/error-boundary'
 import Goal from './routes/goal'
 import EditGoal from './routes/edit'
-import Login from './routes/login'
-import Signup from './routes/signup'
+import SignIn from './routes/sign-in'
+import SignUp from './routes/sign-up'
 import Goals from './routes/goals'
 import CreateGoal from './routes/create'
 import Home from './routes/home'
@@ -21,8 +21,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route element={<GuestRoute />}>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
       </Route>
       <Route index element={<Home />} />
       <Route errorElement={<ErrorBoundary />} element={<ProtectedRoute />}>
