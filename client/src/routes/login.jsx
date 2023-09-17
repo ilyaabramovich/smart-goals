@@ -35,11 +35,11 @@ export default function Login() {
   return (
       <Row lg={4}>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formLoginUsername">
+          <Form.Group className="mb-3" controlId="login-field-username">
             <Form.Label>Username</Form.Label>
             <Form.Control ref={ref} name="username" autoComplete="username" />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formLoginPassword">
+          <Form.Group className="mb-3" controlId="login-field-password">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" name="password" autoComplete="current-password" />
           </Form.Group>

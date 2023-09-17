@@ -36,17 +36,17 @@ export default function Signup() {
   return (
     <Row lg={4}>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formSignupUsername">
+        <Form.Group className="mb-3" controlId="signup-field-username">
           <Form.Label>Username</Form.Label>
-          <Form.Control ref={ref} name="username" autoComplete="username" />
+          <Form.Control required ref={ref} name="username" autoComplete="username" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formSignupPassword">
+        <Form.Group className="mb-3" controlId="signup-field-password">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" name="password" autoComplete="current-password" />
+          <Form.Control required type="password" name="password" autoComplete="new-password" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formSignupPasswordConfirmation">
+        <Form.Group className="mb-3" controlId="signup-field-password-confirmation">
           <Form.Label>Confirm password</Form.Label>
-          <Form.Control type="password" name="passwordConfirmation" />
+          <Form.Control required type="password" name="passwordConfirmation" autoComplete="new-password" />
         </Form.Group>
         <Button variant="primary" type="submit" className="me-2">
           Sign up
