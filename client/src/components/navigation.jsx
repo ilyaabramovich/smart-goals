@@ -40,7 +40,7 @@ export default function Navigation() {
         </Nav.Item>
       </Nav>
       <Nav>
-        <Navbar.Text>Signed in as: {user.username}</Navbar.Text>
+        <Navbar.Text className='me-2'>Signed in as: {user.username}</Navbar.Text>
         <Nav.Item>
           <Nav.Link className="ms-auto" onClick={handleSignOut}>
             Sign out
