@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/auth'
+import { useAuth } from '../hooks'
 
 export default function Navigation() {
   const { isLoggedIn, signout, user } = useAuth()

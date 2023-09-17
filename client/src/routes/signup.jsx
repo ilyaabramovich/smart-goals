@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/auth'
+import { useAuth } from '../hooks'
 import { useEffect, useRef } from 'react'
 
 export default function Signup() {
