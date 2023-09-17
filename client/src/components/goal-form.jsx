@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react'
 
 const goalNullObject = {
   description: '',
-  targetDate: new Date(),
+  targetDate: new Date().setDate(new Date().getDate() + 1),
   initialValue: 0,
   targetValue: 0,
   interval: 'daily'
