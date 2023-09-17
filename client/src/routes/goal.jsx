@@ -11,7 +11,7 @@ import { updateStat } from '../api/stats'
 import { formatDate } from '../utils/formatDate'
 import GoalStatsChart from '../components/goal-stats-chart'
 
-export async function loader({ params }) {
+async function loader({ params }) {
   const goal = await getGoal(params.goalId)
   if (!goal) {
     throw new Response('', {
@@ -22,7 +22,7 @@ export async function loader({ params }) {
   return { goal }
 }
 
-export default function Goal() {
+function Goal() {
   const revalidator = useRevalidator()
   const { goal } = useLoaderData()
 
@@ -109,7 +109,6 @@ export default function Goal() {
           action="destroy"
           onSubmit={(event) => {
             if (
-              // eslint-disable-next-line no-restricted-globals
               !confirm('Please confirm you want to delete this goal.')
             ) {
               event.preventDefault()
@@ -125,3 +124,6 @@ export default function Goal() {
     </>
   )
 }
+
+Goal.loader = loader
+export default Goal

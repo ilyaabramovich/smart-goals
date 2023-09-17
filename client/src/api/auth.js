@@ -1,14 +1,9 @@
 export async function signIn(userData) {
-  let response
-  try {
-    response = await fetch('/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
-    })
-  } catch (error) {
-    throw error
-  }
+  const response = await fetch('/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData),
+  })
   let json
   try {
     if (response) {
@@ -30,35 +25,19 @@ export async function signIn(userData) {
 }
 
 export async function signUp(userData) {
-  let response
-  try {
-    response = await fetch('/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
-    })
-  } catch (error) {
-    throw error
-  }
-  let json
-  try {
-    if (response) {
-      json = await response.json()
-      if (response?.ok) {
-        return json
-      } else {
-        throw new Error(json?.error || 'Unexpected error')
-      }
-    }
-  } catch (error) {
-    throw error
+  const response = await fetch('/auth/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData),
+  })
+  const json = await response.json()
+  if (response?.ok) {
+    return json
+  } else {
+    throw new Error(json?.error || 'Unexpected error')
   }
 }
 
 export async function logOut() {
-  try {
-    await fetch('/auth/logout', { method: 'DELETE' })
-  } catch (error) {
-    throw error
-  }
+  await fetch('/auth/logout', { method: 'DELETE' })
 }

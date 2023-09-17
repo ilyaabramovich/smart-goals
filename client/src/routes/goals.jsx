@@ -2,11 +2,12 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import { Link, useLoaderData } from 'react-router-dom'
 import { getGoals } from '../api/goals'
 
-export async function loader() {
+async function loader() {
   const goals = await getGoals()
   return { goals }
 }
-export default function Goals() {
+
+function Goals() {
   const { goals } = useLoaderData()
 
   return (
@@ -30,3 +31,6 @@ export default function Goals() {
     </>
   )
 }
+
+Goals.loader = loader
+export default Goals

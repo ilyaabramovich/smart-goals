@@ -1,6 +1,6 @@
 import { deepSnakeCase } from '../utils/deepSnakeCase'
 
-export async function getGoals(query) {
+export async function getGoals() {
   const res = await fetch('/api/v1/goals')
   const goals = await res.json()
   if (!goals) return []
