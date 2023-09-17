@@ -1,7 +1,7 @@
 export async function signIn(userData) {
   let response
   try {
-    response = await fetch('/login', {
+    response = await fetch('/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
@@ -32,7 +32,7 @@ export async function signIn(userData) {
 export async function signUp(userData) {
   let response
   try {
-    response = await fetch('/signup', {
+    response = await fetch('/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
@@ -57,7 +57,7 @@ export async function signUp(userData) {
 
 export async function logOut() {
   try {
-    await fetch('/logout', { method: 'DELETE' })
+    await fetch('/auth/logout', { method: 'DELETE' })
   } catch (error) {
     throw error
   }
