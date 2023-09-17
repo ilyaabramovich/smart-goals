@@ -17,7 +17,7 @@ function Goals() {
           <ListGroup>
             {goals.map((goal) => (
               <ListGroup.Item key={goal.id}>
-                <Link to={`${goal.id}`} className="link-underline link-underline-opacity-0">
+                <Link to={`${goal.id}`} className="link-underline link-underline-opacity-0 d-block">
                   {goal.description}
                 </Link>
               </ListGroup.Item>
@@ -27,7 +27,7 @@ function Goals() {
           <span>You have no goals yet. Go ahead and add one!</span>
         )}
       </div>
-      <Link to="new">New goal</Link>
+      <Link className="link-primary" to="new">New goal</Link>
     </>
   )
 }
