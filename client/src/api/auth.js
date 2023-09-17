@@ -7,7 +7,7 @@ export async function signIn(userData) {
       body: JSON.stringify(userData),
     })
   } catch (error) {
-    console.log('There was an error', error)
+    throw error
   }
   let json
   try {
@@ -24,8 +24,8 @@ export async function signIn(userData) {
       console.log('There was a SyntaxError', error)
     } else {
       console.log('There was an error', error)
-      throw error
     }
+    throw error
   }
 }
 
@@ -38,7 +38,7 @@ export async function signUp(userData) {
       body: JSON.stringify(userData),
     })
   } catch (error) {
-    console.log('There was an error', error)
+    throw error
   }
   let json
   try {
@@ -51,12 +51,7 @@ export async function signUp(userData) {
       }
     }
   } catch (error) {
-    if (error instanceof SyntaxError) {
-      console.log('There was a SyntaxError', error)
-    } else {
-      console.log('There was an error', error)
-      throw error
-    }
+    throw error
   }
 }
 
@@ -64,6 +59,6 @@ export async function logOut() {
   try {
     await fetch('/logout', { method: 'DELETE' })
   } catch (error) {
-    console.log('There was an error', error)
+    throw error
   }
 }
