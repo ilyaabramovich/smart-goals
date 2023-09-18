@@ -48,6 +48,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rubocop', require: false
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
