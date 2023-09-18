@@ -21,4 +21,81 @@ RSpec.describe Goal, type: :model do
       it { is_expected.to be_invalid }
     end
   end
+
+  describe '#accumulated_value' do
+    it 'is computed using goal initial value' do
+      goal = build(:goal, initial_value: 5)
+
+      expect(goal.accumulated_value).to eq 5
+    end
+
+    context 'when goal has stats' do
+      it 'is computed using stats measurement values' do
+        user = create(:user)
+        goal = create(:goal, user: user)
+        create(:stat, :due, goal: goal, measurement_value: 3)
+        create(:stat, :due, goal: goal, measurement_value: 2)
+
+        expect(goal.accumulated_value).to eq 5
+      end
+      
+      it 'is using just dew stats for computing' do
+        user = create(:user)
+        goal = create(:goal, user: user)
+        create(:stat, :due, goal: goal, measurement_value: 3)
+        create(:stat, goal: goal, measurement_value: 2, measurement_date: 1.day.from_now)
+
+        expect(goal.accumulated_value).to eq 3
+      end
+
+      context 'when stats has nil as measurement_value' do
+        it 'is computed ignoring empty values' do
+          user = create(:user)
+          goal = create(:goal, user: user)
+          create(:stat, :due, goal: goal, measurement_value: 3)
+          create(:stat, :due, goal: goal, measurement_value: nil)
+
+          expect(goal.accumulated_value).to eq 3
+        end
+      end
+    end
+  end
+
+  describe '#completion_percentage' do
+    context 'when goal has zero as target value' do
+      it 'returns 0' do
+        user = create(:user)
+        goal = create(:goal, user: user, target_value: 0)
+
+        expect(goal.completion_percentage).to eq 0
+      end
+    end
+
+    it 'is using stats accumulated value for computing' do
+      user = create(:user)
+      goal = create(:goal, user: user, initial_value: 5, target_value: 20)
+      create(:stat, :due, goal: goal, measurement_value: 3)
+      create(:stat, :due, goal: goal, measurement_value: 2)
+
+      expect(goal.completion_percentage).to eq (50)
+    end
+
+    it 'is not limited to 100' do
+      user = create(:user)
+      goal = create(:goal, user: user, initial_value: 5, target_value: 5)
+      create(:stat, :due, goal: goal, measurement_value: 3)
+      create(:stat, :due, goal: goal, measurement_value: 2)
+
+      expect(goal.completion_percentage).to eq (200)
+    end
+
+    it 'rounds calculation result' do
+      user = create(:user)
+      goal = create(:goal, user: user, initial_value: 1, target_value: 18)
+      create(:stat, :due, goal: goal, measurement_value: 3)
+      create(:stat, :due, goal: goal, measurement_value: 2)
+
+      expect(goal.completion_percentage).to eq (33)
+    end
+  end
 end
