@@ -64,7 +64,7 @@ export default function SignIn() {
         </Form>
         <p className="text-center mt-4 text-secondary">
           <span>
-            Don't have an account yet? <Link to="/signup">Sign up</Link>
+            Don&apos;t have an account yet? <Link to="/signup">Sign up</Link>
           </span>
         </p>
       </Col>
