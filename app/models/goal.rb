@@ -3,7 +3,7 @@ class Goal < ApplicationRecord
   has_many :stats, dependent: :destroy
   has_many :due_stats, -> { prior_to_date(Time.current.beginning_of_day) }, class_name: 'Stat'
 
-  VALID_INTERVALS = ['daily', 'weekly', 'monthly']
+  VALID_INTERVALS = %w[daily weekly monthly].freeze
 
   validates :description, presence: true, length: { minimum: 15 }
   validates :initial_value, numericality: { greater_than_or_equal_to: 0 }
@@ -17,7 +17,7 @@ class Goal < ApplicationRecord
   def measured_stats
     due_stats.select(&:measured?)
   end
-  
+
   def pending_stats
     due_stats.select(&:pending?)
   end
@@ -42,7 +42,7 @@ class Goal < ApplicationRecord
 
   def target_date_must_be_in_future
     if target_date.present? && target_date <= Time.zone.today
-      errors.add(:target_date, "must be in the future")
+      errors.add(:target_date, 'must be in the future')
     end
   end
 end

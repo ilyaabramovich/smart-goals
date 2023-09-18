@@ -1,6 +1,6 @@
 class Api::V1::StatsController < ApplicationController
   before_action :require_user_logged_in!
-  before_action :set_stat, only: %i[ show update destroy ]
+  before_action :set_stat, only: %i[show update destroy]
 
   def index
     goal = current_user.goals.find(params[:goal_id])

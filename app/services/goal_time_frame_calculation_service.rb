@@ -24,7 +24,7 @@ class GoalTimeFrameCalculationService < BaseService
 
     time_frames
   end
-  
+
   def interval_to_step
     {
       daily: 1.day,

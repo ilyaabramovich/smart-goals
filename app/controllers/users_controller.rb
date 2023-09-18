@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ update destroy ]
+  before_action :set_user, only: %i[update destroy]
 
   def index
     @users = User.all
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if current_user
       render json: current_user, status: :ok
     else
-      render json: { error: "Not authenticated", status: :unauthorized  }
+      render json: { error: 'Not authenticated', status: :unauthorized }
     end
   end
 

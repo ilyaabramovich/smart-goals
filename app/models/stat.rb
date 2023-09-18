@@ -9,7 +9,7 @@ class Stat < ApplicationRecord
   def measured?
     measurement_value.present?
   end
-  
+
   def pending?
     !measured?
   end

@@ -38,7 +38,7 @@ RSpec.describe Goal, type: :model do
 
         expect(goal.accumulated_value).to eq 5
       end
-      
+
       it 'is using just dew stats for computing' do
         user = create(:user)
         goal = create(:goal, user: user)
@@ -77,7 +77,7 @@ RSpec.describe Goal, type: :model do
       create(:stat, :due, goal: goal, measurement_value: 3)
       create(:stat, :due, goal: goal, measurement_value: 2)
 
-      expect(goal.completion_percentage).to eq (50)
+      expect(goal.completion_percentage).to eq 50
     end
 
     it 'is not limited to 100' do
@@ -86,7 +86,7 @@ RSpec.describe Goal, type: :model do
       create(:stat, :due, goal: goal, measurement_value: 3)
       create(:stat, :due, goal: goal, measurement_value: 2)
 
-      expect(goal.completion_percentage).to eq (200)
+      expect(goal.completion_percentage).to eq 200
     end
 
     it 'rounds calculation result' do
@@ -95,7 +95,7 @@ RSpec.describe Goal, type: :model do
       create(:stat, :due, goal: goal, measurement_value: 3)
       create(:stat, :due, goal: goal, measurement_value: 2)
 
-      expect(goal.completion_percentage).to eq (33)
+      expect(goal.completion_percentage).to eq 33
     end
   end
 end
