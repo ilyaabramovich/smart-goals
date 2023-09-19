@@ -36,6 +36,7 @@ export default function SignUp() {
     <Row className="justify-content-center">
       <Col md={6}>
         <Form onSubmit={handleSubmit}>
+          <h1 className="fs-4">Sign up</h1>
           <Form.Group as="section" className="mb-3" controlId="username">
             <Form.Label>Username</Form.Label>
             <Form.Control required ref={ref} name="username" autoComplete="username" />

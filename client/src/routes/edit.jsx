@@ -23,7 +23,12 @@ async function action({ request, params }) {
 function EditGoal() {
   const { goal } = useLoaderData()
 
-  return <GoalForm goal={goal} />
+  return (
+    <>
+      <h1 className="fs-4">Edit goal</h1>
+      <GoalForm goal={goal} />
+    </>
+  )
 }
 
 EditGoal.action = action

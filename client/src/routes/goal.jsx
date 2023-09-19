@@ -40,6 +40,7 @@ function Goal() {
 
   return (
     <>
+      <h1 className="fs-4">Goal details</h1>
       <Table borderless>
         <tbody>
           <tr>
@@ -99,27 +100,25 @@ function Goal() {
       )}
       <GoalStatsChart goal={goal} />
       <Row className="mt-2 align-items-baseline justify-content-end">
-        <Col sm='auto'>
-        <Link to="edit">Edit</Link>
+        <Col sm="auto">
+          <Link to="edit">Edit</Link>
         </Col>
-        <Col sm='auto'>
-        <RouterForm
-          className="mt-2"
-          method="post"
-          action="destroy"
-          onSubmit={(event) => {
-            if (
-              !confirm('Please confirm you want to delete this goal.')
-            ) {
-              event.preventDefault()
-            }
-          }}
-        >
-          <Button variant="danger" type="submit">
-            Delete
-          </Button>
-        </RouterForm>
-      </Col>
+        <Col sm="auto">
+          <RouterForm
+            className="mt-2"
+            method="post"
+            action="destroy"
+            onSubmit={(event) => {
+              if (!confirm('Please confirm you want to delete this goal.')) {
+                event.preventDefault()
+              }
+            }}
+          >
+            <Button variant="danger" type="submit">
+              Delete
+            </Button>
+          </RouterForm>
+        </Col>
       </Row>
     </>
   )

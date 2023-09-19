@@ -16,7 +16,10 @@ async function action({ request }) {
 
 function CreateGoal() {
   return (
-    <GoalForm/>
+    <>
+      <h1 className="fs-4">New goal</h1>
+      <GoalForm />
+    </>
   )
 }
 
