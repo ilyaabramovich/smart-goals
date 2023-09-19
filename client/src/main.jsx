@@ -20,10 +20,8 @@ import { AuthProvider } from './providers/auth'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route element={<GuestRoute />}>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-      </Route>
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/signin" element={<SignIn />} />
       <Route index element={<Home />} />
       <Route errorElement={<ErrorBoundary />} element={<ProtectedRoute />}>
         <Route path="goals" element={<Goals />} loader={Goals.loader} />
