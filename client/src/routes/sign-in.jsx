@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false)
+  const [isSubmittingDisabled, setIsSubmittingDisabled] = useState(false)
   const ref = useRef()
   const { signin } = useAuth()
   const navigate = useNavigate()
@@ -21,16 +22,18 @@ export default function SignIn() {
     }
   }, [])
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const userData = Object.fromEntries(formData)
 
-    signin(userData)
-      .then(() => {
-        navigate(from, { replace: true })
-      })
-      .catch((error) => console.error(error))
+    setIsSubmittingDisabled(true)
+    try {
+      await signin(userData)
+      navigate(from, { replace: true })
+    } catch (error) {
+      setIsSubmittingDisabled(false)
+    }
   }
 
   return (
@@ -59,7 +62,7 @@ export default function SignIn() {
             >{`${showPassword ? 'Hide' : 'Show'} password`}</button>
             <Form.Control type={showPassword ? 'text' : 'password'} name="password" autoComplete="current-password" />
           </Form.Group>
-          <Button variant="primary" type="submit" className="me-2">
+          <Button disabled={isSubmittingDisabled} variant="primary" type="submit" className="me-2">
             Sign in
           </Button>
         </Form>

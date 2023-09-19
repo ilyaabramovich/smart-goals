@@ -4,9 +4,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function SignUp() {
+  const [isSubmittingDisabled, setIsSubmittingDisabled] = useState(false)
   const ref = useRef()
   const { signup } = useAuth()
   const location = useLocation()
@@ -25,11 +26,13 @@ export default function SignUp() {
     const formData = new FormData(event.currentTarget)
     const userData = Object.fromEntries(formData)
 
-    signup(userData)
-      .then(() => {
-        navigate(from, { replace: true })
-      })
-      .catch((error) => console.error(error))
+    setIsSubmittingDisabled(true)
+    try {
+      await signup(userData)
+      navigate(from, { replace: true })
+    } catch (error) {
+      setIsSubmittingDisabled(false)
+    }
   }
 
   return (
@@ -45,7 +48,7 @@ export default function SignUp() {
             <Form.Label>Password</Form.Label>
             <Form.Control required type="password" name="password" autoComplete="new-password" />
           </Form.Group>
-          <Button variant="primary" type="submit" className="me-2">
+          <Button variant="primary" disabled={isSubmittingDisabled} type="submit" className="me-2">
             Sign up
           </Button>
         </Form>
