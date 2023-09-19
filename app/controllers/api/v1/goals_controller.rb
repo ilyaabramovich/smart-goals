@@ -1,6 +1,6 @@
 class Api::V1::GoalsController < ApplicationController
   before_action :require_user_logged_in!
-  before_action :set_goal, only: %i[show update destroy]
+  before_action :set_goal, only: %i[show update destroy details]
 
   def index
     @goals = current_user.goals.select(:id, :description)
@@ -10,6 +10,10 @@ class Api::V1::GoalsController < ApplicationController
 
   def show
     render json: @goal
+  end
+
+  def details
+    render json: @goal, serializer: GoalDetailsSerializer
   end
 
   def create
