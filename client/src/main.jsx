@@ -14,7 +14,6 @@ import CreateGoal from './routes/create'
 import Home from './routes/home'
 import Layout from './routes/layout'
 import ProtectedRoute from './routes/protected'
-import GuestRoute from './routes/guest'
 import { AuthProvider } from './providers/auth'
 
 const router = createBrowserRouter(
