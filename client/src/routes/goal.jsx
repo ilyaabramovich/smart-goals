@@ -6,13 +6,13 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
 import { Link, Form as RouterForm, useLoaderData, useRevalidator } from 'react-router-dom'
-import { getGoal } from '../api/goals'
+import { getGoalDetails } from '../api/goals'
 import { updateStat } from '../api/stats'
 import { formatDate } from '../utils/formatDate'
 import GoalStatsChart from '../components/goal-stats-chart'
 
 async function loader({ params }) {
-  const goal = await getGoal(params.goalId)
+  const goal = await getGoalDetails(params.goalId)
   if (!goal) {
     throw new Response('', {
       status: 404,

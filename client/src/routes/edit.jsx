@@ -1,6 +1,17 @@
 import { redirect, useLoaderData } from 'react-router-dom'
-import { updateGoal } from '../api/goals'
+import { getGoal, updateGoal } from '../api/goals'
 import GoalForm from '../components/goal-form'
+
+async function loader({ params }) {
+  const goal = await getGoal(params.goalId)
+  if (!goal) {
+    throw new Response('', {
+      status: 404,
+      statusText: 'Not Found',
+    })
+  }
+  return { goal }
+}
 
 async function action({ request, params }) {
   const formData = await request.formData()
@@ -16,4 +27,5 @@ function EditGoal() {
 }
 
 EditGoal.action = action
+EditGoal.loader = loader
 export default EditGoal

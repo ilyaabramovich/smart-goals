@@ -44,6 +44,12 @@ export async function getGoal(id) {
   return goal ?? null
 }
 
+export async function getGoalDetails(id) {
+  const res = await fetch(`/api/v1/goals/${id}/details`)
+  const goal = await res.json()
+  return goal ?? null
+}
+
 export async function updateGoal(id, goalData) {
   const res = await fetch(`/api/v1/goals/${id}`, {
     method: 'PATCH',
