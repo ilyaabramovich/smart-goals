@@ -3,9 +3,9 @@ class Api::V1::GoalsController < ApplicationController
   before_action :set_goal, only: %i[show update destroy]
 
   def index
-    @goals = current_user.goals.includes(:due_stats)
+    @goals = current_user.goals.select(:id, :description)
 
-    render json: @goals
+    render json: @goals, fields: [:id, :description]
   end
 
   def show
