@@ -25,7 +25,9 @@ const router = createBrowserRouter(
       <Route errorElement={<ErrorBoundary />} element={<ProtectedRoute />}>
         <Route path="goals" element={<Goals />} loader={Goals.loader} />
         <Route path="goals/new" element={<CreateGoal />} action={CreateGoal.action} />
-        <Route path="goals/:goalId" element={<Goal />} loader={Goal.loader} />
+        <Route path="goals/:goalId" element={<Goal />} loader={Goal.loader}>
+          <Route path="stats/:statId" action={Goal.action} />
+        </Route>
         <Route path="goals/:goalId/edit" element={<EditGoal />} loader={EditGoal.loader} action={EditGoal.action} />
         <Route path="goals/:goalId/destroy" action={destroyAction} />
       </Route>

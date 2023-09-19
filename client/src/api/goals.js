@@ -2,52 +2,42 @@ import { deepSnakeCase } from '../utils/deepSnakeCase'
 
 export async function getGoals() {
   const res = await fetch('/api/v1/goals')
-  const goals = await res.json()
-  if (!goals) return []
-  return goals
+  if (!res.ok) {
+    throw res
+  }
+
+  return await res.json()
 }
 
 export async function createGoal(goalData) {
-  let response
-  try {
-    response = await fetch('/api/v1/goals', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(deepSnakeCase({ goal: goalData })),
-    })
-  } catch (error) {
-    console.log('There was an error', error)
+  const res = await fetch('/api/v1/goals', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(deepSnakeCase({ goal: goalData })),
+  })
+  if (!res.ok) {
+    throw res
   }
-  let json
-  try {
-    if (response) {
-      json = await response.json()
-      if (response?.ok) {
-        return json
-      } else {
-        throw new Error(json?.error || 'Unexpected error')
-      }
-    }
-  } catch (error) {
-    if (error instanceof SyntaxError) {
-      console.log('There was a SyntaxError', error)
-    } else {
-      console.log('There was an error', error)
-      throw error
-    }
-  }
+
+  return await res.json()
 }
 
 export async function getGoal(id) {
   const res = await fetch(`/api/v1/goals/${id}`)
-  const goal = await res.json()
-  return goal ?? null
+  if (!res.ok) {
+    throw res
+  }
+
+  return await res.json()
 }
 
 export async function getGoalDetails(id) {
   const res = await fetch(`/api/v1/goals/${id}/details`)
-  const goal = await res.json()
-  return goal ?? null
+  if (!res.ok) {
+    throw res
+  }
+
+  return await res.json()
 }
 
 export async function updateGoal(id, goalData) {
@@ -56,8 +46,11 @@ export async function updateGoal(id, goalData) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(deepSnakeCase({ goal: goalData })),
   })
-  const goal = await res.json()
-  return goal
+  if (!res.ok) {
+    throw res
+  }
+
+  return { ok: true }
 }
 
 export async function deleteGoal(id) {

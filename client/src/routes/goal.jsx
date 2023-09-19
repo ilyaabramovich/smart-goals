@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
-import { Link, Form as RouterForm, useLoaderData, useRevalidator } from 'react-router-dom'
+import { Link, Form as RouterForm, useFetcher, useLoaderData, useNavigation } from 'react-router-dom'
 import { getGoalDetails } from '../api/goals'
 import { updateStat } from '../api/stats'
 import { formatDate } from '../utils/formatDate'
@@ -22,21 +22,18 @@ async function loader({ params }) {
   return { goal }
 }
 
+async function action({ params, request }) {
+  const formData = await request.formData()
+  const statData = Object.fromEntries(formData)
+  const stat = await updateStat(params.goalId, params.statId, statData)
+  return stat
+}
+
 function Goal() {
-  const revalidator = useRevalidator()
+  const fetcher = useFetcher()
+  const navigation = useNavigation()
   const { goal } = useLoaderData()
-
-  function handleSubmit(event, statId) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const measurementValue = formData.get('measurementValue')
-
-    updateStat(goal.id, statId, { measurementValue })
-      .catch((error) => console.error(error))
-      .then(() => {
-        revalidator.revalidate()
-      })
-  }
+  const isSubmittingStat = navigation.formData?.get('measurementValue') != null
 
   return (
     <>
@@ -81,14 +78,14 @@ function Goal() {
             <Accordion.Item eventKey={stat.id} key={stat.id}>
               <Accordion.Header>Enter measurement for {formatDate(stat.measurementDate)}</Accordion.Header>
               <Accordion.Body>
-                <Form onSubmit={(event) => handleSubmit(event, stat.id)}>
+                <Form as={fetcher.Form} action={`stats/${stat.id}`} method="post">
                   <Row>
                     <Col>
                       <Form.Control min={0} required type="number" name="measurementValue" defaultValue={0} />
                     </Col>
                     <Col>
-                      <Button variant="secondary" type="submit">
-                        Submit
+                      <Button variant="secondary" type="submit" disabled={isSubmittingStat}>
+                        {isSubmittingStat ? 'Submitting' : 'Submit'}
                       </Button>
                     </Col>
                   </Row>
@@ -125,4 +122,5 @@ function Goal() {
 }
 
 Goal.loader = loader
+Goal.action = action
 export default Goal
