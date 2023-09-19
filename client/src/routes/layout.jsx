@@ -8,16 +8,18 @@ export default function Layout() {
     <>
       <Navbar expand="sm" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand as={Link} to="/">SMART goals</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+            SMART goals
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="justify-content-end">
             <Navigation />
           </Navbar.Collapse>
         </Container>
       </Navbar>
-        <Container as='main' className='my-4'>
-          <Outlet />
-        </Container>
+      <Container as="main" className="my-4">
+        <Outlet />
+      </Container>
     </>
   )
 }

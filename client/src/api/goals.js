@@ -8,7 +8,7 @@ export async function getGoals() {
 }
 
 export async function createGoal(goalData) {
-let response
+  let response
   try {
     response = await fetch('/api/v1/goals', {
       method: 'POST',
