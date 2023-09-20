@@ -1,43 +1,37 @@
 export async function signIn(userData) {
-  const response = await fetch('/auth/login', {
+  const res = await fetch('/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   })
-  let json
-  try {
-    if (response) {
-      json = await response.json()
-      if (response?.ok) {
-        return json
-      } else {
-        throw new Error(json?.error || 'Unexpected error')
-      }
-    }
-  } catch (error) {
-    if (error instanceof SyntaxError) {
-      console.log('There was a SyntaxError', error)
-    } else {
-      console.log('There was an error', error)
-    }
-    throw error
+
+  if (!res.ok) {
+    throw res
   }
+
+  return await res.json()
 }
 
 export async function signUp(userData) {
-  const response = await fetch('/auth/signup', {
+  const res = await fetch('/auth/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   })
-  const json = await response.json()
-  if (response?.ok) {
-    return json
-  } else {
-    throw new Error(json?.error || 'Unexpected error')
+
+  if (!res.ok) {
+    throw res
   }
+
+  return await res.json()
 }
 
 export async function logOut() {
-  await fetch('/auth/logout', { method: 'DELETE' })
+  const res = await fetch('/auth/logout', { method: 'DELETE' })
+
+  if (!res.ok) {
+    throw res
+  }
+
+  return { ok: true }
 }
