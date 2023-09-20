@@ -2,13 +2,17 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import { Link, useLoaderData } from 'react-router-dom'
 import { getGoals } from '../api/goals'
 
-async function loader() {
-  const goals = await getGoals()
-  return { goals }
+function loader() {
+  const goals = getGoals()
+  if (!goals) {
+    return []
+  }
+
+  return goals
 }
 
 function Goals() {
-  const { goals } = useLoaderData()
+  const goals = useLoaderData()
 
   return (
     <>
