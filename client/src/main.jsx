@@ -5,7 +5,6 @@ import './index.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import { action as destroyAction } from './routes/destroy'
 
-import ErrorBoundary from './routes/error-boundary'
 import Goal from './routes/goal'
 import EditGoal from './routes/edit'
 import SignIn from './routes/sign-in'
@@ -16,14 +15,15 @@ import Home from './routes/home'
 import Layout from './routes/layout'
 import ProtectedRoute from './routes/protected'
 import { AuthProvider } from './providers/auth'
+import RootBoundary from './routes/root-boundary'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
+    <Route path="/" element={<Layout />} errorElement={<RootBoundary />}>
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin" element={<SignIn />} />
       <Route index element={<Home />} />
-      <Route errorElement={<ErrorBoundary />} element={<ProtectedRoute />}>
+      <Route element={<ProtectedRoute />}>
         <Route path="goals" element={<Goals />} loader={Goals.loader} />
         <Route path="goals/new" element={<CreateGoal />} action={CreateGoal.action} />
         <Route path="goals/:goalId" element={<Goal />} loader={Goal.loader}>
