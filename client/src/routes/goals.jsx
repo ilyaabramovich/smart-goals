@@ -1,4 +1,3 @@
-import ListGroup from 'react-bootstrap/ListGroup'
 import { Link, useLoaderData } from 'react-router-dom'
 import { getGoals } from '../api/goals'
 
@@ -16,21 +15,21 @@ function Goals() {
 
   return (
     <>
-      <h1 className="fs-4">My goals</h1>
+      <h1 className="text-2xl font-bold">My goals</h1>
       {goals.length > 0 ? (
-        <ListGroup className="mb-2">
+        <ul className="mb-2">
           {goals.map((goal) => (
-            <ListGroup.Item key={goal.id}>
-              <Link to={`${goal.id}`} className="link-underline link-underline-opacity-0 d-block">
+            <li key={goal.id}>
+              <Link to={`${goal.id}`}>
                 {goal.description}
               </Link>
-            </ListGroup.Item>
+            </li>
           ))}
-        </ListGroup>
+        </ul>
       ) : (
         <p className="mb-2">You have no goals yet. Go ahead and add one!</p>
       )}
-      <Link className="link-primary" to="new">
+      <Link to="new">
         New goal
       </Link>
     </>

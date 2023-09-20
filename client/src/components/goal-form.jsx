@@ -1,6 +1,4 @@
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import { Form as RouterForm } from 'react-router-dom'
+import { Form } from 'react-router-dom'
 import { formatDate } from '../utils/formatDate'
 import CancelButton from './cancel-button'
 import { useEffect, useRef } from 'react'
@@ -22,49 +20,48 @@ export default function GoalForm({ goal = goalNullObject }) {
   }, [])
 
   return (
-    <Form as={RouterForm} method="post">
-      <Form.Group as="section" className="mb-3" controlId="goal-field-description">
-        <Form.Label>Goal description</Form.Label>
-        <Form.Control
+    <Form method="post">
+      <section className="mb-3" id="goal-field-description">
+        <label>Goal description</label>
+        <textarea
           ref={ref}
           required
-          as="textarea"
           minLength={15}
           rows={3}
           name="description"
           defaultValue={goal.description}
           placeholder="minimum 15 letters"
         />
-      </Form.Group>
-      <Form.Group as="section" className="mb-3" controlId="goal-field-initial-value">
-        <Form.Label>Initial value</Form.Label>
-        <Form.Control type="number" min={0} name="initialValue" defaultValue={goal.initialValue} />
-      </Form.Group>
-      <Form.Group as="section" className="mb-3" controlId="goal-field-target-value">
-        <Form.Label>Target value</Form.Label>
-        <Form.Control required type="number" min={0} name="targetValue" defaultValue={goal.targetValue} />
-      </Form.Group>
-      <Form.Group as="section" className="mb-3" controlId="goal-field-target-date">
-        <Form.Label>Target date</Form.Label>
-        <Form.Control
+      </section>
+      <section className="mb-3" id="goal-field-initial-value">
+        <label>Initial value</label>
+        <input type="number" min={0} name="initialValue" defaultValue={goal.initialValue} />
+      </section>
+      <section className="mb-3" id="goal-field-target-value">
+        <label>Target value</label>
+        <input required type="number" min={0} name="targetValue" defaultValue={goal.targetValue} />
+      </section>
+      <section className="mb-3" id="goal-field-target-date">
+        <label>Target date</label>
+        <input
           required
           type="date"
           min={formatDate(new Date())}
           name="targetDate"
           defaultValue={formatDate(goal.targetDate)}
         />
-      </Form.Group>
-      <Form.Group as="section" className="mb-3" controlId="goal-field-interval">
-        <Form.Label>Interval</Form.Label>
-        <Form.Select aria-label="Goal time frame interval" name="interval" defaultValue={goal.interval}>
+      </section>
+      <section className="mb-3" id="goal-field-interval">
+        <label>Interval</label>
+        <select aria-label="Goal time frame interval" name="interval" defaultValue={goal.interval}>
           <option value="daily">daily</option>
           <option value="weekly">weekly</option>
           <option value="monthly">monthly</option>
-        </Form.Select>
-      </Form.Group>
-      <Button variant="primary" type="submit" className="me-2">
+        </select>
+      </section>
+      <button type="submit" className="me-2">
         Save
-      </Button>
+      </button>
       <CancelButton />
     </Form>
   )

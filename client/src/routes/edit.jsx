@@ -26,7 +26,7 @@ function EditGoal() {
 
   return (
     <>
-      <h1 className="fs-4">Edit goal</h1>
+      <h1 className="text-2xl font-bold">Edit goal</h1>
       <GoalForm goal={goal} />
     </>
   )

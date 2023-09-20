@@ -1,5 +1,3 @@
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 import { useEffect, useRef, useState } from 'react'
@@ -35,20 +33,20 @@ export default function SignUp() {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} className="auth-form">
-        <h1 className="fs-4">Sign up</h1>
-        <Form.Group as="section" className="mb-3" controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control required ref={ref} name="username" autoComplete="username" />
-        </Form.Group>
-        <Form.Group as="section" className="mb-3" controlId="new-password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control required type="password" name="password" autoComplete="new-password" />
-        </Form.Group>
-        <Button variant="primary" disabled={isSubmitting} type="submit" className="me-2">
+      <form onSubmit={handleSubmit} className="mx-auto md:w-1/2">
+        <h1 className="text-2xl font-bold">Sign up</h1>
+        <section className="mb-3" id="username">
+          <label>Username</label>
+          <input required ref={ref} name="username" autoComplete="username" />
+        </section>
+        <section className="mb-3" id="new-password">
+          <label>Password</label>
+          <input required type="password" name="password" autoComplete="new-password" />
+        </section>
+        <button disabled={isSubmitting} type="submit" className="me-2">
           Sign up
-        </Button>
-      </Form>
+        </button>
+      </form>
       <p className="text-center mt-4 text-secondary">
         <span>
           Already have an account? <Link to="/signin">Sign in</Link>

@@ -1,5 +1,3 @@
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
 import { NavLink, useMatch, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 
@@ -20,33 +18,21 @@ export default function Navigation() {
     }
 
     return (
-      <Nav>
-        <Nav.Item>
-          <Nav.Link as={NavLink} className="ms-auto" to="/signin">
-            Sign in
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <NavLink className="ms-auto" to="/signin">
+        Sign in
+      </NavLink>
     )
   }
 
   return (
     <>
-      <Nav className="me-auto">
-        <Nav.Item>
-          <Nav.Link as={NavLink} to="/goals">
-            My goals
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <Nav>
-        <Navbar.Text className="me-2">Signed in as: {user.username}</Navbar.Text>
-        <Nav.Item>
-          <Nav.Link className="ms-auto" onClick={handleSignOut}>
-            Sign out
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <NavLink className="me-auto" to="/goals">
+        My goals
+      </NavLink>
+      <span className="me-2">Signed in as: {user.username}</span>
+      <NavLink className="ms-auto" onClick={handleSignOut}>
+        Sign out
+      </NavLink>
     </>
   )
 }

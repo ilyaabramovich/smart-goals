@@ -1,13 +1,9 @@
-import Accordion from 'react-bootstrap/Accordion'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import ProgressBar from 'react-bootstrap/ProgressBar'
-import Table from 'react-bootstrap/Table'
-import { Link, Form as RouterForm, useFetcher, useLoaderData, useNavigation } from 'react-router-dom'
+import { Link, Form, useFetcher, useLoaderData, useNavigation } from 'react-router-dom'
 import { getGoalDetails } from '../api/goals'
 import { updateStat } from '../api/stats'
 import { formatDate } from '../utils/formatDate'
 import GoalStatsChart from '../components/goal-stats-chart'
+import ProgressBar from '../components/progress-bar'
 
 function loader({ params }) {
   const goal = getGoalDetails(params.goalId)
@@ -37,8 +33,8 @@ function Goal() {
 
   return (
     <>
-      <h1 className="fs-4">Goal details</h1>
-      <Table borderless>
+      <h1 className="text-2xl font-bold">Goal details</h1>
+      <table>
         <tbody>
           <tr>
             <th>Description</th>
@@ -71,28 +67,28 @@ function Goal() {
             </td>
           </tr>
         </tbody>
-      </Table>
+      </table>
       {goal.pendingStats.length > 0 && (
-        <Accordion defaultActiveKey={goal.pendingStats[0].id} className="mb-2">
+        <ul className="mb-2">
           {goal.pendingStats.map((stat) => (
-            <Accordion.Item eventKey={stat.id} key={stat.id}>
-              <Accordion.Header>Enter measurement for {formatDate(stat.measurementDate)}</Accordion.Header>
-              <Accordion.Body>
+            <li key={stat.id}>
+              <span>Enter measurement for {formatDate(stat.measurementDate)}</span>
+              <div>
                 <Form
                   style={{ display: 'grid', gap: '0.5rem', gridTemplateColumns: 'max-content min-content' }}
                   as={fetcher.Form}
                   action={`stats/${stat.id}`}
                   method="post"
                 >
-                  <Form.Control min={0} required type="number" name="measurementValue" defaultValue={0} />
-                  <Button variant="secondary" type="submit" disabled={isSubmittingStat}>
+                  <input min={0} required type="number" name="measurementValue" defaultValue={0} />
+                  <button type="submit" disabled={isSubmittingStat}>
                     {isSubmittingStat ? 'Submitting' : 'Submit'}
-                  </Button>
+                  </button>
                 </Form>
-              </Accordion.Body>
-            </Accordion.Item>
+              </div>
+            </li>
           ))}
-        </Accordion>
+        </ul>
       )}
       <GoalStatsChart goal={goal} />
       <div
@@ -106,7 +102,7 @@ function Goal() {
         }}
       >
         <Link to="edit">Edit</Link>
-        <RouterForm
+        <Form
           method="post"
           action="destroy"
           onSubmit={(event) => {
@@ -115,10 +111,10 @@ function Goal() {
             }
           }}
         >
-          <Button variant="danger" type="submit">
+          <button type="submit">
             Delete
-          </Button>
-        </RouterForm>
+          </button>
+        </Form>
       </div>
     </>
   )

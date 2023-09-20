@@ -1,5 +1,3 @@
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 import { useEffect, useRef, useState } from 'react'
@@ -36,14 +34,14 @@ export default function SignIn() {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} className="auth-form">
-        <h1 className="fs-4">Sign in</h1>
-        <Form.Group as="section" className="mb-3" controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control ref={ref} name="username" autoComplete="username" />
-        </Form.Group>
-        <Form.Group as="section" className="mb-3 position-relative" controlId="current-password">
-          <Form.Label>Password</Form.Label>
+      <form onSubmit={handleSubmit} className="mx-auto md:w-1/2">
+        <h1 className="text-2xl font-bold">Sign in</h1>
+        <section className="mb-3" id="username">
+          <label>Username</label>
+          <input ref={ref} name="username" autoComplete="username" />
+        </section>
+        <section className="mb-3 position-relative" id="current-password">
+          <label>Password</label>
           <button
             className="position-absolute top-0 end-0 p-0 border-0 bg-transparent text-secondary"
             onClick={() => {
@@ -57,12 +55,12 @@ export default function SignIn() {
                 : 'Show password as plain text. Warning: this will display your password on the screen.'
             }
           >{`${showPassword ? 'Hide' : 'Show'} password`}</button>
-          <Form.Control type={showPassword ? 'text' : 'password'} name="password" autoComplete="current-password" />
-        </Form.Group>
-        <Button disabled={isSubmitting} variant="primary" type="submit" className="me-2">
+          <input type={showPassword ? 'text' : 'password'} name="password" autoComplete="current-password" />
+        </section>
+        <button disabled={isSubmitting} type="submit" className="me-2">
           Sign in
-        </Button>
-      </Form>
+        </button>
+      </form>
       <p className="text-center mt-4 text-secondary">
         <span>
           Do not have an account yet? <Link to="/signup">Sign up</Link>
