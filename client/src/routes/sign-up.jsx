@@ -1,13 +1,11 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 import { useEffect, useRef, useState } from 'react'
 
 export default function SignUp() {
-  const [isSubmittingDisabled, setIsSubmittingDisabled] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const ref = useRef()
   const { signup } = useAuth()
   const location = useLocation()
@@ -26,38 +24,36 @@ export default function SignUp() {
     const formData = new FormData(event.currentTarget)
     const userData = Object.fromEntries(formData)
 
-    setIsSubmittingDisabled(true)
+    setIsSubmitting(true)
     try {
       await signup(userData)
       navigate(from, { replace: true })
-    } catch (error) {
-      setIsSubmittingDisabled(false)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
   return (
-    <Row className="justify-content-center">
-      <Col md={6}>
-        <Form onSubmit={handleSubmit}>
-          <h1 className="fs-4">Sign up</h1>
-          <Form.Group as="section" className="mb-3" controlId="username">
-            <Form.Label>Username</Form.Label>
-            <Form.Control required ref={ref} name="username" autoComplete="username" />
-          </Form.Group>
-          <Form.Group as="section" className="mb-3" controlId="new-password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control required type="password" name="password" autoComplete="new-password" />
-          </Form.Group>
-          <Button variant="primary" disabled={isSubmittingDisabled} type="submit" className="me-2">
-            Sign up
-          </Button>
-        </Form>
-        <p className="text-center mt-4 text-secondary">
-          <span>
-            Already have an account? <Link to="/signin">Sign in</Link>
-          </span>
-        </p>
-      </Col>
-    </Row>
+    <>
+      <Form onSubmit={handleSubmit} className="auth-form">
+        <h1 className="fs-4">Sign up</h1>
+        <Form.Group as="section" className="mb-3" controlId="username">
+          <Form.Label>Username</Form.Label>
+          <Form.Control required ref={ref} name="username" autoComplete="username" />
+        </Form.Group>
+        <Form.Group as="section" className="mb-3" controlId="new-password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control required type="password" name="password" autoComplete="new-password" />
+        </Form.Group>
+        <Button variant="primary" disabled={isSubmitting} type="submit" className="me-2">
+          Sign up
+        </Button>
+      </Form>
+      <p className="text-center mt-4 text-secondary">
+        <span>
+          Already have an account? <Link to="/signin">Sign in</Link>
+        </span>
+      </p>
+    </>
   )
 }
