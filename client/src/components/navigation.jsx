@@ -1,4 +1,5 @@
 import Nav from 'react-bootstrap/Nav'
+import Button from 'react-bootstrap/Button'
 import Navbar from 'react-bootstrap/Navbar'
 import { NavLink, useMatch, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
@@ -42,9 +43,13 @@ export default function Navigation() {
       <Nav>
         <Navbar.Text className="me-2">Signed in as: {user.username}</Navbar.Text>
         <Nav.Item>
-          <Nav.Link className="ms-auto" onClick={handleSignOut}>
+          <Button
+            variant="link"
+            className="ms-auto text-secondary link-underline link-underline-opacity-0"
+            onClick={handleSignOut}
+          >
             Sign out
-          </Nav.Link>
+          </Button>
         </Nav.Item>
       </Nav>
     </>
