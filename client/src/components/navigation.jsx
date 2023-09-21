@@ -5,14 +5,13 @@ import { NavLink, useMatch, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 
 export default function Navigation() {
-  const { isLoggedIn, signout, user } = useAuth()
+  const { isLoggedIn, logout, user } = useAuth()
   const navigate = useNavigate()
   const match = useMatch('/')
 
-  const handleSignOut = () => {
-    signout()
-      .then(() => navigate('/'))
-      .catch((err) => console.error(err))
+  const handleSignOut = async () => {
+    await logout()
+    navigate('/')
   }
 
   if (!isLoggedIn) {

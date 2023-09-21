@@ -7,25 +7,25 @@ export function AuthProvider({ children }) {
 
   const isLoggedIn = !!user
 
-  const signin = (newUser) => {
-    return signIn(newUser).then((user) => {
+  const signin = (userData) => {
+    return signIn(userData).then((user) => {
       setUser(user)
     })
   }
 
-  const signup = (newUser) => {
-    return signUp(newUser).then((user) => {
+  const signup = (userData) => {
+    return signUp(userData).then((user) => {
       setUser(user)
     })
   }
 
-  const signout = () => {
+  const logout = () => {
     return logOut().then(() => {
       setUser(null)
     })
   }
 
-  const value = { user, signin, signup, signout, isLoggedIn }
+  const value = { user, signin, signup, logout, isLoggedIn }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
