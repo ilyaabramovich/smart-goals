@@ -16,6 +16,7 @@ import Layout from './routes/layout'
 import ProtectedRoute from './routes/protected'
 import { AuthProvider } from './providers/auth'
 import RootBoundary from './routes/root-boundary'
+import Missing from './routes/missing'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
         <Route path="goals/:goalId/edit" element={<EditGoal />} loader={EditGoal.loader} action={EditGoal.action} />
         <Route path="goals/:goalId/destroy" action={destroyAction} />
       </Route>
+      <Route path="*" element={<Missing />} />
     </Route>,
   ),
 )

@@ -1,7 +1,6 @@
 import Container from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
-import Header from '../components/header'
 
 export default function RootBoundary() {
   const error = useRouteError()
@@ -33,8 +32,7 @@ export default function RootBoundary() {
 
   return (
     <>
-      <Header />
-      <Container as="main" className="my-4">
+      <Container className="my-4">
         <h1 className="fs-4 text-danger">Application error</h1>
         <Alert className="mb-2" variant="danger">
           {getErrorMessage(error)}
