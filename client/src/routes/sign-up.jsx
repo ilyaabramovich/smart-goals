@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
 import { useEffect, useRef, useState } from 'react'
 
@@ -8,10 +8,7 @@ export default function SignUp() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const ref = useRef()
   const { signup } = useAuth()
-  const location = useLocation()
   const navigate = useNavigate()
-  const params = new URLSearchParams(location.search)
-  const from = params.get('from') || '/goals'
 
   useEffect(() => {
     if (ref.current) {
@@ -27,7 +24,7 @@ export default function SignUp() {
     setIsSubmitting(true)
     try {
       await signup(userData)
-      navigate(from, { replace: true })
+      navigate('/goals', { replace: true })
     } finally {
       setIsSubmitting(false)
     }
