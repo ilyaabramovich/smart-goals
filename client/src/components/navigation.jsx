@@ -23,7 +23,7 @@ export default function Navigation() {
     return (
       <Nav>
         <Nav.Item>
-          <Nav.Link as={NavLink} className="ms-auto" to="/signin">
+          <Nav.Link as={NavLink} to="/signin">
             Sign in
           </Nav.Link>
         </Nav.Item>
