@@ -40,7 +40,7 @@ export default function SignIn() {
         <h1 className="fs-4">Sign in</h1>
         <Form.Group as="section" className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
-          <Form.Control ref={ref} name="username" autoComplete="username" />
+          <Form.Control required ref={ref} name="username" autoComplete="username" />
         </Form.Group>
         <Form.Group as="section" className="mb-3 position-relative" controlId="current-password">
           <Form.Label>Password</Form.Label>
@@ -57,7 +57,12 @@ export default function SignIn() {
                 : 'Show password as plain text. Warning: this will display your password on the screen.'
             }
           >{`${showPassword ? 'Hide' : 'Show'} password`}</button>
-          <Form.Control type={showPassword ? 'text' : 'password'} name="password" autoComplete="current-password" />
+          <Form.Control
+            required
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            autoComplete="current-password"
+          />
         </Form.Group>
         <Button disabled={isSubmitting} variant="primary" type="submit" className="me-2">
           Sign in
