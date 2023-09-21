@@ -36,91 +36,102 @@ function Goal() {
   const isSubmittingStat = navigation.formData?.get('measurementValue') != null
 
   return (
-    <>
-      <h1 className="fs-4">Goal details</h1>
-      <Table borderless>
-        <tbody>
-          <tr>
-            <th>Description</th>
-            <td>{goal.description}</td>
-          </tr>
-          <tr>
-            <th>Initial value</th>
-            <td>{goal.initialValue}</td>
-          </tr>
-          <tr>
-            <th>Target value</th>
-            <td>{goal.targetValue}</td>
-          </tr>
-          <tr>
-            <th>Accumulated value</th>
-            <td>{goal.accumulatedValue}</td>
-          </tr>
-          <tr>
-            <th>Target date</th>
-            <td>{formatDate(goal.targetDate)}</td>
-          </tr>
-          <tr>
-            <th>Interval</th>
-            <td>{goal.interval}</td>
-          </tr>
-          <tr>
-            <th>Goal progress</th>
-            <td>
-              <ProgressBar now={goal.completionPercentage} label={`${goal.completionPercentage}%`} />
-            </td>
-          </tr>
-        </tbody>
-      </Table>
-      {goal.pendingStats.length > 0 && (
-        <Accordion defaultActiveKey={goal.pendingStats[0].id} className="mb-2">
-          {goal.pendingStats.map((stat) => (
-            <Accordion.Item eventKey={stat.id} key={stat.id}>
-              <Accordion.Header>Enter measurement for {formatDate(stat.measurementDate)}</Accordion.Header>
-              <Accordion.Body>
-                <Form
-                  style={{ display: 'grid', gap: '0.5rem', gridTemplateColumns: 'max-content min-content' }}
-                  as={fetcher.Form}
-                  action={`stats/${stat.id}`}
-                  method="post"
-                >
-                  <Form.Control min={0} required type="number" name="measurementValue" defaultValue={0} />
-                  <Button variant="secondary" type="submit" disabled={isSubmittingStat}>
-                    {isSubmittingStat ? 'Submitting' : 'Submit'}
-                  </Button>
-                </Form>
-              </Accordion.Body>
-            </Accordion.Item>
-          ))}
-        </Accordion>
-      )}
-      <GoalStatsChart goal={goal} />
-      <div
-        style={{
-          marginTop: '0.5rem',
-          display: 'grid',
-          gap: '0.5rem',
-          gridTemplateColumns: 'min-content min-content',
-          justifyContent: 'space-between',
-          alignItems: 'baseline',
-        }}
-      >
-        <Link to="edit">Edit</Link>
-        <RouterForm
-          method="post"
-          action="destroy"
-          onSubmit={(event) => {
-            if (!confirm('Please confirm you want to delete this goal.')) {
-              event.preventDefault()
-            }
+    <div style={{ display: 'grid', gap: '1rem' }}>
+      <section aria-labelledby="goal-details">
+        <h1 className="fs-4" id="goal-details">
+          Details
+        </h1>
+        <Table borderless>
+          <tbody>
+            <tr>
+              <th>Description</th>
+              <td>{goal.description}</td>
+            </tr>
+            <tr>
+              <th>Initial value</th>
+              <td>{goal.initialValue}</td>
+            </tr>
+            <tr>
+              <th>Target value</th>
+              <td>{goal.targetValue}</td>
+            </tr>
+            <tr>
+              <th>Accumulated value</th>
+              <td>{goal.accumulatedValue}</td>
+            </tr>
+            <tr>
+              <th>Target date</th>
+              <td>{formatDate(goal.targetDate)}</td>
+            </tr>
+            <tr>
+              <th>Interval</th>
+              <td>{goal.interval}</td>
+            </tr>
+            <tr>
+              <th>Goal progress</th>
+              <td>
+                <ProgressBar now={goal.completionPercentage} label={`${goal.completionPercentage}%`} />
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </section>
+      <section aria-labelledby="goal-actions">
+        <h2 className="fs-4" id="goal-actions">
+          Actions
+        </h2>
+        <div
+          style={{
+            display: 'grid',
+            gap: '0.5rem',
+            gridTemplateColumns: 'min-content min-content',
+            justifyContent: 'space-between',
+            alignItems: 'baseline',
           }}
         >
-          <Button variant="danger" type="submit">
-            Delete
-          </Button>
-        </RouterForm>
-      </div>
-    </>
+          <Link to="edit">Edit</Link>
+          <RouterForm
+            method="post"
+            action="destroy"
+            onSubmit={(event) => {
+              if (!confirm('Please confirm you want to delete this goal.')) {
+                event.preventDefault()
+              }
+            }}
+          >
+            <Button variant="danger" type="submit">
+              Delete
+            </Button>
+          </RouterForm>
+        </div>
+      </section>
+      <section aria-labelledby="goal-stats">
+        <h2 className="fs-4">Stats</h2>
+        {goal.pendingStats.length > 0 && (
+          <Accordion defaultActiveKey={goal.pendingStats[0].id} className="mb-2">
+            {goal.pendingStats.map((stat) => (
+              <Accordion.Item eventKey={stat.id} key={stat.id}>
+                <Accordion.Header>Enter measurement for {formatDate(stat.measurementDate)}</Accordion.Header>
+                <Accordion.Body>
+                  <Form
+                    style={{ display: 'grid', gap: '0.5rem', gridTemplateColumns: 'max-content min-content' }}
+                    as={fetcher.Form}
+                    action={`stats/${stat.id}`}
+                    method="post"
+                  >
+                    <Form.Control min={0} required type="number" name="measurementValue" defaultValue={0} />
+                    <Button variant="secondary" type="submit" disabled={isSubmittingStat}>
+                      {isSubmittingStat ? 'Submitting' : 'Submit'}
+                    </Button>
+                  </Form>
+                </Accordion.Body>
+              </Accordion.Item>
+            ))}
+          </Accordion>
+        )}
+        <GoalStatsChart goal={goal} />
+      </section>
+    </div>
   )
 }
 
