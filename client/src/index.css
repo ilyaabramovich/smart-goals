@@ -1,3 +1,11 @@
+body {
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
 .auth-form {
   margin-left: auto;
   margin-right: auto;
