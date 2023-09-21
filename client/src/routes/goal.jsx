@@ -63,7 +63,7 @@ function Goal() {
           <tr>
             <th>Goal progress</th>
             <td>
-              <ProgressBar now={goal.completionPercentage} label={`${goal.completionPercentage}%`} />
+              <ProgressBar now={goal.completionPercentage} />
             </td>
           </tr>
         </tbody>
