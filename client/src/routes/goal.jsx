@@ -24,8 +24,7 @@ function loader({ params }) {
 async function action({ params, request }) {
   const formData = await request.formData()
   const statData = Object.fromEntries(formData)
-  const stat = await updateStat(params.goalId, params.statId, statData)
-  return stat
+  return await updateStat(params.goalId, params.statId, statData)
 }
 
 function Goal() {
