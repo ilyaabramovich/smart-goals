@@ -18,7 +18,7 @@ export default function Navigation() {
     }
 
     return (
-      <NavLink className="ms-auto" to="/signin">
+      <NavLink className="text-sm ml-auto text-gray-500 dark:text-white hover:underline" to="/signin">
         Sign in
       </NavLink>
     )
@@ -26,11 +26,11 @@ export default function Navigation() {
 
   return (
     <>
-      <NavLink className="me-auto" to="/goals">
+      <NavLink className="text-sm text-gray-500 mr-auto dark:text-white hover:underline" to="/goals">
         My goals
       </NavLink>
-      <span className="me-2">Signed in as: {user.username}</span>
-      <NavLink className="ms-auto" onClick={handleSignOut}>
+      <span className="mr-4 text-sm text-gray-500 dark:text-white">Signed in as: {user.username}</span>
+      <NavLink className="text-sm text-gray-500 dark:text-white hover:underline" onClick={handleSignOut}>
         Sign out
       </NavLink>
     </>
