@@ -1,8 +1,12 @@
-export default function ProgressBar({ now, label }) {
+export default function ProgressBar({ now }) {
   return (
-    <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-      <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${now}%` }}>
-        {label}
+    <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+      <div
+        className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+        style={{ width: `${now}%` }}
+      >
+        {' '}
+        {now}%
       </div>
     </div>
   )
