@@ -18,9 +18,9 @@ function Goals() {
     <>
       <h1 className="fs-4">My goals</h1>
       {goals.length > 0 ? (
-        <ListGroup className="mb-2">
+        <ListGroup as="ul" className="mb-2">
           {goals.map((goal) => (
-            <ListGroup.Item key={goal.id}>
+            <ListGroup.Item as="li" key={goal.id}>
               <Link to={`${goal.id}`} className="link-underline link-underline-opacity-0 d-block">
                 {goal.description}
               </Link>
