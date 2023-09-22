@@ -33,7 +33,7 @@ export default function SignUp() {
   return (
     <>
       <Form onSubmit={handleSubmit} className="auth-form">
-        <h1 className="fs-4">Sign up</h1>
+        <h1 className="fs-4 mb-4">Sign up</h1>
         <Form.Group as="section" className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control required ref={ref} name="username" autoComplete="username" />

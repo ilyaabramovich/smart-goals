@@ -33,7 +33,7 @@ export default function RootBoundary() {
   return (
     <>
       <Container className="my-4">
-        <h1 className="fs-4 text-danger">Application error</h1>
+        <h1 className="fs-4 mb-4 text-danger">Application error</h1>
         <Alert className="mb-2" variant="danger">
           {getErrorMessage(error)}
         </Alert>

@@ -16,7 +16,7 @@ function Goals() {
 
   return (
     <>
-      <h1 className="fs-4">My goals</h1>
+      <h1 className="fs-4 mb-4">My goals</h1>
       {goals.length > 0 ? (
         <ListGroup as="ul" className="mb-2">
           {goals.map((goal) => (
