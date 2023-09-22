@@ -40,34 +40,48 @@ function Goal() {
         <h1 className="fs-4" id="goal-details">
           Details
         </h1>
-        <Table borderless>
+        <Table borderless role="presentation">
           <tbody>
             <tr>
-              <th>Description</th>
+              <td>
+                <strong>Description</strong>
+              </td>
               <td>{goal.description}</td>
             </tr>
             <tr>
-              <th>Initial value</th>
+              <td>
+                <strong>Initial value</strong>
+              </td>
               <td>{goal.initialValue}</td>
             </tr>
             <tr>
-              <th>Target value</th>
+              <td>
+                <strong>Target value</strong>
+              </td>
               <td>{goal.targetValue}</td>
             </tr>
             <tr>
-              <th>Accumulated value</th>
+              <td>
+                <strong>Accumulated value</strong>
+              </td>
               <td>{goal.accumulatedValue}</td>
             </tr>
             <tr>
-              <th>Target date</th>
+              <td>
+                <strong>Target date</strong>
+              </td>
               <td>{formatDate(goal.targetDate)}</td>
             </tr>
             <tr>
-              <th>Interval</th>
+              <td>
+                <strong>Interval</strong>
+              </td>
               <td>{goal.interval}</td>
             </tr>
             <tr>
-              <th>Goal progress</th>
+              <td>
+                <strong>Goal progress</strong>
+              </td>
               <td>
                 <ProgressBar now={goal.completionPercentage} label={`${goal.completionPercentage}%`} />
               </td>
