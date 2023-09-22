@@ -33,8 +33,11 @@ export default function GoalForm({ goal = goalNullObject }) {
           rows={3}
           name="description"
           defaultValue={goal.description}
-          placeholder="minimum 15 letters"
+          aria-describedby="description-help-block"
         />
+        <Form.Text id="description-help-block" muted>
+          Your description must be at least 15 characters long
+        </Form.Text>
       </Form.Group>
       <Form.Group as="section" className="mb-3" controlId="goal-field-initial-value">
         <Form.Label>Initial value</Form.Label>
@@ -52,7 +55,11 @@ export default function GoalForm({ goal = goalNullObject }) {
           min={formatDate(new Date())}
           name="targetDate"
           defaultValue={formatDate(goal.targetDate)}
+          aria-describedby="target-date-help-block"
         />
+        <Form.Text id="target-date-help-block" muted>
+          Target date must be in future
+        </Form.Text>
       </Form.Group>
       <Form.Group as="section" className="mb-3" controlId="goal-field-interval">
         <Form.Label>Interval</Form.Label>
