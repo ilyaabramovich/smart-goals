@@ -36,10 +36,11 @@ function Goal() {
 
   return (
     <div style={{ display: 'grid', gap: '1rem' }}>
+      <h1 className="fs-4">Goal</h1>
       <section aria-labelledby="goal-details">
-        <h1 className="fs-4" id="goal-details">
+        <h2 className="fs-5" id="goal-details">
           Details
-        </h1>
+        </h2>
         <Table borderless role="presentation">
           <tbody>
             <tr>
@@ -90,7 +91,7 @@ function Goal() {
         </Table>
       </section>
       <section aria-labelledby="goal-actions">
-        <h2 className="fs-4" id="goal-actions">
+        <h2 className="fs-5" id="goal-actions">
           Actions
         </h2>
         <div
@@ -119,12 +120,12 @@ function Goal() {
         </div>
       </section>
       <section aria-labelledby="goal-stats">
-        <h2 className="fs-4">Stats</h2>
+        <h2 className="fs-5">Stats</h2>
         {goal.pendingStats.length > 0 && (
           <Accordion defaultActiveKey={goal.pendingStats[0].id} className="mb-2">
             {goal.pendingStats.map((stat) => (
               <Accordion.Item eventKey={stat.id} key={stat.id}>
-                <Accordion.Header>Enter measurement for {formatDate(stat.measurementDate)}</Accordion.Header>
+                <Accordion.Header as="h3">Enter measurement for {formatDate(stat.measurementDate)}</Accordion.Header>
                 <Accordion.Body>
                   <Form
                     style={{ display: 'grid', gap: '0.5rem', gridTemplateColumns: 'max-content min-content' }}
