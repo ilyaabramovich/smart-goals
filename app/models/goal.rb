@@ -36,8 +36,11 @@ class Goal < ApplicationRecord
 
   def create_time_frame_stats
     time_frames = GoalTimeFrameCalculationService.new.call(self)
+    return if time_frames.empty?
+
     stats_data = time_frames.map { |time_frame| { measurement_date: time_frame } }
-    stats.create!(stats_data)
+
+    stats.insert_all(stats_data)
   end
 
   def target_date_must_be_in_future
