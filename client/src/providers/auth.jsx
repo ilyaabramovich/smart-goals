@@ -7,22 +7,19 @@ export function AuthProvider({ children }) {
 
   const isLoggedIn = !!user
 
-  const signin = (userData) => {
-    return signIn(userData).then((user) => {
-      setUser(user)
-    })
+  const signin = async (userData) => {
+    const user = await signIn(userData)
+    setUser(user)
   }
 
-  const signup = (userData) => {
-    return signUp(userData).then((user) => {
-      setUser(user)
-    })
+  const signup = async (userData) => {
+    const user = await signUp(userData)
+    setUser(user)
   }
 
-  const logout = () => {
-    return logOut().then(() => {
-      setUser(null)
-    })
+  const logout = async () => {
+    await logOut()
+    setUser(null)
   }
 
   const value = { user, signin, signup, logout, isLoggedIn }
