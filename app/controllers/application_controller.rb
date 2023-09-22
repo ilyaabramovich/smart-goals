@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
 
   def require_user_logged_in!
     if current_user.nil?
-      render json: { error: 'You must be signed in to do that.' }, status: :unauthorized
+      render json: { error: 'You are not authorized to do that.' }, status: :unauthorized
     end
   end
 
