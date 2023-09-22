@@ -36,7 +36,7 @@ export default function GoalForm({ goal = goalNullObject }) {
           aria-describedby="description-help-block"
         />
         <Form.Text id="description-help-block" muted>
-          Your description must be at least 15 characters long
+          Description must be at least 15 characters long
         </Form.Text>
       </Form.Group>
       <Form.Group as="section" className="mb-3" controlId="goal-field-initial-value">
