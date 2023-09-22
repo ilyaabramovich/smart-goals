@@ -1,10 +1,12 @@
+import { useEffect, useRef, useState } from 'react'
+import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks'
-import { useEffect, useRef, useState } from 'react'
 
 export default function SignIn() {
+  const [error, setError] = useState(null)
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const ref = useRef()
@@ -21,6 +23,7 @@ export default function SignIn() {
   }, [])
 
   async function handleSubmit(event) {
+    setError(null)
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const userData = Object.fromEntries(formData)
@@ -29,6 +32,8 @@ export default function SignIn() {
     try {
       await signin(userData)
       navigate(from, { replace: true })
+    } catch (error) {
+      setError(error)
     } finally {
       setIsSubmitting(false)
     }
@@ -67,6 +72,11 @@ export default function SignIn() {
         <Button disabled={isSubmitting} variant="primary" type="submit" className="me-2">
           Sign in
         </Button>
+        {error && (
+          <Alert className="mt-4" variant="danger">
+            {error.message}
+          </Alert>
+        )}
       </Form>
       <p className="text-center mt-4 text-secondary">
         <span>
