@@ -20,7 +20,7 @@ RSpec.describe Stat, type: :model do
         stat_due_today = create(:stat, measurement_date: time_frame, goal: goal)
         create(:stat, measurement_date: 1.week.from_now, goal: goal)
 
-        expect(Stat.prior_to_date(time_frame).ids).to match_array([stat_due_yesterday.id, stat_due_today.id])
+        expect(described_class.prior_to_date(time_frame).ids).to match_array([stat_due_yesterday.id, stat_due_today.id])
       end
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe Stat, type: :model do
       it 'returns false' do
         stat = build(:stat, goal: goal, measurement_value: nil)
 
-        expect(stat.measured?).to be_falsy
+        expect(stat.measured?).to be(false)
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe Stat, type: :model do
       it 'returns true' do
         stat = build(:stat, goal: goal, measurement_value: 1)
 
-        expect(stat.measured?).to be_truthy
+        expect(stat.measured?).to be(true)
       end
     end
   end
@@ -54,7 +54,7 @@ RSpec.describe Stat, type: :model do
       it 'returns true' do
         stat = build(:stat, goal: goal, measurement_value: nil)
 
-        expect(stat.pending?).to be_truthy
+        expect(stat.pending?).to be(true)
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe Stat, type: :model do
       it 'returns false' do
         stat = build(:stat, goal: goal, measurement_value: 1)
 
-        expect(stat.pending?).to be_falsy
+        expect(stat.pending?).to be(false)
       end
     end
   end
@@ -75,7 +75,7 @@ RSpec.describe Stat, type: :model do
       it 'returns true' do
         stat = build(:stat, goal: goal, measurement_date: Time.current.tomorrow)
 
-        expect(stat.upcoming?).to be_truthy
+        expect(stat.upcoming?).to be(true)
       end
     end
 
@@ -83,7 +83,7 @@ RSpec.describe Stat, type: :model do
       it 'returns true' do
         stat = build(:stat, goal: goal, measurement_date: Time.current.yesterday)
 
-        expect(stat.upcoming?).to be_falsy
+        expect(stat.upcoming?).to be(false)
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe Stat, type: :model do
       it 'returns true' do
         stat = build(:stat, goal: goal, measurement_date: Time.zone.today)
 
-        expect(stat.upcoming?).to be_falsy
+        expect(stat.upcoming?).to be(false)
       end
     end
   end
@@ -104,7 +104,7 @@ RSpec.describe Stat, type: :model do
       it 'returns true' do
         stat = build(:stat, goal: goal, measurement_date: Time.current.tomorrow)
 
-        expect(stat.due?).to be_falsy
+        expect(stat.due?).to be(false)
       end
     end
 
@@ -112,7 +112,7 @@ RSpec.describe Stat, type: :model do
       it 'returns true' do
         stat = build(:stat, goal: goal, measurement_date: Time.current.yesterday)
 
-        expect(stat.due?).to be_truthy
+        expect(stat.due?).to be(true)
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe Stat, type: :model do
       it 'returns true' do
         stat = build(:stat, goal: goal, measurement_date: Time.zone.today)
 
-        expect(stat.due?).to be_truthy
+        expect(stat.due?).to be(true)
       end
     end
   end

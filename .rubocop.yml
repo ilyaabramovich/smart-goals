@@ -4,6 +4,7 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
+  - rubocop-factory_bot
 
 AllCops:
   Exclude:
@@ -49,3 +50,9 @@ Layout/LineLength:
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
