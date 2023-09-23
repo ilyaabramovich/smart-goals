@@ -55,6 +55,7 @@ group :development do
 end
 
 group :test do
+  gem 'fuubar', '~> 2.5'
   gem 'shoulda-matchers', '~> 5.0', require: false
 end
 
