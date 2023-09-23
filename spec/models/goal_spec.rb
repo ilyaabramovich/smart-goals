@@ -154,4 +154,36 @@ RSpec.describe Goal, type: :model do
       end
     end
   end
+
+  describe '#days_until_target' do
+    context 'when the target date is in the future' do
+      it 'calculates difference in days between goal target_date in future and current time' do
+        user = create(:user)
+        freeze_time do
+          goal = build(:goal, user: user, target_date: 4.days.from_now)
+          expect(goal.days_until_target).to eq(4)
+        end
+      end
+    end
+
+    context 'when the target date is in the past' do
+      it 'calculates difference in days between goal target_date in past and current time' do
+        user = create(:user)
+        freeze_time do
+          goal = build(:goal, user: user, target_date: 4.days.before)
+          expect(goal.days_until_target).to eq(-4)
+        end
+      end
+    end
+
+    context 'when the target date in is the same day' do
+      it 'returns zero' do
+        user = create(:user)
+        freeze_time do
+          goal = build(:goal, user: user, target_date: Time.current)
+          expect(goal.days_until_target).to eq(0)
+        end
+      end
+    end
+  end
 end

@@ -14,6 +14,7 @@ import { getGoalDetails } from "../api/goals";
 import { updateStat } from "../api/stats";
 import { formatDate } from "../utils/formatDate";
 import GoalStatsChart from "../components/goal-stats-chart";
+import { formatRelativeDate } from "../utils/formatRelativeDate";
 
 function loader({ params }) {
   const goal = getGoalDetails(params.goalId);
@@ -78,7 +79,7 @@ function Goal() {
                 <td>
                   <strong>Target date</strong>
                 </td>
-                <td>{formatDate(goal.targetDate)}</td>
+                <td>{formatDate(goal.targetDate)} ({formatRelativeDate(goal.daysUntilTarget)})</td>
               </tr>
               <tr>
                 <td>

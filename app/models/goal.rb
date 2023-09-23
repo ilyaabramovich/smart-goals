@@ -43,6 +43,10 @@ class Goal < ApplicationRecord
     nearest_stat.measurement_date
   end
 
+  def days_until_target
+    (target_date - Time.current.beginning_of_day).to_i / (24 * 60 * 60)
+  end
+
   private
 
   def create_time_frame_stats
