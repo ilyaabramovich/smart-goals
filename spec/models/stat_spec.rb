@@ -86,5 +86,42 @@ RSpec.describe Stat, type: :model do
         expect(stat.upcoming?).to be_falsy
       end
     end
+
+    context 'when measurement_date is today' do
+      it 'returns true' do
+        stat = build(:stat, goal: goal, measurement_date: Time.zone.today)
+
+        expect(stat.upcoming?).to be_falsy
+      end
+    end
+  end
+
+  describe '#due?' do
+    let(:user) { build(:user) }
+    let(:goal) { build(:goal, user: user) }
+
+    context 'when measurement_date is in future' do
+      it 'returns true' do
+        stat = build(:stat, goal: goal, measurement_date: Time.current.tomorrow)
+
+        expect(stat.due?).to be_falsy
+      end
+    end
+
+    context 'when measurement_date is in past' do
+      it 'returns true' do
+        stat = build(:stat, goal: goal, measurement_date: Time.current.yesterday)
+
+        expect(stat.due?).to be_truthy
+      end
+    end
+
+    context 'when measurement_date is today' do
+      it 'returns true' do
+        stat = build(:stat, goal: goal, measurement_date: Time.zone.today)
+
+        expect(stat.due?).to be_truthy
+      end
+    end
   end
 end

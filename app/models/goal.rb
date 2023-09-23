@@ -14,6 +14,10 @@ class Goal < ApplicationRecord
 
   after_create :create_time_frame_stats
 
+  def due_stats
+    stats.select(&:due?)
+  end
+
   def measured_stats
     due_stats.select(&:measured?)
   end

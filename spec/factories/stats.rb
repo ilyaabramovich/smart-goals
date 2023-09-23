@@ -6,4 +6,8 @@ FactoryBot.define do
   trait :due do
     measurement_date { Time.current.yesterday }
   end
+
+  trait :upcoming do
+    measurement_date { Time.current.tomorrow }
+  end
 end

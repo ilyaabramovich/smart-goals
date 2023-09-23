@@ -22,6 +22,41 @@ RSpec.describe Goal, type: :model do
     end
   end
 
+  describe '#due_stats' do
+    it 'calculates due stats correctly' do
+      user = create(:user)
+      goal = create(:goal, :without_create_time_frame_stats_callback, user: user, target_value: 0)
+      due_stat = create(:stat, :due, goal: goal)
+      create(:stat, :upcoming, goal: goal)
+
+      expect(goal.due_stats).to match_array([due_stat])
+    end
+  end
+
+  describe '#pending_stats' do
+    it 'calculates pending stats correctly' do
+      user = create(:user)
+      goal = create(:goal, :without_create_time_frame_stats_callback, user: user, target_value: 0)
+      due_unmeasured_stat = create(:stat, :due, goal: goal, measurement_value: nil)
+      create(:stat, :due, goal: goal, measurement_value: 3)
+      create(:stat, :upcoming, goal: goal)
+
+      expect(goal.pending_stats).to match_array([due_unmeasured_stat])
+    end
+  end
+
+  describe '#measured_stats' do
+    it 'calculates measured stats correctly' do
+      user = create(:user)
+      goal = create(:goal, :without_create_time_frame_stats_callback, user: user, target_value: 0)
+      due_measured_stat = create(:stat, :due, goal: goal, measurement_value: 3)
+      create(:stat, :due, goal: goal, measurement_value: nil)
+      create(:stat, :upcoming, goal: goal)
+
+      expect(goal.measured_stats).to match_array([due_measured_stat])
+    end
+  end
+
   describe '#accumulated_value' do
     it 'is computed using goal initial value' do
       goal = build(:goal, initial_value: 5)
@@ -96,6 +131,27 @@ RSpec.describe Goal, type: :model do
       create(:stat, :due, goal: goal, measurement_value: 2)
 
       expect(goal.completion_percentage).to eq 33
+    end
+  end
+
+  describe '#nearest_upcoming_stat_date' do
+    it 'calculates measured stats correctly' do
+      user = create(:user)
+      goal = create(:goal, :without_create_time_frame_stats_callback, user: user, target_value: 0)
+      nearest_upcoming_stat = create(:stat, measurement_date: Time.current.tomorrow, goal: goal)
+      create(:stat, measurement_date: Time.current.next_week, goal: goal)
+
+      expect(goal.nearest_upcoming_stat_date).to eq(nearest_upcoming_stat.measurement_date)
+    end
+
+    context 'when there are no upcoming stats' do
+      it 'returns nil' do
+        user = create(:user)
+        goal = create(:goal, :without_create_time_frame_stats_callback, user: user, target_value: 0)
+        create(:stat, :due, goal: goal, measurement_value: nil)
+
+        expect(goal.nearest_upcoming_stat_date).to be_nil
+      end
     end
   end
 end
