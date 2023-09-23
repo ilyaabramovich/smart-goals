@@ -32,6 +32,13 @@ class Goal < ApplicationRecord
     ((accumulated_value * 100) / target_value).round
   end
 
+  def nearest_upcoming_stat_date
+    nearest_stat = stats.detect(&:upcoming?)
+    return if nearest_stat.blank?
+
+    nearest_stat.measurement_date
+  end
+
   private
 
   def create_time_frame_stats

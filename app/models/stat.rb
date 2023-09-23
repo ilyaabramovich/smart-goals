@@ -13,4 +13,8 @@ class Stat < ApplicationRecord
   def pending?
     !measured?
   end
+
+  def upcoming?
+    measurement_date > Time.zone.today
+  end
 end

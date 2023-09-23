@@ -1,43 +1,49 @@
-import Accordion from 'react-bootstrap/Accordion'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import ProgressBar from 'react-bootstrap/ProgressBar'
-import Table from 'react-bootstrap/Table'
-import { Link, Form as RouterForm, useFetcher, useLoaderData, useNavigation } from 'react-router-dom'
-import { getGoalDetails } from '../api/goals'
-import { updateStat } from '../api/stats'
-import { formatDate } from '../utils/formatDate'
-import GoalStatsChart from '../components/goal-stats-chart'
+import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import Table from "react-bootstrap/Table";
+import {
+  Link,
+  Form as RouterForm,
+  useFetcher,
+  useLoaderData,
+  useNavigation,
+} from "react-router-dom";
+import { getGoalDetails } from "../api/goals";
+import { updateStat } from "../api/stats";
+import { formatDate } from "../utils/formatDate";
+import GoalStatsChart from "../components/goal-stats-chart";
 
 function loader({ params }) {
-  const goal = getGoalDetails(params.goalId)
+  const goal = getGoalDetails(params.goalId);
   if (!goal) {
-    throw new Response('', {
+    throw new Response("", {
       status: 404,
-      statusText: 'Not Found',
-    })
+      statusText: "Not Found",
+    });
   }
 
-  return goal
+  return goal;
 }
 
 async function action({ params, request }) {
-  const formData = await request.formData()
-  const statData = Object.fromEntries(formData)
-  return await updateStat(params.goalId, params.statId, statData)
+  const formData = await request.formData();
+  const statData = Object.fromEntries(formData);
+  return await updateStat(params.goalId, params.statId, statData);
 }
 
 function Goal() {
-  const fetcher = useFetcher()
-  const navigation = useNavigation()
-  const goal = useLoaderData()
+  const fetcher = useFetcher();
+  const navigation = useNavigation();
+  const goal = useLoaderData();
 
-  const isSubmittingStat = navigation.formData?.get('measurementValue') != null
+  const isSubmittingStat = navigation.formData?.get("measurementValue") != null;
 
   return (
     <>
       <h1 className="fs-4 mb-4">Goal</h1>
-      <div style={{ display: 'grid', gap: '1rem' }}>
+      <div style={{ display: "grid", gap: "1rem" }}>
         <section aria-labelledby="goal-details">
           <h2 className="fs-5" id="goal-details">
             Details
@@ -85,7 +91,10 @@ function Goal() {
                   <strong>Goal progress</strong>
                 </td>
                 <td>
-                  <ProgressBar now={goal.completionPercentage} label={`${goal.completionPercentage}%`} />
+                  <ProgressBar
+                    now={goal.completionPercentage}
+                    label={`${goal.completionPercentage}%`}
+                  />
                 </td>
               </tr>
             </tbody>
@@ -97,11 +106,11 @@ function Goal() {
           </h2>
           <div
             style={{
-              display: 'grid',
-              gap: '0.5rem',
-              gridTemplateColumns: 'min-content min-content',
-              justifyContent: 'space-between',
-              alignItems: 'baseline',
+              display: "grid",
+              gap: "0.5rem",
+              gridTemplateColumns: "min-content min-content",
+              justifyContent: "space-between",
+              alignItems: "baseline",
             }}
           >
             <Link to="edit">Edit</Link>
@@ -109,8 +118,8 @@ function Goal() {
               method="post"
               action="destroy"
               onSubmit={(event) => {
-                if (!confirm('Please confirm you want to delete this goal.')) {
-                  event.preventDefault()
+                if (!confirm("Please confirm you want to delete this goal.")) {
+                  event.preventDefault();
                 }
               }}
             >
@@ -123,34 +132,64 @@ function Goal() {
         <section aria-labelledby="goal-stats">
           <h2 className="fs-5">Stats</h2>
           {goal.pendingStats.length > 0 && (
-            <Accordion defaultActiveKey={goal.pendingStats[0].id} className="mb-2">
-              {goal.pendingStats.map((stat) => (
-                <Accordion.Item eventKey={stat.id} key={stat.id}>
-                  <Accordion.Header as="h3">Enter measurement for {formatDate(stat.measurementDate)}</Accordion.Header>
-                  <Accordion.Body>
-                    <Form
-                      style={{ display: 'grid', gap: '0.5rem', gridTemplateColumns: 'max-content min-content' }}
-                      as={fetcher.Form}
-                      action={`stats/${stat.id}`}
-                      method="post"
-                    >
-                      <Form.Control min={0} required type="number" name="measurementValue" defaultValue={0} />
-                      <Button variant="secondary" type="submit" disabled={isSubmittingStat}>
-                        {isSubmittingStat ? 'Submitting' : 'Submit'}
-                      </Button>
-                    </Form>
-                  </Accordion.Body>
-                </Accordion.Item>
-              ))}
-            </Accordion>
+            <>
+              <p className="text-secondary">
+                Start tracking your goal progress by recording stat measurements {goal.interval}
+              </p>
+              <Accordion
+                defaultActiveKey={goal.pendingStats[0].id}
+                className="mb-2"
+              >
+                {goal.pendingStats.map((stat) => (
+                  <Accordion.Item eventKey={stat.id} key={stat.id}>
+                    <Accordion.Header as="h3">
+                      Enter measurement for {formatDate(stat.measurementDate)}
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <Form
+                        style={{
+                          display: "grid",
+                          gap: "0.5rem",
+                          gridTemplateColumns: "max-content min-content",
+                        }}
+                        as={fetcher.Form}
+                        action={`stats/${stat.id}`}
+                        method="post"
+                      >
+                        <Form.Control
+                          min={0}
+                          required
+                          type="number"
+                          name="measurementValue"
+                          defaultValue={0}
+                        />
+                        <Button
+                          variant="secondary"
+                          type="submit"
+                          disabled={isSubmittingStat}
+                        >
+                          {isSubmittingStat ? "Submitting" : "Submit"}
+                        </Button>
+                      </Form>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                ))}
+              </Accordion>
+            </>
+          )}
+          {goal.nearestUpcomingStatDate != null && goal.pendingStats.length === 0 && (
+            <p className="text-secondary">
+              You are all caught up for now! Next tracking would be available at{" "}
+              {formatDate(goal.nearestUpcomingStatDate)}
+            </p>
           )}
           <GoalStatsChart goal={goal} />
         </section>
       </div>
     </>
-  )
+  );
 }
 
-Goal.loader = loader
-Goal.action = action
-export default Goal
+Goal.loader = loader;
+Goal.action = action;
+export default Goal;
