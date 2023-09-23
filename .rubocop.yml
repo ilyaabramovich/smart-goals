@@ -1,5 +1,13 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
 AllCops:
   Exclude:
+    - bin/**
     - db/schema.rb
 
 Style/Documentation:
@@ -8,11 +16,36 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Layout/LineLength:
-  Max: 80
-
 Style/IfUnlessModifier:
   Enabled: false
 
 Style/GuardClause:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/SymbolArray:
+  EnforcedStyle: percent
+  MinSize: 10
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
