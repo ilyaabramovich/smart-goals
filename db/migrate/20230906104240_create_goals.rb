@@ -4,8 +4,8 @@ class CreateGoals < ActiveRecord::Migration[7.0]
       t.datetime :target_date
       t.float :target_value
       t.text :description
-      t.string :interval, default:'daily'
-      t.float :initial_value, default:0
+      t.string :interval, default: 'daily'
+      t.float :initial_value, default: 0
 
       t.timestamps
     end

@@ -15,10 +15,10 @@ RSpec.describe Stat, type: :model do
       it 'returns goals with measurement_dates that are less than or equal to specified date' do
         user = create(:user)
         goal = create(:goal, :without_create_time_frame_stats_callback, user: user)
-        future_stat = create(:stat, measurement_date: 1.week.from_now, goal: goal)
-        stat_due_yesterday = create(:stat, measurement_date: 1.day.before, goal: goal)
         time_frame = Time.current.beginning_of_day
+        stat_due_yesterday = create(:stat, measurement_date: 1.day.before, goal: goal)
         stat_due_today = create(:stat, measurement_date: time_frame, goal: goal)
+        create(:stat, measurement_date: 1.week.from_now, goal: goal)
 
         expect(Stat.prior_to_date(time_frame).ids).to match_array([stat_due_yesterday.id, stat_due_today.id])
       end
