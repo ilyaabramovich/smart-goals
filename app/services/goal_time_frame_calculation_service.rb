@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class GoalTimeFrameCalculationService < BaseService
-  attr_reader :goal
-
   def call(goal)
     @goal = goal
 
@@ -10,6 +8,8 @@ class GoalTimeFrameCalculationService < BaseService
   end
 
   private
+
+  attr_reader :goal
 
   def calculate_time_frames
     step = interval_to_step.fetch(goal.interval, 1.day)
