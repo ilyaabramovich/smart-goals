@@ -24,6 +24,14 @@ export async function signUp(userData) {
   })
 
   if (!res.ok) {
+    if (res.status === 422) {
+      const json = await res.json()
+
+      if (json.status === 'error') {
+        throw new Error(json.message)
+      }
+    }
+
     throw res
   }
 

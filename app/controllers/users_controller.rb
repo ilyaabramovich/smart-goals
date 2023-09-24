@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       render json: @user, status: :created, location: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { status: 'error', message: @user.errors.full_messages[0] }, status: :unprocessable_entity
     end
   end
 

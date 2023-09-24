@@ -23,11 +23,11 @@ export default function SignIn() {
   }, [])
 
   async function handleSubmit(event) {
-    setError(null)
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const userData = Object.fromEntries(formData)
 
+    setError(null)
     setIsSubmitting(true)
     try {
       await signin(userData)

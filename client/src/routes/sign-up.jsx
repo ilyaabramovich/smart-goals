@@ -1,32 +1,37 @@
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks'
-import { useEffect, useRef, useState } from 'react'
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import Form from "react-bootstrap/Form";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks";
+import { useEffect, useRef, useState } from "react";
 
 export default function SignUp() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const ref = useRef()
-  const { signup } = useAuth()
-  const navigate = useNavigate()
+  const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const ref = useRef();
+  const { signup } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.focus()
+      ref.current.focus();
     }
-  }, [])
+  }, []);
 
   async function handleSubmit(event) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const userData = Object.fromEntries(formData)
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const userData = Object.fromEntries(formData);
 
-    setIsSubmitting(true)
+    setError(null);
+    setIsSubmitting(true);
     try {
-      await signup(userData)
-      navigate('/goals', { replace: true })
+      await signup(userData);
+      navigate("/goals", { replace: true });
+    } catch (error) {
+      setError(error);
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
@@ -36,15 +41,35 @@ export default function SignUp() {
         <h1 className="fs-4 mb-4">Sign up</h1>
         <Form.Group as="section" className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
-          <Form.Control required ref={ref} name="username" autoComplete="username" />
+          <Form.Control
+            required
+            ref={ref}
+            name="username"
+            autoComplete="username"
+          />
         </Form.Group>
         <Form.Group as="section" className="mb-3" controlId="new-password">
           <Form.Label>Password</Form.Label>
-          <Form.Control required type="password" name="password" autoComplete="new-password" />
+          <Form.Control
+            required
+            type="password"
+            name="password"
+            autoComplete="new-password"
+          />
         </Form.Group>
-        <Button variant="primary" disabled={isSubmitting} type="submit" className="me-2">
+        <Button
+          variant="primary"
+          disabled={isSubmitting}
+          type="submit"
+          className="me-2"
+        >
           Sign up
         </Button>
+        {error && (
+          <Alert className="mt-4" variant="danger">
+            {error.message}
+          </Alert>
+        )}
       </Form>
       <p className="text-center mt-4 text-secondary">
         <span>
@@ -52,5 +77,5 @@ export default function SignUp() {
         </span>
       </p>
     </>
-  )
+  );
 }
