@@ -7,7 +7,7 @@ export async function signIn(userData) {
 
   if (!res.ok) {
     if (res.status === 401) {
-      throw new Error('Error: Invalid username or password. Please check your username and password and try again.')
+      throw new Error('Incorrect username or password. Please double-check your sign-in details and try again.')
     }
 
     throw new Error('Something went wrong. Try submitting the form again.')
