@@ -132,6 +132,7 @@ function Goal() {
         </section>
         <section aria-labelledby="goal-stats">
           <h2 className="fs-5">Stats</h2>
+          <p className='text-secondary'>Recorded: {goal.measuredStats.length} / {goal.statsLength}</p>
           {goal.pendingStats.length > 0 && (
             <>
               <p className="text-secondary">

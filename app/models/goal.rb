@@ -47,6 +47,10 @@ class Goal < ApplicationRecord
     (target_date - Time.current.beginning_of_day).to_i / (24 * 60 * 60)
   end
 
+  def stats_length
+    stats.size
+  end
+
   private
 
   def create_time_frame_stats
