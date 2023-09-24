@@ -79,7 +79,7 @@ function Goal() {
                 <td>
                   <strong>Target date</strong>
                 </td>
-                <td>{formatDate(goal.targetDate)} ({formatRelativeDate(goal.daysUntilTarget)})</td>
+                <td>{formatDate(goal.targetDate)} ({formatRelativeDate(goal.daysToComplete)})</td>
               </tr>
               <tr>
                 <td>
