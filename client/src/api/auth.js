@@ -10,7 +10,7 @@ export async function signIn(userData) {
       throw new Error('Incorrect username or password. Please double-check your sign-in details and try again.')
     }
 
-    throw new Error('Something went wrong. Try submitting the form again.')
+    throw new Error('An error occured while trying to sign you in. Try submitting the form again.')
   }
 
   return await res.json()
@@ -32,7 +32,7 @@ export async function signUp(userData) {
       }
     }
 
-    throw res
+    throw new Error('An error occured while trying to create your account. Try submitting the form again.')
   }
 
   return await res.json()
