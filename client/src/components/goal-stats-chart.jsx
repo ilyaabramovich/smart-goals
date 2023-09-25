@@ -8,11 +8,20 @@ import {
   PointElement,
   Title,
   Tooltip,
-} from 'chart.js'
-import { Chart } from 'react-chartjs-2'
-import { formatDate } from '../utils/formatDate'
+} from "chart.js";
+import { Chart } from "react-chartjs-2";
+import { formatDate } from "../utils/formatDate";
 
-ChartJS.register(LinearScale, CategoryScale, BarElement, PointElement, LineElement, Legend, Tooltip, Title)
+ChartJS.register(
+  LinearScale,
+  CategoryScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Legend,
+  Tooltip,
+  Title,
+);
 
 export default function GoalStatsChart({ goal }) {
   const options = {
@@ -23,21 +32,21 @@ export default function GoalStatsChart({ goal }) {
         text: goal.description,
       },
     },
-  }
+  };
 
   const data = {
     labels: goal.measuredStats.map((stat) => formatDate(stat.measurementDate)),
     datasets: [
       {
-        type: 'bar',
+        type: "bar",
         label: `measured ${goal.interval}`,
-        backgroundColor: 'rgb(75, 192, 192)',
+        backgroundColor: "rgb(75, 192, 192)",
         data: goal.measuredStats.map((stat) => stat.measurementValue),
-        borderColor: 'white',
+        borderColor: "white",
         borderWidth: 2,
       },
     ],
-  }
+  };
 
-  return <Chart type="bar" data={data} options={options} />
+  return <Chart type="bar" data={data} options={options} />;
 }

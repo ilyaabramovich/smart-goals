@@ -1,7 +1,7 @@
-import Container from 'react-bootstrap/Container'
-import Navbar from 'react-bootstrap/Navbar'
-import { Link } from 'react-router-dom'
-import Navigation from '../components/navigation'
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
+import Navigation from "../components/navigation";
 
 export default function Header() {
   return (
@@ -18,5 +18,5 @@ export default function Header() {
         </Container>
       </Navbar>
     </header>
-  )
+  );
 }

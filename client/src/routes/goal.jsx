@@ -79,7 +79,10 @@ function Goal() {
                 <td>
                   <strong>Target date</strong>
                 </td>
-                <td>{formatDate(goal.targetDate)} ({formatRelativeDate(goal.daysToComplete)})</td>
+                <td>
+                  {formatDate(goal.targetDate)} (
+                  {formatRelativeDate(goal.daysToComplete)})
+                </td>
               </tr>
               <tr>
                 <td>
@@ -132,11 +135,14 @@ function Goal() {
         </section>
         <section aria-labelledby="goal-stats">
           <h2 className="fs-5">Stats</h2>
-          <p className='text-secondary'>Recorded: {goal.measuredStats.length} / {goal.statsLength}</p>
+          <p className="text-secondary">
+            Recorded: {goal.measuredStats.length} / {goal.statsLength}
+          </p>
           {goal.pendingStats.length > 0 && (
             <>
               <p className="text-secondary">
-                Start tracking your goal progress by recording stat measurements {goal.interval}
+                Start tracking your goal progress by recording stat measurements{" "}
+                {goal.interval}
               </p>
               <Accordion
                 defaultActiveKey={goal.pendingStats[0].id}
@@ -179,12 +185,13 @@ function Goal() {
               </Accordion>
             </>
           )}
-          {goal.nearestUpcomingStatDate != null && goal.pendingStats.length === 0 && (
-            <p className="text-secondary">
-              You are all caught up for now! Next tracking would be available at{" "}
-              {formatDate(goal.nearestUpcomingStatDate)}
-            </p>
-          )}
+          {goal.nearestUpcomingStatDate != null &&
+            goal.pendingStats.length === 0 && (
+              <p className="text-secondary">
+                You are all caught up for now! Next tracking would be available
+                at {formatDate(goal.nearestUpcomingStatDate)}
+              </p>
+            )}
           <GoalStatsChart goal={goal} />
         </section>
       </div>

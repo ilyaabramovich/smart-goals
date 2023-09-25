@@ -1,18 +1,18 @@
-import ListGroup from 'react-bootstrap/ListGroup'
-import { Link, useLoaderData } from 'react-router-dom'
-import { getGoals } from '../api/goals'
+import ListGroup from "react-bootstrap/ListGroup";
+import { Link, useLoaderData } from "react-router-dom";
+import { getGoals } from "../api/goals";
 
 function loader() {
-  const goals = getGoals()
+  const goals = getGoals();
   if (!goals) {
-    return []
+    return [];
   }
 
-  return goals
+  return goals;
 }
 
 function Goals() {
-  const goals = useLoaderData()
+  const goals = useLoaderData();
 
   return (
     <>
@@ -21,7 +21,10 @@ function Goals() {
         <ListGroup as="ul" className="mb-2">
           {goals.map((goal) => (
             <ListGroup.Item as="li" key={goal.id}>
-              <Link to={`${goal.id}`} className="link-underline link-underline-opacity-0 d-block">
+              <Link
+                to={`${goal.id}`}
+                className="link-underline link-underline-opacity-0 d-block"
+              >
                 {goal.description}
               </Link>
             </ListGroup.Item>
@@ -34,8 +37,8 @@ function Goals() {
         New goal
       </Link>
     </>
-  )
+  );
 }
 
-Goals.loader = loader
-export default Goals
+Goals.loader = loader;
+export default Goals;

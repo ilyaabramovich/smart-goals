@@ -1,22 +1,22 @@
-import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
-import Navbar from 'react-bootstrap/Navbar'
-import { NavLink, useMatch, useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks'
+import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import { NavLink, useMatch, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks";
 
 export default function Navigation() {
-  const { isLoggedIn, logout, user } = useAuth()
-  const navigate = useNavigate()
-  const match = useMatch('/')
+  const { isLoggedIn, logout, user } = useAuth();
+  const navigate = useNavigate();
+  const match = useMatch("/");
 
   const handleSignOut = async () => {
-    await logout()
-    navigate('/')
-  }
+    await logout();
+    navigate("/");
+  };
 
   if (!isLoggedIn) {
     if (!match) {
-      return null
+      return null;
     }
 
     return (
@@ -27,7 +27,7 @@ export default function Navigation() {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-    )
+    );
   }
 
   return (
@@ -40,7 +40,9 @@ export default function Navigation() {
         </Nav.Item>
       </Nav>
       <Nav>
-        <Navbar.Text className="me-2">Signed in as: {user.username}</Navbar.Text>
+        <Navbar.Text className="me-2">
+          Signed in as: {user.username}
+        </Navbar.Text>
         <Nav.Item>
           <Button
             variant="link"
@@ -52,5 +54,5 @@ export default function Navigation() {
         </Nav.Item>
       </Nav>
     </>
-  )
+  );
 }
