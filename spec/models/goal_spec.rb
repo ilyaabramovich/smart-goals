@@ -15,10 +15,26 @@ RSpec.describe Goal, type: :model do
     it { is_expected.to validate_numericality_of(:target_value).is_greater_than_or_equal_to 0 }
     it { is_expected.to validate_inclusion_of(:interval).in_array Goal::VALID_INTERVALS }
 
-    context 'when target_date is in the past' do
-      let(:goal) { build(:goal, target_date: 1.week.before) }
+    describe '#target_date_must_not_be_in_the_past' do
+      subject { build(:goal, user: build(:user), target_date: target_date, target_value: 5) }
 
-      it { is_expected.to be_invalid }
+      context 'when target_date is in the past' do
+        let(:target_date) { 1.week.before }
+
+        it { is_expected.to be_invalid }
+      end
+
+      context 'when target_date is in the same day' do
+        let(:target_date) { Time.current }
+
+        it { is_expected.to be_valid }
+      end
+
+      context 'when target_date is in future' do
+        let(:target_date) { 1.week.from_now }
+
+        it { is_expected.to be_valid }
+      end
     end
   end
 

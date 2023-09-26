@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 
 const goalNullObject = {
   description: "",
-  targetDate: new Date().setDate(new Date().getDate() + 1),
+  targetDate: new Date(),
   initialValue: 0,
   targetValue: 0,
   interval: "daily",
@@ -89,11 +89,7 @@ export default function GoalForm({ goal = goalNullObject }) {
             min={formatDate(goal.targetDate)}
             name="targetDate"
             defaultValue={formatDate(goal.targetDate)}
-            aria-describedby="target-date-help-block"
           />
-          <Form.Text id="target-date-help-block" muted>
-            Target date must be in future
-          </Form.Text>
         </Form.Group>
         <Form.Group
           as="section"

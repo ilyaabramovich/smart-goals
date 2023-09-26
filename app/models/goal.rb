@@ -10,7 +10,7 @@ class Goal < ApplicationRecord
   validates :target_value, numericality: { greater_than_or_equal_to: 0 }
   validates :target_date, presence: true
   validates :interval, inclusion: { in: VALID_INTERVALS }
-  validate :target_date_must_be_in_future, if: :target_date_changed?
+  validate :target_date_must_not_be_in_the_past, if: :target_date_changed?
 
   after_create :create_time_frame_stats
 
@@ -62,9 +62,9 @@ class Goal < ApplicationRecord
     stats.insert_all(stats_data)
   end
 
-  def target_date_must_be_in_future
-    if target_date.present? && target_date <= Time.zone.today
-      errors.add(:target_date, 'must be in the future')
+  def target_date_must_not_be_in_the_past
+    if target_date.present? && target_date < Time.zone.today
+      errors.add(:target_date, 'must not be in the past')
     end
   end
 end
