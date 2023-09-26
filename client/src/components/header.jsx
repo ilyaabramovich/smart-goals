@@ -9,7 +9,11 @@ export default function Header() {
       <Navbar expand="sm" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand as={Link} to="/">
-            SMART goals
+              <img
+              src="/logo.svg"
+              width="85"
+              height="24"
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="justify-content-end">
