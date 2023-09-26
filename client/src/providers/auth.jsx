@@ -13,8 +13,12 @@ export function AuthProvider({ children }) {
   };
 
   const signup = async (userData) => {
-    const user = await signUp(userData);
-    setUser(user);
+    const { user, errors } = await signUp(userData);
+    if (user) {
+      setUser(user);
+    }
+
+    return { errors }
   };
 
   const logout = async () => {

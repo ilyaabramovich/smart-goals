@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function SignUp() {
   const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const ref = useRef();
   const { signup } = useAuth();
@@ -26,7 +27,12 @@ export default function SignUp() {
     setError(null);
     setIsSubmitting(true);
     try {
-      await signup(userData);
+      const { errors } = await signup(userData);
+      if (errors) {
+        setErrors(errors);
+        return;
+      }
+
       navigate("/goals", { replace: true });
     } catch (error) {
       setError(error);
@@ -46,7 +52,11 @@ export default function SignUp() {
             ref={ref}
             name="username"
             autoComplete="username"
+            isInvalid={errors.username}
           />
+          <Form.Control.Feedback type="invalid">
+            {errors.username}
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as="section" className="mb-3" controlId="new-password">
           <Form.Label>Password</Form.Label>

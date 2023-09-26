@@ -32,7 +32,7 @@ export async function signUp(userData) {
       const json = await res.json();
 
       if (json.status === "error") {
-        throw new Error(json.message);
+        return { user: null, errors: json.errors }
       }
     }
 
@@ -41,7 +41,8 @@ export async function signUp(userData) {
     );
   }
 
-  return await res.json();
+  const user = await res.json();
+  return { user, errors: null }
 }
 
 export async function logOut() {
