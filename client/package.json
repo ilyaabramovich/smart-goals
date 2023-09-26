@@ -25,7 +25,7 @@
     "**/*": [
       "prettier --write --ignore-unknown"
     ],
-    "*.{js,jsx}": "eslint --cache --fix",
+    "*.{js,jsx}": "eslint --fix",
     "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
