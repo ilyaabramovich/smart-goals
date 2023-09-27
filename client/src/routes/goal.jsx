@@ -31,13 +31,17 @@ function loader({ params }) {
 async function action({ params, request }) {
   const formData = await request.formData();
   const statData = Object.fromEntries(formData);
-  return await updateStat(params.goalId, params.statId, statData);
+  const { errors } = await updateStat(params.goalId, params.statId, statData);
+  if (errors) {
+    return errors;
+  }
 }
 
 function Goal() {
   const fetcher = useFetcher();
   const navigation = useNavigation();
   const goal = useLoaderData();
+  const errors = fetcher.data;
 
   const isSubmittingStat = navigation.formData?.get("measurementValue") != null;
 
@@ -159,18 +163,25 @@ function Goal() {
                           display: "grid",
                           gap: "0.5rem",
                           gridTemplateColumns: "max-content min-content",
+                          alignItems: "start",
                         }}
                         as={fetcher.Form}
                         action={`stats/${stat.id}`}
                         method="post"
                       >
-                        <Form.Control
-                          min={0}
-                          required
-                          type="number"
-                          name="measurementValue"
-                          defaultValue={0}
-                        />
+                        <section>
+                          <Form.Control
+                            min={0}
+                            required
+                            type="number"
+                            name="measurementValue"
+                            defaultValue={0}
+                            isInvalid={errors?.measurementValue}
+                          />
+                          <Form.Control.Feedback type="invalid">
+                            {errors?.measurementValue}
+                          </Form.Control.Feedback>
+                        </section>
                         <Button
                           variant="secondary"
                           type="submit"

@@ -28,7 +28,7 @@ class Api::V1::StatsController < ApplicationController
     if @stat.update(stat_params)
       render json: @stat
     else
-      render json: @stat.errors, status: :unprocessable_entity
+      render json: @stat, serializer: ErrorSerializer, status: :unprocessable_entity
     end
   end
 

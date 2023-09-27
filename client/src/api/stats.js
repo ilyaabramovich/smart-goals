@@ -8,8 +8,18 @@ export async function updateStat(goalId, statId, statData) {
   });
 
   if (!res.ok) {
-    throw res;
+    if (res.status === 422) {
+      const { status, errors } = await res.json();
+
+      if (status === "error") {
+        return { errors };
+      }
+    }
+
+    throw new Error(
+      "An error occured while trying to update a stat. Try submitting the form again.",
+    );
   }
 
-  return { ok: true };
+  return { ok: true, errors: null };
 }
