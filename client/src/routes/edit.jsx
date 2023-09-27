@@ -1,4 +1,4 @@
-import { redirect, useLoaderData } from "react-router-dom";
+import { redirect, useActionData, useLoaderData } from "react-router-dom";
 import { getGoal, updateGoal } from "../api/goals";
 import GoalForm from "../components/goal-form";
 
@@ -17,17 +17,22 @@ function loader({ params }) {
 async function action({ request, params }) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
-  await updateGoal(params.goalId, updates);
+  const { errors } = await updateGoal(params.goalId, updates);
+  if (errors) {
+    return errors;
+  }
+
   return redirect(`/goals/${params.goalId}`);
 }
 
 function EditGoal() {
   const goal = useLoaderData();
+  const errors = useActionData();
 
   return (
     <>
       <h1 className="fs-4 mb-4">Edit goal</h1>
-      <GoalForm goal={goal} />
+      <GoalForm goal={goal} errors={errors} />
     </>
   );
 }

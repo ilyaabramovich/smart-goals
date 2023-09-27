@@ -18,10 +18,21 @@ export async function createGoal(goalData) {
   });
 
   if (!res.ok) {
-    throw res;
+    if (res.status === 422) {
+      const { status, errors } = await res.json();
+
+      if (status === "error") {
+        return { goal: null, errors };
+      }
+    }
+
+    throw new Error(
+      "An error occured while trying to create new goal. Try submitting the form again.",
+    );
   }
 
-  return await res.json();
+  const goal = await res.json();
+  return { goal, errors: null };
 }
 
 export async function getGoal(id) {
@@ -42,10 +53,20 @@ export async function updateGoal(id, goalData) {
   });
 
   if (!res.ok) {
-    throw res;
+    if (res.status === 422) {
+      const { status, errors } = await res.json();
+
+      if (status === "error") {
+        return { errors };
+      }
+    }
+
+    throw new Error(
+      "An error occured while trying to update a goal. Try submitting the form again.",
+    );
   }
 
-  return { ok: true };
+  return { ok: true, errors: null };
 }
 
 export async function deleteGoal(id) {

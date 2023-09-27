@@ -22,7 +22,7 @@ class Api::V1::GoalsController < ApplicationController
     if @goal.save
       render json: @goal, status: :created
     else
-      render json: @goal.errors, status: :unprocessable_entity
+      render json: @goal, serializer: ErrorSerializer, status: :unprocessable_entity
     end
   end
 
@@ -30,7 +30,7 @@ class Api::V1::GoalsController < ApplicationController
     if @goal.update(goal_params)
       render json: @goal
     else
-      render json: @goal.errors, status: :unprocessable_entity
+      render json: @goal, serializer: ErrorSerializer, status: :unprocessable_entity
     end
   end
 
