@@ -9,8 +9,8 @@ class ErrorSerializer < ActiveModel::Serializer
   end
 
   def errors
-    object.errors.each_with_object({}) do |(key), result|
-      result[key.attribute.to_s.camelize(:lower)] = key.message
+    object.errors.each_with_object({}) do |error, result|
+      result[error.attribute.to_s.camelize(:lower)] = error.full_message
     end
   end
 end
