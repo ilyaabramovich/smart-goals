@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if current_user
       render json: current_user, status: :ok
     else
-      render json: { error: 'Not authenticated', status: :unauthorized }
+      render json: { error: 'Not authenticated' }, status: :unauthorized
     end
   end
 
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render json: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: @user, serializer: ErrorSerializer, status: :unprocessable_entity
     end
   end
 
