@@ -25,6 +25,7 @@ export default function SignUp() {
     const userData = Object.fromEntries(formData);
 
     setError(null);
+    setErrors({});
     setIsSubmitting(true);
     try {
       const { errors } = await signup(userData);
