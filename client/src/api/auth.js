@@ -29,10 +29,10 @@ export async function signUp(userData) {
 
   if (!res.ok) {
     if (res.status === 422) {
-      const json = await res.json();
+      const { status, errors } = await res.json();
 
-      if (json.status === "error") {
-        return { user: null, errors: json.errors }
+      if (status === "error") {
+        return { user: null, errors };
       }
     }
 
@@ -42,7 +42,7 @@ export async function signUp(userData) {
   }
 
   const user = await res.json();
-  return { user, errors: null }
+  return { user, errors: null };
 }
 
 export async function logOut() {
