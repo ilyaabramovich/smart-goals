@@ -49,30 +49,6 @@ RSpec.describe Goal, type: :model do
     end
   end
 
-  describe '#pending_stats' do
-    it 'calculates pending stats correctly' do
-      user = create(:user)
-      goal = create(:goal, :without_create_time_frame_stats_callback, user: user, target_value: 0)
-      due_unmeasured_stat = create(:stat, :due, goal: goal, measurement_value: nil)
-      create(:stat, :due, goal: goal, measurement_value: 3)
-      create(:stat, :upcoming, goal: goal)
-
-      expect(goal.pending_stats).to match_array([due_unmeasured_stat])
-    end
-  end
-
-  describe '#measured_stats' do
-    it 'calculates measured stats correctly' do
-      user = create(:user)
-      goal = create(:goal, :without_create_time_frame_stats_callback, user: user, target_value: 0)
-      due_measured_stat = create(:stat, :due, goal: goal, measurement_value: 3)
-      create(:stat, :due, goal: goal, measurement_value: nil)
-      create(:stat, :upcoming, goal: goal)
-
-      expect(goal.measured_stats).to match_array([due_measured_stat])
-    end
-  end
-
   describe '#accumulated_value' do
     it 'is computed using goal initial value' do
       goal = build(:goal, initial_value: 5)

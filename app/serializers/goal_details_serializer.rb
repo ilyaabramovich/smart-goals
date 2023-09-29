@@ -1,8 +1,19 @@
 # frozen_string_literal: true
 
 class GoalDetailsSerializer < ActiveModel::Serializer
-  attributes :id, :description, :target_date, :target_value, :initial_value, :interval, :accumulated_value, :completion_percentage, :nearest_upcoming_stat_date, :days_to_complete, :stats_length
+  attributes :id, :description, :target_date, :target_value, :initial_value, :interval, :accumulated_value, :completion_percentage, :days_to_complete
 
-  has_many :measured_stats
-  has_many :pending_stats
+  attribute :stats_total
+
+  has_many :measured_stats do
+    object.due_stats.select(&:measured?)
+  end
+
+  has_many :pending_stats do
+    object.due_stats.select(&:pending?)
+  end
+
+  def stats_total
+    object.stats.size
+  end
 end

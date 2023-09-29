@@ -18,16 +18,12 @@ class Goal < ApplicationRecord
     stats.select(&:due?)
   end
 
-  def measured_stats
-    due_stats.select(&:measured?)
-  end
-
-  def pending_stats
-    due_stats.select(&:pending?)
-  end
-
   def accumulated_value
     initial_value + due_stats.map(&:measurement_value).compact.sum
+  end
+
+  def days_to_complete
+    (target_date - Time.current.beginning_of_day).to_i / (24 * 60 * 60)
   end
 
   def completion_percentage
@@ -41,14 +37,6 @@ class Goal < ApplicationRecord
     return if nearest_stat.blank?
 
     nearest_stat.measurement_date
-  end
-
-  def days_to_complete
-    (target_date - Time.current.beginning_of_day).to_i / (24 * 60 * 60)
-  end
-
-  def stats_length
-    stats.size
   end
 
   private

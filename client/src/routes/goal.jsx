@@ -140,7 +140,7 @@ function Goal() {
         <section aria-labelledby="goal-stats">
           <h2 className="fs-5">Stats</h2>
           <p className="text-secondary">
-            Recorded: {goal.measuredStats.length} / {goal.statsLength}
+            Recorded: {goal.measuredStats.length} / {goal.statsTotal}
           </p>
           {goal.pendingStats.length > 0 && (
             <>
