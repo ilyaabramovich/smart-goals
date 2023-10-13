@@ -18,6 +18,10 @@ class Goal < ApplicationRecord
     stats.select(&:due?)
   end
 
+  def measured_stats
+    due_stats.select(&:measured?)
+  end
+
   def accumulated_value
     initial_value + due_stats.inject(0) { |sum, stat| sum + stat.measurement_value.to_i }
   end

@@ -13,7 +13,7 @@ import {
 import { getGoalDetails } from "../api/goals";
 import { updateStat } from "../api/stats";
 import { formatDate } from "../utils/formatDate";
-import GoalStatsChart from "../components/goal-stats-chart";
+import BarChart from "../components/bar-chart";
 import { formatRelativeDate } from "../utils/formatRelativeDate";
 
 function loader({ params }) {
@@ -31,10 +31,16 @@ function loader({ params }) {
 async function action({ params, request }) {
   const formData = await request.formData();
   const statData = Object.fromEntries(formData);
-  const { errors } = await updateStat(params.goalId, params.statId, statData);
+  const { errors, ok } = await updateStat(
+    params.goalId,
+    params.statId,
+    statData,
+  );
   if (errors) {
     return errors;
   }
+
+  return ok;
 }
 
 function Goal() {
@@ -140,7 +146,7 @@ function Goal() {
         <section aria-labelledby="goal-stats">
           <h2 className="fs-5">Stats</h2>
           <p className="text-secondary">
-            Recorded: {goal.measuredStats.length} / {goal.statsTotal}
+            Recorded: {goal.measurementValues.length} / {goal.statsTotal}
           </p>
           {goal.pendingStats.length > 0 && (
             <>
@@ -203,7 +209,12 @@ function Goal() {
                 at {formatDate(goal.nearestUpcomingStatDate)}
               </p>
             )}
-          <GoalStatsChart goal={goal} />
+          <BarChart
+            title={goal.description}
+            label={`measured ${goal.interval}`}
+            data={goal.measurementValues}
+            labels={goal.measurementDates}
+          />
         </section>
       </div>
     </>

@@ -10,7 +10,6 @@ import {
   Tooltip,
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
-import { formatDate } from "../utils/formatDate";
 
 ChartJS.register(
   LinearScale,
@@ -23,25 +22,25 @@ ChartJS.register(
   Title,
 );
 
-export default function GoalStatsChart({ goal }) {
+export default function BarChart({ title, label, labels, data: chartData }) {
   const options = {
     responsive: true,
     plugins: {
       title: {
         display: true,
-        text: goal.description,
+        text: title,
       },
     },
   };
 
   const data = {
-    labels: goal.measuredStats.map((stat) => formatDate(stat.measurementDate)),
+    labels,
     datasets: [
       {
         type: "bar",
-        label: `measured ${goal.interval}`,
+        label,
         backgroundColor: "rgb(75, 192, 192)",
-        data: goal.measuredStats.map((stat) => stat.measurementValue),
+        data: chartData,
         borderColor: "white",
         borderWidth: 2,
       },

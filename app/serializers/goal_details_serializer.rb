@@ -12,10 +12,8 @@ class GoalDetailsSerializer < ActiveModel::Serializer
     :days_to_complete
 
   attribute :stats_total
-
-  has_many :measured_stats do
-    object.due_stats.select(&:measured?)
-  end
+  attribute :measurement_values
+  attribute :measurement_dates
 
   has_many :pending_stats do
     object.due_stats.select(&:pending?)
@@ -23,5 +21,13 @@ class GoalDetailsSerializer < ActiveModel::Serializer
 
   def stats_total
     object.stats.size
+  end
+
+  def measurement_values
+    object.measured_stats.map(&:measurement_value)
+  end
+
+  def measurement_dates
+    object.measured_stats.map { |stat| stat.measurement_date.strftime('%Y-%d-%m') }
   end
 end
