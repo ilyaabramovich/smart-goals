@@ -2,7 +2,6 @@ import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import Table from "react-bootstrap/Table";
 import {
   Link,
   Form as RouterForm,
@@ -54,65 +53,56 @@ function Goal() {
   return (
     <>
       <h1 className="fs-4 mb-4">Goal</h1>
-      <div style={{ display: "grid", gap: "1rem" }}>
+      <div
+        style={{ display: "grid", gap: "1rem", gridTemplateColumns: "100%" }}
+      >
         <section aria-labelledby="goal-details">
-          <h2 className="fs-5" id="goal-details">
-            Details
-          </h2>
-          <Table borderless role="presentation">
-            <tbody>
-              <tr>
-                <td>
-                  <strong>Description</strong>
-                </td>
-                <td>{goal.description}</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Initial value</strong>
-                </td>
-                <td>{goal.initialValue}</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Target value</strong>
-                </td>
-                <td>{goal.targetValue}</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Accumulated value</strong>
-                </td>
-                <td>{goal.accumulatedValue}</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Target date</strong>
-                </td>
-                <td>
-                  {formatDate(goal.targetDate)} (
-                  {formatRelativeDate(goal.daysToComplete)})
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Interval</strong>
-                </td>
-                <td>{goal.interval}</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Goal progress</strong>
-                </td>
-                <td>
-                  <ProgressBar
-                    now={goal.completionPercentage}
-                    label={`${goal.completionPercentage}%`}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+          <dl
+            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
+          >
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+              <dt>Description</dt>
+              <dd>{goal.description}</dd>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+              <dt>Initial value</dt>
+              <dd>{goal.initialValue}</dd>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+              <dt>Target value</dt>
+              <dd>{goal.targetValue}</dd>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+              <dt>Accumulated value</dt>
+              <dd>{goal.accumulatedValue}</dd>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+              <dt>Target date</dt>
+              <dd>
+                {formatDate(goal.targetDate)} (
+                {formatRelativeDate(goal.daysToComplete)})
+              </dd>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+              <dt>Interval</dt>
+              <dd>{goal.interval}</dd>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 2fr",
+                alignItems: "baseline",
+              }}
+            >
+              <dt>Goal progress</dt>
+              <dd>
+                <ProgressBar
+                  now={goal.completionPercentage}
+                  label={`${goal.completionPercentage}%`}
+                />
+              </dd>
+            </div>
+          </dl>
         </section>
         <section aria-labelledby="goal-actions">
           <h2 className="fs-5" id="goal-actions">
