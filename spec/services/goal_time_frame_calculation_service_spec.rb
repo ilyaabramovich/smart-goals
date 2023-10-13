@@ -5,11 +5,10 @@ RSpec.describe GoalTimeFrameCalculationService, type: :service do
 
   describe '#call' do
     it 'returns time frames as an array of times' do
-      goal = build_stubbed(:goal, target_date: 10.days.from_now, interval: 'daily')
+      time = Time.current
+      goal = build_stubbed(:goal, created_at: time, target_date: time, interval: 'daily')
       time_frames = service.call(goal)
-
-      expect(time_frames).to be_an(Array)
-      expect(time_frames.all? { |time| time.is_a?(Time) }).to be true
+      expect(time_frames).to eq([time.beginning_of_day])
     end
 
     it 'calculates time frames correctly' do

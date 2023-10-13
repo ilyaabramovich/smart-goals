@@ -45,45 +45,37 @@ RSpec.describe Goal, type: :model do
       due_stat = create(:stat, :due, goal: goal)
       create(:stat, :upcoming, goal: goal)
 
-      expect(goal.due_stats).to match_array([due_stat])
+      expect(goal.due_stats).to contain_exactly(due_stat)
     end
   end
 
   describe '#accumulated_value' do
-    it 'is computed using goal initial value' do
-      goal = build(:goal, initial_value: 5)
+    it 'computing sum correctly' do
+      user = create(:user)
+      goal = create(:goal, user: user, initial_value: 5)
+      create(:stat, :due, goal: goal, measurement_value: 3)
+      create(:stat, :due, goal: goal, measurement_value: 2)
 
-      expect(goal.accumulated_value).to eq 5
+      expect(goal.accumulated_value).to eq 10
     end
 
-    context 'when goal has stats' do
-      it 'is computed using stats measurement values' do
+    it 'computing sum using just dew stats' do
+      user = create(:user)
+      goal = create(:goal, user: user)
+      create(:stat, :due, goal: goal, measurement_value: 3)
+      create(:stat, goal: goal, measurement_value: 2, measurement_date: 1.day.from_now)
+
+      expect(goal.accumulated_value).to eq 3
+    end
+
+    context 'when stat has empty measurement_value' do
+      it 'computing sum correctly' do
         user = create(:user)
         goal = create(:goal, user: user)
         create(:stat, :due, goal: goal, measurement_value: 3)
-        create(:stat, :due, goal: goal, measurement_value: 2)
-
-        expect(goal.accumulated_value).to eq 5
-      end
-
-      it 'is using just dew stats for computing' do
-        user = create(:user)
-        goal = create(:goal, user: user)
-        create(:stat, :due, goal: goal, measurement_value: 3)
-        create(:stat, goal: goal, measurement_value: 2, measurement_date: 1.day.from_now)
+        create(:stat, :due, goal: goal, measurement_value: nil)
 
         expect(goal.accumulated_value).to eq 3
-      end
-
-      context 'when stats has nil as measurement_value' do
-        it 'is computed ignoring empty values' do
-          user = create(:user)
-          goal = create(:goal, user: user)
-          create(:stat, :due, goal: goal, measurement_value: 3)
-          create(:stat, :due, goal: goal, measurement_value: nil)
-
-          expect(goal.accumulated_value).to eq 3
-        end
       end
     end
   end
