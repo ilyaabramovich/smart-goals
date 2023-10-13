@@ -19,7 +19,7 @@ class Goal < ApplicationRecord
   end
 
   def accumulated_value
-    initial_value + due_stats.map(&:measurement_value).compact.sum
+    initial_value + due_stats.inject(0) { |sum, stat| sum + stat.measurement_value.to_i }
   end
 
   def days_to_complete
