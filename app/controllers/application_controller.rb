@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
     render json: { status: :error, error: errors.message }, status: :not_found
   end
 
-  def invalid_record(invalid_record)
-    render json: { error: invalid_record.record.errors }, status: :unprocessable_entity
+  def invalid_record(error)
+    render json: error.record, serializer: ErrorSerializer, status: :unprocessable_entity
   end
 end

@@ -15,21 +15,13 @@ class Api::V1::StatsController < ApplicationController
 
   def create
     goal = current_user.goals.find(params[:goal_id])
-    @stat = goal.stats.new(stat_params)
-
-    if @stat.save
-      render json: @stat, status: :created, location: @stat
-    else
-      render json: @stat.errors, status: :unprocessable_entity
-    end
+    @stat = goal.stats.create!(stat_params)
+    render json: @stat, status: :created
   end
 
   def update
-    if @stat.update(stat_params)
-      render json: @stat
-    else
-      render json: @stat, serializer: ErrorSerializer, status: :unprocessable_entity
-    end
+    @stat.update!(stat_params)
+    render json: @stat
   end
 
   def destroy

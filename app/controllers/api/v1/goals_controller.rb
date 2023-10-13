@@ -17,21 +17,13 @@ class Api::V1::GoalsController < ApplicationController
   end
 
   def create
-    @goal = current_user.goals.new(goal_params)
-
-    if @goal.save
-      render json: @goal, status: :created
-    else
-      render json: @goal, serializer: ErrorSerializer, status: :unprocessable_entity
-    end
+    @goal = current_user.goals.create!(goal_params)
+    render json: @goal, status: :created
   end
 
   def update
-    if @goal.update(goal_params)
-      render json: @goal
-    else
-      render json: @goal, serializer: ErrorSerializer, status: :unprocessable_entity
-    end
+    @goal.update!(goal_params)
+    render json: @goal
   end
 
   def destroy

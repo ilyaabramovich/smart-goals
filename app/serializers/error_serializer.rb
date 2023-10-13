@@ -5,7 +5,7 @@ class ErrorSerializer < ActiveModel::Serializer
   attribute :errors
 
   def status
-    'error'
+    :error
   end
 
   def errors

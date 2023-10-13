@@ -16,22 +16,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-
-    if @user.save
-      session[:user_id] = @user.id
-      render json: @user, status: :created, location: @user
-    else
-      render json: @user, serializer: ErrorSerializer, status: :unprocessable_entity
-    end
+    @user = User.create!(user_params)
+    session[:user_id] = @user.id
+    render json: @user, status: :created, location: @user
   end
 
   def update
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user, serializer: ErrorSerializer, status: :unprocessable_entity
-    end
+    @user.update!(user_params)
+    render json: @user
   end
 
   def destroy
