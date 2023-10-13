@@ -58,6 +58,12 @@ export default function SignIn() {
           controlId="current-password"
         >
           <Form.Label>Password</Form.Label>
+          <Form.Control
+            required
+            type={showPassword ? "text" : "password"}
+            name="password"
+            autoComplete="current-password"
+          />
           <button
             className="position-absolute top-0 end-0 p-0 border-0 bg-transparent text-secondary"
             onClick={() => {
@@ -71,12 +77,6 @@ export default function SignIn() {
                 : "Show password as plain text. Warning: this will display your password on the screen."
             }
           >{`${showPassword ? "Hide" : "Show"} password`}</button>
-          <Form.Control
-            required
-            type={showPassword ? "text" : "password"}
-            name="password"
-            autoComplete="current-password"
-          />
         </Form.Group>
         <Button
           disabled={isSubmitting}
