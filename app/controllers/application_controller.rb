@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
 
   def require_user_logged_in!
     if current_user.nil?
-      render json: { error: 'You are not authorized to do that.' }, status: :unauthorized
+      render json: { status: :error, error: 'You are not authorized to do that.' }, status: :unauthorized
     end
   end
 
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::API
   end
 
   def record_not_found(errors)
-    render json: { error: errors.message }, status: :not_found
+    render json: { status: :error, error: errors.message }, status: :not_found
   end
 
   def invalid_record(invalid_record)
