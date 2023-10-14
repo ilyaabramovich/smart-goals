@@ -201,7 +201,7 @@ function Goal() {
             )}
           <BarChart
             title={goal.description}
-            label={`measured ${goal.interval}`}
+            label={`${goal.interval} measurement`}
             data={goal.measurementValues}
             labels={goal.measurementDates}
           />
