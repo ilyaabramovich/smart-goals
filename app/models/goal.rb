@@ -1,7 +1,7 @@
 class Goal < ApplicationRecord
   belongs_to :user
   has_many :stats, dependent: :destroy, inverse_of: :goal
-  has_many :due_stats, -> { prior_to_date(Time.current.beginning_of_day) }, class_name: 'Stat', inverse_of: :goal
+  has_many :due_stats, -> { prior_to_date(Time.current) }, class_name: 'Stat', inverse_of: :goal
 
   VALID_INTERVALS = %w[daily weekly monthly].freeze
 
@@ -27,7 +27,7 @@ class Goal < ApplicationRecord
   end
 
   def days_to_complete
-    (target_date - Time.current.beginning_of_day).to_i / (24 * 60 * 60)
+    (target_date - created_at).to_i / (24 * 60 * 60)
   end
 
   def completion_percentage

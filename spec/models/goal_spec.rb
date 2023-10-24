@@ -144,7 +144,7 @@ RSpec.describe Goal, type: :model do
       it 'calculates difference in days between goal target_date in future and current time' do
         user = create(:user)
         freeze_time do
-          goal = build(:goal, user: user, target_date: 4.days.from_now)
+          goal = build_stubbed(:goal, user: user, target_date: 4.days.from_now)
           expect(goal.days_to_complete).to eq(4)
         end
       end
@@ -154,7 +154,7 @@ RSpec.describe Goal, type: :model do
       it 'calculates difference in days between goal target_date in past and current time' do
         user = create(:user)
         freeze_time do
-          goal = build(:goal, user: user, target_date: 4.days.before)
+          goal = build_stubbed(:goal, user: user, target_date: 4.days.before)
           expect(goal.days_to_complete).to eq(-4)
         end
       end
@@ -164,7 +164,7 @@ RSpec.describe Goal, type: :model do
       it 'returns zero' do
         user = create(:user)
         freeze_time do
-          goal = build(:goal, user: user, target_date: Time.current)
+          goal = build_stubbed(:goal, user: user, target_date: Time.current)
           expect(goal.days_to_complete).to eq(0)
         end
       end
