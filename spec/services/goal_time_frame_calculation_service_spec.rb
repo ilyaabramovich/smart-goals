@@ -1,51 +1,42 @@
 require 'rails_helper'
 
 RSpec.describe GoalTimeFrameCalculationService, type: :service do
-  let(:service) { described_class.new }
+  subject(:time_frames) { described_class.new.call(goal) }
+
+  let(:goal) { build_stubbed(:goal, target_date: target_date, interval: interval) }
 
   describe '#call' do
-    it 'returns time frames as an array of times' do
-      time = Time.current
-      goal = build_stubbed(:goal, created_at: time, target_date: time, interval: 'daily')
-      time_frames = service.call(goal)
-      expect(time_frames).to eq([time.beginning_of_day])
-    end
+    context 'for daily interval' do
+      let(:interval) { 'daily' }
 
-    it 'calculates time frames correctly' do
-      goal = build_stubbed(:goal, target_date: 10.days.from_now, interval: 'daily')
-      time_frames = service.call(goal)
+      context 'when target date is the same as creation date' do
+        let(:target_date) { Time.current }
 
-      expect(time_frames).to eq((0..10).map { |i| goal.created_at.beginning_of_day + i.days })
-    end
+        it { freeze_time { is_expected.to eq([goal.created_at.beginning_of_day]) } }
+      end
 
-    context 'when created_at matches target_date' do
-      it 'calculates time frames correctly' do
-        time = Time.current
-        goal = build_stubbed(:goal, created_at: time, target_date: time, interval: 'daily')
-        time_frames = service.call(goal)
-        expect(time_frames.count).to eq(1)
+      context 'when target date is in future' do
+        let(:target_date) { 10.days.from_now }
+
+        it { is_expected.to eq((0..10).map { |i| goal.created_at.beginning_of_day + i.days }) }
       end
     end
 
-    it 'calculates time frames for daily interval' do
-      goal = build_stubbed(:goal, target_date: 10.days.from_now, interval: 'daily')
-      time_frames = service.call(goal)
+    context 'for weekly interval' do
+      let(:interval) { 'weekly' }
 
-      expect(time_frames.count).to eq(11)
+      context 'when target date is in future' do
+        let(:target_date) { 10.days.from_now }
+
+        it { is_expected.to eq([goal.created_at.beginning_of_day, goal.created_at.beginning_of_day + 1.week]) }
+      end
     end
 
-    it 'calculates time frames for weekly interval' do
-      goal = build_stubbed(:goal, target_date: 10.days.from_now, interval: 'weekly')
-      time_frames = service.call(goal)
+    context 'for monthly interval' do
+      let(:interval) { 'monthly' }
+      let(:target_date) { 1.month.from_now }
 
-      expect(time_frames.count).to eq(2)
-    end
-
-    it 'calculates time frames for monthly interval' do
-      goal = build_stubbed(:goal, target_date: 1.month.from_now, interval: 'monthly')
-      time_frames = service.call(goal)
-
-      expect(time_frames.count).to eq(2)
+      it { is_expected.to eq([goal.created_at.beginning_of_day, goal.created_at.beginning_of_day + 1.month]) }
     end
   end
 end
