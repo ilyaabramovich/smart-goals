@@ -27,7 +27,7 @@ RSpec.describe Goal, type: :model do
       context 'when target_date is in the same day' do
         let(:target_date) { Time.current }
 
-        it { is_expected.to be_valid }
+        it { freeze_time { is_expected.to be_valid } }
       end
 
       context 'when target_date is in future' do

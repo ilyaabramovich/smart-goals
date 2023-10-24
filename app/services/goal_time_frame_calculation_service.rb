@@ -20,7 +20,7 @@ class GoalTimeFrameCalculationService < BaseService
     loop do
       time_frames << current_date
       current_date += step
-      break if current_date > target_date
+      break if current_date.after? target_date
     end
 
     time_frames

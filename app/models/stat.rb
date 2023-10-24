@@ -14,11 +14,11 @@ class Stat < ApplicationRecord
     !measured?
   end
 
-  def due?
-    measurement_date <= Time.zone.today
+  def upcoming?
+    measurement_date.future?
   end
 
-  def upcoming?
-    !due?
+  def due?
+    !upcoming?
   end
 end

@@ -55,7 +55,7 @@ class Goal < ApplicationRecord
   end
 
   def target_date_must_not_be_in_the_past
-    if target_date.present? && target_date < Time.zone.today
+    if target_date.present? && target_date.past?
       errors.add(:target_date, 'must not be in the past')
     end
   end
