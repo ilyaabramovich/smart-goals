@@ -24,15 +24,15 @@ Style/IfUnlessModifier:
 Style/GuardClause:
   Enabled: false
 
+Style/StringLiterals:
+  Enabled: false
+
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 
 Style/SymbolArray:
   EnforcedStyle: percent
   MinSize: 10
-
-Style/StringLiterals:
-  EnforcedStyle: single_quotes
 
 Metrics/BlockLength:
   Enabled: false
@@ -52,8 +52,20 @@ Layout/LineLength:
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
 
+Rails/SkipsModelValidations:
+  Enabled: false
+
 RSpec/ExampleLength:
   Enabled: false
 
 RSpec/NestedGroups:
   Enabled: false
+
+RSpec/ContextWording:
+  Prefixes:
+    - when
+    - with
+    - without
+    - if
+    - unless
+    - for

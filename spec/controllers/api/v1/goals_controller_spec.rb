@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::GoalsController, type: :controller do
+RSpec.describe Api::V1::GoalsController do
   let(:user) { create(:user) }
 
   before { sign_in_as user }

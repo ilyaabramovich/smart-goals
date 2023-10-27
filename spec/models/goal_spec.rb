@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Goal, type: :model do
+RSpec.describe Goal do
   describe 'associations' do
     it { is_expected.to have_many(:stats).dependent(:destroy) }
     it { is_expected.to have_many(:due_stats) }
@@ -21,7 +21,7 @@ RSpec.describe Goal, type: :model do
       context 'when target_date is in the past' do
         let(:target_date) { 1.week.before }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context 'when target_date is in the same day' do

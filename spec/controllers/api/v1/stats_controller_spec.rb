@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::StatsController, type: :controller do
+RSpec.describe Api::V1::StatsController do
   let(:user) { create(:user) }
 
   before { sign_in_as user }

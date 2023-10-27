@@ -1,7 +1,7 @@
 class Goal < ApplicationRecord
   belongs_to :user
   has_many :stats, dependent: :destroy, inverse_of: :goal
-  has_many :due_stats, -> { prior_to_date(Time.current) }, class_name: 'Stat', inverse_of: :goal
+  has_many :due_stats, -> { prior_to_date(Time.current) }, dependent: :destroy, class_name: 'Stat', inverse_of: :goal
 
   VALID_INTERVALS = %w[daily weekly monthly].freeze
 

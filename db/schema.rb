@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_091901) do
     t.float "initial_value", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_goals_on_user_id"
     t.check_constraint "char_length(description) >= 15", name: "goals_description_length_check"
   end

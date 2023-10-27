@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Stat, type: :model do
+RSpec.describe Stat do
   describe 'associations' do
     it { is_expected.to belong_to(:goal) }
   end
