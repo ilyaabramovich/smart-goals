@@ -86,6 +86,7 @@ GEM
       thor (~> 1.0)
     case_transform (0.2)
       activesupport
+    cgi (0.5.1)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
@@ -101,6 +102,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    fiddle (1.1.8)
     fuubar (2.5.1)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
@@ -296,8 +298,10 @@ DEPENDENCIES
   bootsnap
   brakeman
   bundler-audit (~> 0.9)
+  cgi
   debug
   factory_bot_rails
+  fiddle
   fuubar (~> 2.5)
   logger
   mutex_m
