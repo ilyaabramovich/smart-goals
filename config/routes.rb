@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :goals do
         resources :stats
+        collection do
+          post :generate
+        end
         member do
           get 'details'
         end

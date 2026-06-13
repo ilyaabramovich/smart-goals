@@ -14,6 +14,7 @@ import SignIn from "./routes/sign-in";
 import SignUp from "./routes/sign-up";
 import Goals from "./routes/goals";
 import CreateGoal from "./routes/create";
+import GenerateGoal from "./routes/generate";
 import Home from "./routes/home";
 import Layout from "./routes/layout";
 import ProtectedRoute from "./routes/protected";
@@ -33,6 +34,11 @@ const router = createBrowserRouter(
           path="goals/new"
           element={<CreateGoal />}
           action={CreateGoal.action}
+        />
+        <Route
+          path="goals/generate"
+          element={<GenerateGoal />}
+          action={GenerateGoal.action}
         />
         <Route path="goals/:goalId" element={<Goal />} loader={Goal.loader}>
           <Route path="stats/:statId" action={Goal.action} />

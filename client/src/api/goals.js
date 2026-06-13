@@ -73,6 +73,29 @@ export async function deleteGoal(id) {
   await fetch(`/api/v1/goals/${id}`, { method: "DELETE" });
 }
 
+export async function generateGoal(prompt) {
+  const res = await fetch("/api/v1/goals/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt }),
+  });
+
+  if (!res.ok) {
+    if (res.status === 422) {
+      const { status, errors } = await res.json();
+
+      if (status === "error") {
+        return { goal: null, errors };
+      }
+    }
+
+    throw new Error("An error occurred while generating your goal. Try again.");
+  }
+
+  const goal = await res.json();
+  return { goal, errors: null };
+}
+
 export async function getGoalDetails(id) {
   const res = await fetch(`/api/v1/goals/${id}/details`);
 

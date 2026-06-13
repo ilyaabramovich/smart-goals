@@ -21,6 +21,18 @@ class Api::V1::GoalsController < ApplicationController
     render json: @goal, status: :created
   end
 
+  def generate
+    result = GeminiService.new.call(params[:prompt])
+
+    if result[:error]
+      render json: { status: :error, errors: { prompt: result[:error] } }, status: :unprocessable_entity
+      return
+    end
+
+    @goal = current_user.goals.create!(result[:params])
+    render json: @goal, status: :created
+  end
+
   def update
     @goal.update!(goal_params)
     render json: @goal

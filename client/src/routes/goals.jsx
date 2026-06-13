@@ -33,9 +33,14 @@ function Goals() {
       ) : (
         <p className="mb-2">You have no goals yet. Go ahead and add one!</p>
       )}
-      <Link className="link-primary" to="new">
-        New goal
-      </Link>
+      <div className="d-flex gap-3">
+        <Link className="link-primary" to="new">
+          New goal
+        </Link>
+        <Link className="link-primary" to="generate">
+          Create with AI
+        </Link>
+      </div>
     </>
   );
 }
